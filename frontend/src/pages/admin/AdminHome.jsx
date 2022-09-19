@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import {  useSelector } from "react-redux";
+import {  useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Box, Stack } from "@mui/material";
 import AdminSidebar from "../../components/admin/AdminSidebar";
@@ -8,6 +8,7 @@ import AdminNavbar from "../../components/admin/AdminNavbar";
 
 function AdminHome() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { admin } = useSelector((state) => state.auth);
   
     useEffect(() => {
@@ -17,7 +18,7 @@ function AdminHome() {
       } else {
         navigate('/')
       }
-    }, [admin,navigate]);
+    }, [admin,navigate,dispatch]);
 
   return (
     <>

@@ -64,13 +64,17 @@ const userSchema = mongoose.Schema(
     relationship:{
       type:Number,
       enum:[1, 2, 3]
-    }
+    },
+    isBlock:{
+      type:Boolean,
+     default: false,
+    },
   },
   {
     timestamps: true,
   }
 );
-
+                      
 
 
 module.exports = mongoose.model("User", userSchema);

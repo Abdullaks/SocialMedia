@@ -1,13 +1,13 @@
-// const express = require("express");
-// const router = express.Router();
-// const {verifyUser} =require("../middleware/authMiddleware")
-// const {getAllUsers } = require("../controllers/adminController");
+const express = require("express");
+const router = express.Router();
+const {verifyUser} =require("../middleware/authMiddleware")
+const {getAllUsers ,deleteUser} = require("../controllers/adminController");
 
-    
+     
 
-// router.get("/getAllUsers", getAllUsers);
+router.get("/", getAllUsers);
+router.delete("/deleteUser/:id", deleteUser);
 
 
 
-
-// module.exports = router;
+module.exports = router;
