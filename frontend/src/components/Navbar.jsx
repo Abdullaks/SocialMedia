@@ -9,8 +9,6 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { logout ,reset} from "../features/auth/authSlice";
 
-
-
 const StyledToolbar = styled(Toolbar)({
   display: "flex",
   justifyContent: "space-between",
@@ -41,12 +39,10 @@ const Userbox = styled(Box)(({ theme }) => ({
 
 const Navbar = () => {
   const [open,setOpen] = useState(false)
-  
   const dispatch = useDispatch();
   const onLogout = () => {
     dispatch(logout())
     dispatch(reset())
-    // navigate('/')
   }
   
   return (

@@ -7,7 +7,6 @@ const AccountSID = process.env.AccountSID;
 const authToken = process.env.authToken;
 const client = require("twilio")(AccountSID, authToken);
 
-
 //lOGIN ADMIN
 const loginAdmin = async (req, res) => {
   try {
@@ -32,10 +31,6 @@ const loginAdmin = async (req, res) => {
     res.status(500).json(error);
   }
 };
-
-
-
-
 
 //REGISTER
 const registerUser = async (req, res) => {
@@ -87,6 +82,9 @@ const loginUser = async (req, res) => {
     const user = await User.findOne({ email: req.body.email });
     if (!user) {
       return res.status(404).json("user not found");
+    }
+    if (user.isBlock) {
+      return res.status(400).json("You are blocked by admin");
     }
     const validPassword = await bcrypt.compare(
       req.body.password,

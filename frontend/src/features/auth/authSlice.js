@@ -6,10 +6,10 @@ const admin = JSON.parse(localStorage.getItem("admin"));
 const initialState = {
   user: user ? user : null,
   admin: admin ? admin : null,
-  isError: false,
-  isSuccess: false,
   isAdmin: false,
   isLoading: false,
+  isSuccess: false,
+  isError: false,
   message: "",
 };
 
@@ -140,7 +140,7 @@ export const authSlice = createSlice({
               state.admin = null
           })
           .addCase(adminLogout.fulfilled, (state) => {
-            state.user = null
+            state.admin = null
         })
 
     }

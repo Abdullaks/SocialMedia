@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login,adminLogin, reset } from "../features/auth/authSlice";
 import {toast} from 'react-toastify'
+const ADMIN_EMAIL=process.env.ADMIN_EMAIL
 const validate = (values) => {
   const errors = {};
 

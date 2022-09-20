@@ -9,10 +9,10 @@ const userSchema = mongoose.Schema(
       max: 20,
       unique: true,
     },
-  
+
     name: {
       type: String,
-    //   required: [true, "please Add a name"],
+      //   required: [true, "please Add a name"],
     },
     email: {
       type: String,
@@ -29,7 +29,7 @@ const userSchema = mongoose.Schema(
       required: [true, "please Add a password"],
       min: 8,
     },
-    profilePicture: { 
+    profilePicture: {
       type: String,
       default: "",
     },
@@ -49,32 +49,30 @@ const userSchema = mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    desc:{
-      type: String, 
-      max:50,
-    },
-    city:{
+    desc: {
       type: String,
-      max:50,
+      max: 50,
     },
-    from:{
+    city: {
       type: String,
-      max:50,
+      max: 50,
     },
-    relationship:{
-      type:Number,
-      enum:[1, 2, 3]
+    from: {
+      type: String,
+      max: 50,
     },
-    isBlock:{
-      type:Boolean,
-     default: false,
+    relationship: {
+      type: Number,
+      enum: [1, 2, 3],
+    },
+    isBlock: {
+      type: Boolean,
+      default: false,
     },
   },
   {
     timestamps: true,
   }
 );
-                      
-
 
 module.exports = mongoose.model("User", userSchema);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   Notifications,
@@ -15,11 +15,12 @@ import {
 } from "../../svg";
 import "./style.css";
 import { useSelector } from "react-redux";
+import SearchMenu from "./SearchMenu";
+
 export default function Header() {
-  const { user, isLoading, isError, isSuccess, message } = useSelector(
-    (state) => state.auth
-  );
-  console.log(user);
+  const { user } = useSelector((state) => state.auth);
+  const [showSearchMenu, setShowSearchMenu] = useState(false);
+
   const color = "#65676b";
   return (
     <header>
@@ -30,11 +31,17 @@ export default function Header() {
             {/* <Logo/>  */}
           </div>
         </Link>
-        <div className="search search1">
+        <div
+          className="search search1"
+          onClick={() => {
+            setShowSearchMenu(true);
+          }}
+        >
           <Search color={color} />
           <input type="text" placeholder="Search" className="hide_input" />
         </div>
       </div>
+      {showSearchMenu && <SearchMenu color={color}  setShowSearchMenu={setShowSearchMenu} />}
       <div className="header_middle">
         <Link to="/" className="middle_icon  active">
           <HomeActive />
@@ -57,7 +64,6 @@ export default function Header() {
         <Link to="/" className="profile_link hover1">
           <img src={user?.profilePicture} alt="" />
           <span>{user?.username}</span>
-        
         </Link>
         <div className="circle_icon hover1">
           <Menu />

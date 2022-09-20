@@ -9,4 +9,4 @@ mongoose
   })
   .catch((e) => {
     console.log("db not connected");
-  });  
+  });
