@@ -1,8 +1,6 @@
 import React from "react";
 import { Box, Button, TextField, Typography } from "@mui/material";
-import axios from "axios";
 import { useFormik } from "formik";
-import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {updatePassword } from "../features/auth/authSlice";
 
@@ -12,7 +10,7 @@ const validate = (values) => {
     errors.password = "Required";
   } else if (values.password.length < 8) {
     errors.password = "password must be 8 character long ";
-  }
+  } 
   if (!values.confirmpassword) {
     errors.confirmpassword = "Required";
   } else if (values.password !== values.confirmpassword) {
@@ -33,7 +31,6 @@ function ForgetPassword() {
     },
     validate,
     onSubmit: async (values) => {
-      //   setUserData(values);
       const mobile = JSON.parse(localStorage.getItem("mobile"));
       
       dispatch(updatePassword({

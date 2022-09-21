@@ -12,6 +12,7 @@
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
+    "emoji-picker-react": "^3.6.2",
     "formik": "^2.2.9",
     "otp-input-react": "^0.3.0",
     "otp-timer": "^1.1.5",
@@ -46,14 +47,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
-  ,
+  },
   "proxy": "http://localhost:8800"
 }
- 
-
-
-
-
-
-

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
-// import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
 import {
@@ -24,7 +23,6 @@ const validate = (values) => {
   } else if (values.mobile.length != 10) {
     errors.mobile = "phone no. must be 10 character long ";
   }
-
   return errors;
 };
 const StyledModal = styled(Modal)({
@@ -33,13 +31,10 @@ const StyledModal = styled(Modal)({
   justifyContent: "center",
 });
 function VerifyMobile() {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-
   const [OTP, setOTP] = useState("");
   const [mobile, setMobile] = useState({});
-  // const [userData, setUserData] = useState({});
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
   // Formik starts
   const formik = useFormik({
     initialValues: {
@@ -47,7 +42,6 @@ function VerifyMobile() {
     },
     validate,
     onSubmit: async (values) => {
-      // console.log(values);
       setMobile(values);
       const verifyMobile = await axios.post("/api/auth/verifyMobile", {
         mobile: values.mobile,
@@ -68,9 +62,7 @@ function VerifyMobile() {
   //formik ends
   const validateOtp = async (e) => {
     e.preventDefault();
-    // console.log(OTP.length);
     if (OTP.length === 4) {
-      //   console.log(userData);
       const inOtpData = await axios.post("/api/auth/otpConfirmation", {
         mobile: mobile.mobile,
         otp: OTP,

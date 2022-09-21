@@ -93,7 +93,6 @@ const Signup = () => {
   //formik ends
   const validateOtp = async (e) => {
     e.preventDefault();
-    // console.log(userData);
     console.log(OTP.length);
     if (OTP.length === 4) {
       console.log(userData);
@@ -101,7 +100,6 @@ const Signup = () => {
         mobile: userData.mobile,
         otp: OTP,
       });
-      // console.log(inOtpData);
       if (inOtpData.data == "otpConfirmed") {
         dispatch(register(userData));
       } else {
