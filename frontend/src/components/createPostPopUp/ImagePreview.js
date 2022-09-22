@@ -7,7 +7,7 @@ export default function ImagePreview({
   setText,
   images,
   setImages,
-  setShowPrev
+  setShowPrev,
 }) {
   const imageInputRef = useRef(null);
   const handleImages = (e) => {

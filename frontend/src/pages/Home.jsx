@@ -28,14 +28,14 @@ function Home() {
     <>
       <ThemeProvider theme={darkTheme}>
         <Box bgcolor={"background.default"} color={"text.primary"}>
-          {/* <Navbar /> */}
+          <Navbar />
           <Header />
-          {/* <Stack direction="row" spacing={2} justifyContent="space-between">
+          <Stack direction="row" spacing={2} justifyContent="space-between">
             <Sidebar mode={mode} setMode={setMode} />
             <Feed />
             <Rightbar />
           </Stack>
-          <Add /> */}
+          <Add />
         </Box>
       </ThemeProvider>
     </>
