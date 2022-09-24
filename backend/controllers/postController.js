@@ -1,6 +1,5 @@
 const Post = require("../models/postModel");
 
-
 // CREATE POST
 const createPost = async (req, res) => {
   try {
@@ -11,6 +10,25 @@ const createPost = async (req, res) => {
   }
 };
 
+
+//ALL POST 
+const getAllPosts = async (req, res) => {
+  try {
+    const posts = await Post.find({})
+      .populate("user", "username")
+      .sort({ createdAt: -1 });
+    res.json(posts);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
+
+
+
+
+
 module.exports = {
   createPost,
+  getAllPosts,
 };

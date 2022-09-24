@@ -5,7 +5,7 @@ const imageUpload = require('../middleware/imageUpload');
 const {uploadImages} = require("../controllers/uploadController");
 
 
-router.post("/",imageUpload,uploadImages );
+router.post("/uploadImages",verifyUser,imageUpload,uploadImages );
 
  
 module.exports = router;

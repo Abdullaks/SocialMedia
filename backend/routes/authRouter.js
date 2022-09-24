@@ -12,8 +12,6 @@ const {
 } = require("../controllers/authController");
 
 
-
-
 router.post("/register", registerUser);
 router.post("/login", loginUser);
 router.post("/adminLogin", loginAdmin);

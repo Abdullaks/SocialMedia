@@ -14,14 +14,20 @@ import {
   Market,
 } from "../../svg";
 import "./style.css";
-import { useSelector } from "react-redux";
 import SearchMenu from "./SearchMenu";
+import { useDispatch, useSelector } from "react-redux";
+import { logout ,reset} from "../../features/auth/authSlice";
 
 export default function Header() {
   const { user } = useSelector((state) => state.auth);
   const [showSearchMenu, setShowSearchMenu] = useState(false);
-
   const color = "#65676b";
+  const dispatch = useDispatch();
+  const onLogout = () => {
+    dispatch(logout())
+    dispatch(reset())
+  }
+  
   return (
     <header>
       <div className="header_left">
@@ -62,7 +68,7 @@ export default function Header() {
       </div>
       <div className="header_right">
         <Link to="/" className="profile_link hover1">
-          <img src={user?.profilePicture} alt="" />
+          {/* <img src={user?.profilePicture} alt="" /> */}
           <span>{user?.username}</span>
         </Link>
         <div className="circle_icon hover1">
@@ -74,6 +80,10 @@ export default function Header() {
         <div className="circle_icon hover1">
           <Notifications />
           <div className="right_notification">1</div>
+        </div>
+        <div className="circle_icon hover1"
+        onClick={onLogout} >
+          LO
         </div>
         <div className="circle_icon hover1">
           <ArrowDown />
