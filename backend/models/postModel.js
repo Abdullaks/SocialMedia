@@ -23,28 +23,33 @@ const postSchema = new mongoose.Schema(
     background: {
       type: String,
     },
-    comments: [
-      {
-        comment: {
-          type: String,
-        },
-        image: {
-          type: String,
-        },
-        commentBy: {
-          type: ObjectId,
-          ref: "User",
-        },
-        commentAt: {
-          type: Date,
-          default: new Date(),
-        },
-      },
-    ],
+    
+
+
   },
   {
+    toJSON:{
+      virtuals:true
+  },
+  toObject:{
+      virtuals:true,
+  },
     timestamps: true,
-  }
+  },
+  
 );
 
 module.exports = mongoose.model("Post", postSchema);
+
+
+
+// virtual methode to populate 
+
+
+postSchema.virtual("Comment", {
+    ref:"Comment",
+    foreignField:"postId",
+    localField:"_id"
+  })
+
+

@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const { verifyUser } = require("../middleware/authMiddleware");
+// const { verifyAdmin } = require("../middleware/adminMiddleware");
 const {
   getAllUsers,
   deleteUser,
   blockUser,
-  unBlockUser,
+  unBlockUser, 
 } = require("../controllers/adminController");
 
 router.get("/", getAllUsers);

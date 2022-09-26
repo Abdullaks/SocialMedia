@@ -41,17 +41,18 @@ export const deleteUser = createAsyncThunk(
         (error.response &&
           error.response.data &&
           error.response.data.message) ||
-        error.message ||
+        error.message || 
         error.toString();
       return thunkAPI.rejectWithValue(message);
     }
   }
 );
+
+ 
 //Block user
 export const blockUser = createAsyncThunk(
   "admin/blockUser",
   async (id, thunkAPI) => {
-    console.log(id, "block called  with slice");
     try {
       const token = thunkAPI.getState().auth.admin.token;
       return await adminService.blockUser(id, token);

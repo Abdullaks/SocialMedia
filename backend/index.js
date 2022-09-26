@@ -11,7 +11,7 @@ const adminRouter = require("./routes/adminRouter");
 const postRouter = require("./routes/postRouter");
 const uploadRouter = require("./routes/uploadRouter");
 const app = express();
-const { readdirSync } = require("fs");
+// const { readdirSync } = require("fs");
 
 //middlewares
 app.use(express.json()); // middleware to print json data
@@ -22,15 +22,17 @@ app.use(
     useTempFiles: true,
   })
 );
-// readdirSync("./routes").map((r) => app.use("/", require("./routes/" + r)));
 
+// readdirSync("./routes").map((r) => app.use("/", require("./routes/" + r)));
+//routing middleware 
 app.use("/api/auth", authRouter);
 app.use("/api/users", userRouter);
 app.use("/api/admin", adminRouter);
 app.use("/api/post", postRouter);
 app.use("/api/upload", uploadRouter);
 
+
+//backend port
 app.listen(8800, () => {
-  console.log("backend running");
+  console.log("Backend running...");
 });
-                                 

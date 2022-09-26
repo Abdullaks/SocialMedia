@@ -12,13 +12,14 @@ import {
   Watch,
   ArrowDown,
   Market,
+  Home,
 } from "../../svg";
 import "./style.css";
 import SearchMenu from "./SearchMenu";
 import { useDispatch, useSelector } from "react-redux";
 import { logout ,reset} from "../../features/auth/authSlice";
 
-export default function Header() {
+export default function Header({page}) {
   const { user } = useSelector((state) => state.auth);
   const [showSearchMenu, setShowSearchMenu] = useState(false);
   const color = "#65676b";
@@ -49,8 +50,8 @@ export default function Header() {
       </div>
       {showSearchMenu && <SearchMenu color={color}  setShowSearchMenu={setShowSearchMenu} />}
       <div className="header_middle">
-        <Link to="/" className="middle_icon  active">
-          <HomeActive />
+        <Link to="/" className={`middle_icon ${page === "home" ? "active" : "hover1"}`} >
+          {page === "home" ? <HomeActive /> : <Home color={color} />}
         </Link>
         <Link to="/" className="middle_icon hover1">
           <Friends color={color} />
@@ -67,7 +68,9 @@ export default function Header() {
         </Link>
       </div>
       <div className="header_right">
-        <Link to="/" className="profile_link hover1">
+        <Link to="/profile"className={`profile_link hover1 ${
+            page === "profile" ? "active_link" : ""
+          }`}>
           {/* <img src={user?.profilePicture} alt="" /> */}
           <span>{user?.username}</span>
         </Link>

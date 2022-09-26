@@ -166,7 +166,7 @@ const Signup = () => {
               width: { sm: 200, md: 300 },
               "& .MuiInputBase-root": {
                 height: 60,
-              },
+              },  
             }}
           />
           {formik.errors.name ? (

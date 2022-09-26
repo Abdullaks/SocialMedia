@@ -8,7 +8,7 @@ export default function CreatePost({ user,setPostPopup }) {
         <img src={user?.picture} alt="" />
         <div className="open_post hover2"
         onClick={()=>{setPostPopup(true)}} >
-          What's on your mind, {user?.username}
+          Post Something.., {user?.username}
         </div>
       </div>
       <div className="create_splitter"></div>

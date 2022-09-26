@@ -12,7 +12,7 @@ import { getAllposts } from "../../features/post/postSlice";
 import "./style.css";
 
 export default function Home() {
-  const [postPopup,setPostPopup]=useState(false);
+  const [postPopup, setPostPopup] = useState(false);
   const { user } = useSelector((state) => state.auth);
   const { posts } = useSelector((state) => state.posts);
   const navigate = useNavigate();
@@ -22,27 +22,26 @@ export default function Home() {
     if (!user) {
       navigate("/");
     }
-    dispatch(getAllposts())
-  }, [user,navigate,dispatch])
-  
+    dispatch(getAllposts());
+  }, [user, navigate, dispatch]);
+
   return (
-    <div className="home">
-      <Header />
+    <div className="home" 
+    // style={{ height: `${height + 150}px` }}
+    >
+      <Header page="home" />
       <LeftHome user={user} />
       <div className="home_middle">
-        <CreatePost user={user}  setPostPopup={setPostPopup}/>
-
+        <CreatePost user={user} setPostPopup={setPostPopup} />
         <div className="posts">
-        {posts.map((post,i)=>(
-          <>
-          <Post key={post._id} post={post} />
-          <CreatePost user={user}  setPostPopup={setPostPopup}/>
-          </>
-
-        ))}
+          {posts.map((post, i) => (
+            <Post key={post._id} post={post} />
+          ))}
+          <CreatePost user={user} setPostPopup={setPostPopup} />
         </div>
-        {/* <CreatePost user={user}  setPostPopup={setPostPopup}/> */}
-        {postPopup && <CreatePostPopUp  user={user} setPostPopup={setPostPopup} />}
+        {postPopup && (
+          <CreatePostPopUp user={user} setPostPopup={setPostPopup} />
+        )}
       </div>
       <RightHome user={user} />
     </div>

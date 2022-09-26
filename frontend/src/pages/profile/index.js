@@ -1,7 +1,117 @@
-import React from 'react'
+import React, { useState } from "react";
+import "./style.css";
+import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import Header from "../../components/header";
+import ProfielPictureDetails from "./ProfilePictureDetails";
+import ProfileMenu from "./ProfileMenu";
+import PeoplelYouMayKnow from "./PeoplelYouMayKnow";
+import Cover from "./Cover";
+import GridPosts from "./GridPosts";
+import CreatePost from "../../components/createPost";
+import CreatePostPopUp from "../../components/createPostPopUp";
+import { useParams } from 'react-router-dom'
 
 export default function Profile() {
+  const [postPopup, setPostPopup] = useState(false);
+  const { user } = useSelector((state) => state.auth);
+  // const navigate = useNavigate();
+  const { username}=useParams()
+  var userName = username === undefined ? user.username : username;
+  // useEffect(() => {
+  //   if (!user) {
+  //     navigate("/");
+  //   }
+  // }, [user, navigate]);
+
   return (
-    <div>Profile</div>
-  )
+    <div className="profile">
+      <Header page="profile" />
+      <div className="profile_top"
+      //  ref={profileTop}
+       >
+        <div className="profile_container">
+          <Cover
+            // cover={user.coverPicture ? user.coverPicture : " "}
+            // visitor={visitor}
+            // photos={photos.resources}
+          />
+          <ProfielPictureDetails 
+          // profile={profile}
+          // visitor={visitor}
+          // photos={photos.resources}
+          // othername={othername}
+          />
+          <ProfileMenu />
+        </div>
+      </div>
+      <div className="profile_bottom">
+        <div className="profile_container">
+          <div className="bottom_container">
+            <PeoplelYouMayKnow />
+            <div
+              // className={`profile_grid ${
+              //   check && scrollHeight >= height && leftHeight > 1000
+              //     ? "scrollFixed showLess"
+              //     : check &&
+              //       scrollHeight >= height &&
+              //       leftHeight < 1000 &&
+              //       "scrollFixed showMore"
+              // }`}
+            >
+              <div className="profile_left" 
+              // ref={leftSide}
+              >
+                {/* <Intro
+                detailss={profile.details}
+                visitor={visitor}
+                setOthername={setOthername}
+              /> */}
+                {/* <Photos
+                username={userName}
+                token={user.token}
+                photos={photos}
+              /> */}
+                {/* <Friends friends={profile.friends} /> */}
+                <div className="relative_fb_copyright">
+                  <Link to="/">Privacy </Link>
+                  <span>. </span>
+                  <Link to="/">Terms </Link>
+                  <span>. </span>
+                  <Link to="/">Advertising </Link>
+                  <span>. </span>
+                  <Link to="/">
+                    Ad Choices <i className="ad_choices_icon"></i>{" "}
+                  </Link>
+                  <span>. </span>
+                  <Link to="/"></Link>Cookies <span>. </span>
+                  <Link to="/">More </Link>
+                  <span>. </span> <br />
+                  KS © 2022
+                </div>
+              </div>
+              <div className="profile_right">
+                {/* {!visitor && ( */}
+                <CreatePost user={user} setPostPopup={setPostPopup} />
+                {postPopup && (
+                  <CreatePostPopUp user={user} setPostPopup={setPostPopup} />
+                )}
+                {/* )} */}
+                <GridPosts />
+                <div className="posts">
+                  {/* {profile.posts && profile.posts.length ? (
+                  profile.posts.map((post) => (
+                    <Post post={post} user={user} key={post._id} profile />
+                  ))
+                ) : (
+                  <div className="no_posts">No posts available</div>
+                )} */}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }

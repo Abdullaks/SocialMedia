@@ -2,7 +2,6 @@ import React from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import VerifyMobile from "./pages/VerifyMobile";
@@ -24,6 +23,7 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/admin" element={<AdminHome />} />
           <Route path="/profile" element={<Profile />} />
+          {/* <Route path="/profile/:username" element={<Profile />} /> */}
         </Routes>
       </Router>
       <ToastContainer />

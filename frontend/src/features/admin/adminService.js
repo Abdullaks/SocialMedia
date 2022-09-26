@@ -13,7 +13,6 @@ const getAllUsers = async (token) => {
 
 //Delete user
 const deleteUser = async (userId, token) => {
-  console.log("deleteUser called service");
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -23,31 +22,26 @@ const deleteUser = async (userId, token) => {
     "/api/admin/deleteUser/" + userId,
     config
   );
-  console.log(response.data);
   return response.data;
 };
 //Block user
 const blockUser = async (userId, token) => {
-  console.log("blockUser called service");
-  const config = {
+    const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   };
   const response = await axios.put("/api/admin/blockUser/" + userId, config);
-  console.log(response.data);
   return response.data;
 };
 //Unblock user
 const unBlockUser = async (userId, token) => {
-  console.log("blockUser called service");
-  const config = {
+  const config = { 
     headers: {
       Authorization: `Bearer ${token}`,
     },
   };
   const response = await axios.put("/api/admin/unBlockUser/" + userId, config);
-  console.log(response.data);
   return response.data;
 };
 
