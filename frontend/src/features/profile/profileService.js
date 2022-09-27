@@ -1,17 +1,31 @@
 import axios from "axios";
 
-//Get All posts
-// const getAllposts = async (token) => {
-//   const config = {
-//     headers: {
-//       Authorization: `Bearer ${token}`,
-//     },
-//   };
-//   const response = await axios.get("/api/post/getAllPosts", config);
-//   return response.data;
-// };
+//Get profile
+const getProfile = async (username, token) => {
+
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const response = await axios.get("/api/user/getProfile/" + username, config);
+  return response.data;
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const profileService = {
-    
+  getProfile,
 };
 export default profileService;

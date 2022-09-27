@@ -5,10 +5,10 @@ import { Dots, Public } from "../../svg";
 import "./style.css";
 import CreateComment from "./CreateComment";
 import ReactionPopup from "./ReactionPopup";
-export default function Post({ post }) {
+export default function Post({ post,profile }) {
   const [showReaction,setShowReaction]= useState(false);
   return (
-    <div className="post">
+    <div className="post" style={{ width: `${profile && "100%"}` }}>
       <div className="post_header">
         <Link
           to={`/profile/${post.user.username}`}

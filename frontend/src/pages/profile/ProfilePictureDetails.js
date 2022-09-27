@@ -1,26 +1,30 @@
-import React from 'react'
-import { useSelector } from 'react-redux';
-
-export default function ProfielPictureDetails({visitor}) {
-    const { user } = useSelector((state) => state.auth);
-
+import React, { useState } from "react";
+import ProfilePicture from "../../components/profile/profilePicture";
+export default function ProfielPictureDetails({ profile, visitor }) {
+  const [profilePopup, setProfilePopup] = useState(false);
   return (
     <div className="profile_img_wrap">
-      {/* {show && <ProfilePicture setShow={setShow} pRef={pRef} photos={photos} />} */}
+      {profilePopup && (
+        <ProfilePicture
+          setProfilePopup={setProfilePopup}
+          // pRef={pRef}
+          //  photos={photos}
+        />
+      )}
       <div className="profile_w_left">
         <div className="profile_w_img">
           <div
             className="profile_w_bg"
             // ref={pRef}
-            style={{  
+            style={{
               backgroundSize: "cover",
-              backgroundImage: `url(${user.profilePicture})`,
+              backgroundImage: `url(${profile.profilePicture})`,
             }}
           ></div>
           {!visitor && (
             <div
               className="profile_circle hover1"
-            //   onClick={() => setShow(true)}
+              onClick={() => setProfilePopup(true)}
             >
               <i className="camera_filled_icon"></i>
             </div>
@@ -28,20 +32,19 @@ export default function ProfielPictureDetails({visitor}) {
         </div>
         <div className="profile_w_col">
           <div className="profile_name">
-            {user.name?user.name:user.username}
-            {/* {profile.first_name} {profile.last_name} */}
+            {profile.username}
             <div className="othername">
-                othername
-                {/* {othername && `(${othername})`} */}
-                </div>
+              othername
+              {/* {othername && `(${othername})`} */}
+            </div>
           </div>
           <div className="profile_friend_count"></div>
           <div className="profile_friend_imgs"></div>
         </div>
       </div>
-      {/* {visitor ? (
+      {visitor ? (
         ""
-      ) : ( */}
+      ) : (
         <div className="profile_w_right">
           <div className="blue_btn">
             <img src="../../../icons/plus.png" alt="" className="invert" />
@@ -52,7 +55,7 @@ export default function ProfielPictureDetails({visitor}) {
             <span>Edit profile</span>
           </div>
         </div>
-      {/* )} */}
+      )}
     </div>
-  )
+  );
 }

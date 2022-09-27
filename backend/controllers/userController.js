@@ -23,6 +23,17 @@ try {
 }
 }
 
+const updateProfilePicture=async(req,res) => {
+  try {
+    const { url } = req.body;
+    await User.findByIdAndUpdate({ _id: req.user.id }, {$set:{
+      profilePicture: url,
+    }});
+    res.json(url);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
 
 //UPDATE USER
 // const updateUser = async (req, res) => {
@@ -124,4 +135,5 @@ try {
 
 module.exports = {
   getProfile,
+  updateProfilePicture,
 };

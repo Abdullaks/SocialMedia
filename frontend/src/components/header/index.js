@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import {
   Notifications,
   Friends,
@@ -24,9 +24,11 @@ export default function Header({page}) {
   const [showSearchMenu, setShowSearchMenu] = useState(false);
   const color = "#65676b";
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const onLogout = () => {
     dispatch(logout())
     dispatch(reset())
+    navigate("/")
   }
   
   return (

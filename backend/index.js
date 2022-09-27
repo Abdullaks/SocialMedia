@@ -26,7 +26,7 @@ app.use(
 // readdirSync("./routes").map((r) => app.use("/", require("./routes/" + r)));
 //routing middleware 
 app.use("/api/auth", authRouter);
-app.use("/api/users", userRouter);
+app.use("/api/user", userRouter);
 app.use("/api/admin", adminRouter);
 app.use("/api/post", postRouter);
 app.use("/api/upload", uploadRouter);

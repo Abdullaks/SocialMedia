@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react'
 import { useSelector } from 'react-redux';
 import useClickOutside from '../../helpers/clickOutside';
 
-export default function Cover({cover}) {
+export default function Cover({cover,visitor}) {
     const { user } = useSelector((state) => state.auth);
     const [showCoverMneu, setShowCoverMenu] = useState(false);
     const menuRef = useRef(null);
@@ -32,7 +32,7 @@ export default function Cover({cover}) {
           </button>
         </div>
       </div>
-    {/* )} */}
+    {/* )}  */}
     <input
       type="file"
     //   ref={refInput}
@@ -68,7 +68,7 @@ export default function Cover({cover}) {
     {/* {cover && !coverPicture && (
       <img src={cover} className="cover" alt="" ref={cRef} />
     )} */}
-    {/* {!visitor && ( */}
+    {!visitor && (
       <div className="udpate_cover_wrapper">
         <div
           className="open_cover_update"
@@ -96,7 +96,7 @@ export default function Cover({cover}) {
           </div>
         )}
       </div>
-    {/* )} */}
+     )} 
     {/* {show && (
       <OldCovers
         photos={photos}

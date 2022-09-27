@@ -8,7 +8,7 @@ import RightHome from "../../components/home/right_bar";
 import LeftHome from "../../components/home/side_bar";
 // import Stories from "../../components/home/stories";
 import Post from "../../components/post/index";
-import { getAllposts } from "../../features/post/postSlice";
+import { getAllposts, reset } from "../../features/post/postSlice";
 import "./style.css";
 
 export default function Home() {
@@ -23,7 +23,11 @@ export default function Home() {
       navigate("/");
     }
     dispatch(getAllposts());
+    return () => {
+      dispatch(reset())
+    }
   }, [user, navigate, dispatch]);
+
 
   return (
     <div className="home" 

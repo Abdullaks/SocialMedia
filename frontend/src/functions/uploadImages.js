@@ -1,6 +1,8 @@
 import axios from "axios";
 
 export const uploadImages = async (formData, path, token) => {
+
+
   try {
     const { data } = await axios.post(
         "/api/upload/uploadImages",

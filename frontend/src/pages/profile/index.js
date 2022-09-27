@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./style.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import Header from "../../components/header";
 import ProfielPictureDetails from "./ProfilePictureDetails";
@@ -11,18 +11,29 @@ import GridPosts from "./GridPosts";
 import CreatePost from "../../components/createPost";
 import CreatePostPopUp from "../../components/createPostPopUp";
 import { useParams } from 'react-router-dom'
+import { getProfile, reset } from "../../features/profile/profileSlice";
+import Post from "../../components/post";
+import Friends from "./Friends";
 
 export default function Profile() {
   const [postPopup, setPostPopup] = useState(false);
   const { user } = useSelector((state) => state.auth);
-  // const navigate = useNavigate();
+  const { profile } = useSelector((state) => state.profile);
+  const navigate = useNavigate();
+  const dispatch= useDispatch()
   const { username}=useParams()
   var userName = username === undefined ? user.username : username;
-  // useEffect(() => {
-  //   if (!user) {
-  //     navigate("/");
-  //   }
-  // }, [user, navigate]);
+  var visitor = userName === user.username ? false : true;
+  useEffect(() => {
+    if (!user) {
+      navigate("/");
+    }
+    dispatch(getProfile(userName))
+    return () => {
+      dispatch(reset())
+    }
+  }, [user,navigate,dispatch,userName]);
+
 
   return (
     <div className="profile">
@@ -32,13 +43,13 @@ export default function Profile() {
        >
         <div className="profile_container">
           <Cover
-            // cover={user.coverPicture ? user.coverPicture : " "}
-            // visitor={visitor}
+            cover={profile.coverPicture}
+            visitor={visitor}
             // photos={photos.resources}
           />
           <ProfielPictureDetails 
-          // profile={profile}
-          // visitor={visitor}
+          profile={profile}
+          visitor={visitor}
           // photos={photos.resources}
           // othername={othername}
           />
@@ -48,7 +59,7 @@ export default function Profile() {
       <div className="profile_bottom">
         <div className="profile_container">
           <div className="bottom_container">
-            <PeoplelYouMayKnow />
+            {/* <PeoplelYouMayKnow /> */}
             <div
               // className={`profile_grid ${
               //   check && scrollHeight >= height && leftHeight > 1000
@@ -72,8 +83,8 @@ export default function Profile() {
                 token={user.token}
                 photos={photos}
               /> */}
-                {/* <Friends friends={profile.friends} /> */}
-                <div className="relative_fb_copyright">
+                <Friends friends={profile.friends} />
+                {/* <div className="relative_fb_copyright">
                   <Link to="/">Privacy </Link>
                   <span>. </span>
                   <Link to="/">Terms </Link>
@@ -88,24 +99,24 @@ export default function Profile() {
                   <Link to="/">More </Link>
                   <span>. </span> <br />
                   KS © 2022
-                </div>
+                </div> */}
               </div>
               <div className="profile_right">
-                {/* {!visitor && ( */}
+                {!visitor && (
                 <CreatePost user={user} setPostPopup={setPostPopup} />
-                {postPopup && (
+                 )} 
+                 {postPopup && (
                   <CreatePostPopUp user={user} setPostPopup={setPostPopup} />
                 )}
-                {/* )} */}
                 <GridPosts />
                 <div className="posts">
-                  {/* {profile.posts && profile.posts.length ? (
+                  {profile.posts && profile.posts.length ? (
                   profile.posts.map((post) => (
                     <Post post={post} user={user} key={post._id} profile />
                   ))
                 ) : (
                   <div className="no_posts">No posts available</div>
-                )} */}
+                )}
                 </div>
               </div>
             </div>

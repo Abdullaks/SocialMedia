@@ -23,7 +23,7 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/admin" element={<AdminHome />} />
           <Route path="/profile" element={<Profile />} />
-          {/* <Route path="/profile/:username" element={<Profile />} /> */}
+          <Route path="/profile/:username" element={<Profile />} />
         </Routes>
       </Router>
       <ToastContainer />

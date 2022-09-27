@@ -41,7 +41,6 @@ const Login = () => {
         password: values.password,
       };
       if (userData.email ==="admin123@gmail.com") {
-        console.log("admin123@gmail.com");
         dispatch(adminLogin(userData));
       }else{
         dispatch(login(userData));
