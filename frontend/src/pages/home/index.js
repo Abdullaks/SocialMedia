@@ -14,7 +14,7 @@ import "./style.css";
 export default function Home() {
   const [postPopup, setPostPopup] = useState(false);
   const { user } = useSelector((state) => state.auth);
-  const { posts } = useSelector((state) => state.posts);
+  const { posts, comments } = useSelector((state) => state.posts);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -23,23 +23,22 @@ export default function Home() {
       navigate("/");
     }
     dispatch(getAllposts());
-    return () => {
-      dispatch(reset())
-    }
-  }, [user, navigate, dispatch]);
 
+  }, [user, navigate, dispatch, comments]);
 
   return (
-    <div className="home" 
-    // style={{ height: `${height + 150}px` }}
+    <div
+      className="home"
+      // style={{ height: `${height + 150}px` }}
     >
       <Header page="home" />
       <LeftHome user={user} />
       <div className="home_middle">
         <CreatePost user={user} setPostPopup={setPostPopup} />
         <div className="posts">
-          {posts.map((post, i) => (
-            <Post key={post._id} post={post} />
+        
+          {posts?.map((post, i) => (
+            <Post key={i} post={post} comments={comments}  />
           ))}
           <CreatePost user={user} setPostPopup={setPostPopup} />
         </div>
@@ -51,3 +50,4 @@ export default function Home() {
     </div>
   );
 }
+

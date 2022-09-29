@@ -1,38 +1,49 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import Moment from "react-moment";
 import { Dots, Public } from "../../svg";
 import "./style.css";
 import CreateComment from "./CreateComment";
 import ReactionPopup from "./ReactionPopup";
-export default function Post({ post,profile }) {
-  const [showReaction,setShowReaction]= useState(false);
+import Comment from "./Comment";
+export default function Post({ post, profile,comments }) {
+  const [showReaction, setShowReaction] = useState(false);
+  const [commentsArray, setCommentsArray] = useState([]);
+  const [count, setCount] = useState(1);
+  const navigate = useNavigate();
+  useEffect(() => {
+    setCommentsArray(post?.Comments);
+  }, [post, comments]);
+  const showMore = () => {
+    setCount((prev) => prev + 5);
+  };
   return (
     <div className="post" style={{ width: `${profile && "100%"}` }}>
       <div className="post_header">
         <Link
-          to={`/profile/${post.user.username}`}
+          to={`/profile/${post?.user.username}`}
           className="post_header_left"
         >
-          {/* <img src={post.user.picture} alt="" /> */}
+          <img
+            src={
+              post?.user.profilePicture
+                ? post.user.profilePicture
+                : "https://res.cloudinary.com/dmhcnhtng/image/upload/v1643044376/avatars/default_pic_jeaybr.png"
+            }
+            alt=""
+          />
           <div className="header_col">
             <div className="post_profile_name">
-              {post.user.username}
-              {/* {post.user.first_name} {post.user.last_name} */}
+              {post?.user.username}
               <div className="updated_p">
-                {/* {post.type == "profilePicture" &&
-                `updated ${
-                  post.user.gender === "male" ? "his" : "her"
-                } profile picture`}
-              {post.type == "cover" &&
-                `updated ${
-                  post.user.gender === "male" ? "his" : "her"
-                } cover picture`} */}
+                {post?.type == "profilePicture" &&
+                  `updated their profile picture`}
+                {post?.type == "cover" && `updated their cover picture`}
               </div>
             </div>
             <div className="post_profile_privacy_date">
               <Moment fromNow interval={60}>
-                {post.createdAt}
+                {post?.createdAt}
               </Moment>
               {/* <Public color="#828387" /> */}
             </div>
@@ -44,8 +55,8 @@ export default function Post({ post,profile }) {
       </div>
 
       <>
-        <div className="post_text">{post.text}</div>
-        {post.images && post.images.length && (
+        <div className="post_text">{post?.text}</div>
+        {post?.images && post?.images.length && (
           <div
             className={
               post.images.length === 1
@@ -59,7 +70,7 @@ export default function Post({ post,profile }) {
                 : post.images.length >= 5 && "grid_5"
             }
           >
-            {post.images.slice(0, 5).map((image, i) => (
+            {post?.images.slice(0, 5).map((image, i) => (
               <img
                 src={image.url}
                 key={i}
@@ -67,8 +78,8 @@ export default function Post({ post,profile }) {
                 className={`img-${i}`}
               />
             ))}
-            {post.images.length > 5 && (
-              <div className="more-pics-shadow">+{post.images.length - 5}</div>
+            {post?.images.length > 5 && (
+              <div className="more-pics-shadow">+{post?.images.length - 5}</div>
             )}
           </div>
         )}
@@ -78,25 +89,29 @@ export default function Post({ post,profile }) {
           <div className="reacts_count_imgs"></div>
           <div className="reacts_count_num"></div>
         </div>
-        <div className="to_right">
-          <div className="comments_count">13 comments</div>
+        {/* <div className="to_right">
+          <div className="comments_count"> comments</div>
           <div className="share_count">1 share</div>
-        </div>
+        </div> */}
       </div>
       <div className="post_actions">
-        <ReactionPopup showReaction={showReaction} setShowReaction={setShowReaction}  />
-        <div className="post_action hover1"
-        onMouseOver={() => {
-          setTimeout(() => {
-            setShowReaction(true);
-          }, 500);
-        }}
-        onMouseLeave={() => {
-          setTimeout(() => {
-            setShowReaction(false);
-          }, 500);
-        }}
-         >
+        <ReactionPopup
+          showReaction={showReaction}
+          setShowReaction={setShowReaction}
+        />
+        <div
+          className="post_action hover1"
+          onMouseOver={() => {
+            setTimeout(() => {
+              setShowReaction(true);
+            }, 500);
+          }}
+          onMouseLeave={() => {
+            setTimeout(() => {
+              setShowReaction(false);
+            }, 500);
+          }}
+        >
           <i className="like_icon"></i>
           <span>Like</span>
         </div>
@@ -111,7 +126,17 @@ export default function Post({ post,profile }) {
       </div>
       <div className="comments_wrap">
         <div className="comments_order"></div>
-        <CreateComment />
+
+        <CreateComment postId={post._id} />
+        {commentsArray &&
+          commentsArray
+            .slice(0, count)
+            .map((comment, i) => <Comment comment={comment} key={i} />)}
+        {count < 5 && (
+          <div className="view_comments" onClick={() => showMore()}>
+            View more comments
+          </div>
+        )}
       </div>
     </div>
   );

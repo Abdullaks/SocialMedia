@@ -1,7 +1,5 @@
-import React, { useRef, useState } from "react";
+import React, {  useState } from "react";
 export default function ImagePreview({ user, text, setText, image, setImage }) {
-  const imageInputRef = useRef(null);
-  const [error, setError] = useState("");
   return (
     <div className="overflow_a">
       <div className="add_pics_wrap">
@@ -20,14 +18,6 @@ export default function ImagePreview({ user, text, setText, image, setImage }) {
             </div>
           </div>
         ) }
-        {error && (
-          <div className="postError comment_error">
-            <div className="postError_error">{error}</div>
-            <button className="blue_btn" onClick={() => setError("")}>
-              Try again
-            </button>
-          </div>
-        )}
       </div>
     </div>
   );

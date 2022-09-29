@@ -34,7 +34,6 @@ export default function Profile() {
     }
   }, [user,navigate,dispatch,userName]);
 
-
   return (
     <div className="profile">
       <Header page="profile" />
@@ -43,7 +42,7 @@ export default function Profile() {
        >
         <div className="profile_container">
           <Cover
-            cover={profile.coverPicture}
+            cover={profile?.coverPicture}
             visitor={visitor}
             // photos={photos.resources}
           />
@@ -84,22 +83,7 @@ export default function Profile() {
                 photos={photos}
               /> */}
                 <Friends friends={profile.friends} />
-                {/* <div className="relative_fb_copyright">
-                  <Link to="/">Privacy </Link>
-                  <span>. </span>
-                  <Link to="/">Terms </Link>
-                  <span>. </span>
-                  <Link to="/">Advertising </Link>
-                  <span>. </span>
-                  <Link to="/">
-                    Ad Choices <i className="ad_choices_icon"></i>{" "}
-                  </Link>
-                  <span>. </span>
-                  <Link to="/"></Link>Cookies <span>. </span>
-                  <Link to="/">More </Link>
-                  <span>. </span> <br />
-                  KS © 2022
-                </div> */}
+                
               </div>
               <div className="profile_right">
                 {!visitor && (

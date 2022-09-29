@@ -23,9 +23,6 @@ const postSchema = new mongoose.Schema(
     background: {
       type: String,
     },
-    
-
-
   },
   {
     toJSON:{
@@ -39,17 +36,13 @@ const postSchema = new mongoose.Schema(
   
 );
 
-module.exports = mongoose.model("Post", postSchema);
-
-
 
 // virtual methode to populate 
-
-
-postSchema.virtual("Comment", {
+postSchema.virtual("Comments", {
     ref:"Comment",
-    foreignField:"postId",
+    foreignField:"Post",
     localField:"_id"
   })
-
+  
+  module.exports = mongoose.model("Post", postSchema);
 

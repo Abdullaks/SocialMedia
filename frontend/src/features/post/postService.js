@@ -11,7 +11,23 @@ const getAllposts = async (token) => {
   return response.data;
 };
 
+
+
+//Comment on Post
+const comment = async (Data,token) => { 
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const response = await axios.post("/api/post/comment",Data, config);
+  return response.data;
+};
+
+
+
 const postService = {
     getAllposts,
+    comment,
 };
 export default postService;

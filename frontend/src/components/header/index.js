@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Notifications,
   Friends,
@@ -17,7 +17,7 @@ import {
 import "./style.css";
 import SearchMenu from "./SearchMenu";
 import { useDispatch, useSelector } from "react-redux";
-import { logout ,reset} from "../../features/auth/authSlice";
+import { logout, reset } from "../../features/auth/authSlice";
 
 export default function Header({page}) {
   const { user } = useSelector((state) => state.auth);
@@ -28,8 +28,15 @@ export default function Header({page}) {
   const onLogout = () => {
     dispatch(logout())
     dispatch(reset())
-    navigate("/")
   }
+
+  useEffect(() => {
+     if(!user){
+      navigate("/")
+     }
+  }, [user,navigate])
+  
+  
   
   return (
     <header>
@@ -63,17 +70,18 @@ export default function Header({page}) {
           <div className="middle_notification">9+</div>
         </Link>
         <Link to="/" className="middle_icon hover1">
-          <Market color={color} />
+          <Market color={color} />      
         </Link>
         <Link to="/" className="middle_icon hover1">
           <Gaming color={color} />
-        </Link>
+        </Link>  
       </div>
       <div className="header_right">
         <Link to="/profile"className={`profile_link hover1 ${
             page === "profile" ? "active_link" : ""
           }`}>
-          {/* <img src={user?.profilePicture} alt="" /> */}
+            
+          <img src={user?.profilePicture?user.profilePicture:"https://res.cloudinary.com/dmhcnhtng/image/upload/v1643044376/avatars/default_pic_jeaybr.png "}  />
           <span>{user?.username}</span>
         </Link>
         <div className="circle_icon hover1">

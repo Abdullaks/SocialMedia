@@ -5,7 +5,7 @@ export default function CreatePost({ user,setPostPopup }) {
   return (
     <div className="createPost">
       <div className="createPost_header">
-        <img src={user?.picture} alt="" />
+        <img src={user?.profilePicture?user.profilePicture:"https://res.cloudinary.com/dmhcnhtng/image/upload/v1643044376/avatars/default_pic_jeaybr.png"} alt="" />
         <div className="open_post hover2"
         onClick={()=>{setPostPopup(true)}} >
           Post Something.., {user?.username}

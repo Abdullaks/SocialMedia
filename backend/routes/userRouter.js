@@ -8,10 +8,11 @@ const {verifyUser}= require('../middleware/authMiddleware');
 //   followUser,
 //   unfollowUser,
 // } = require("../controllers/userController");
-const {getProfile,updateProfilePicture} =require("../controllers/userController")
+const {getProfile,updateProfilePicture,updateCoverPicture} =require("../controllers/userController")
 
 router.get("/getProfile/:username",verifyUser, getProfile);
 router.put("/updateProfilePicture",verifyUser, updateProfilePicture);
+router.put("/updateCoverPicture",verifyUser, updateCoverPicture);
 
 
 

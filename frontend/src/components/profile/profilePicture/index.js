@@ -6,6 +6,7 @@ import PulseLoader from "react-spinners/PulseLoader";
 import { uploadImages } from "../../../functions/uploadImages";
 import { updateprofilePicture } from "../../../functions/profile";
 import { createPost } from "../../../functions/createPost";
+import { getProfile } from "../../../features/profile/profileSlice";
 
 export default function ProfilePicture({ setProfilePopup }) {
   const refInput = useRef(null);
@@ -53,19 +54,17 @@ export default function ProfilePicture({ setProfilePopup }) {
         const new_post = await createPost(
           "profilePicture",
           null,
-          "My New pro. pic",
+          "My New profile. picture",
           res,
           user._id,
           user.token
         );
+
         if (new_post === "ok") {
           setLoading(false);
           setImage("");
-          // dispatch({
-          //   type: "UPDATEPICTURE",
-          //   payload: res[0].url,
-          // });
           setProfilePopup(false);
+          dispatch(getProfile(user.username))
         } else {
           setLoading(false);
           setError(new_post);
@@ -138,7 +137,9 @@ export default function ProfilePicture({ setProfilePopup }) {
         </div>
         {image && (
           <div className="update_submit_wrap">
-            <div className="blue_link">Cancel</div>
+            <div className="blue_link"
+            onClick={()=>setImage("")}
+            >Cancel</div>
             <button className="blue_btn"
              disabled={loading}
              onClick={() => updateProfielPicture()}>

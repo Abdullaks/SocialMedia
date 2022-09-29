@@ -10,9 +10,9 @@ export default function LeftHome({ user }) {
   return (
     <div className="left_home scrollbar">
       <Link to="/profile" className="left_link hover1">
-        <img src={user?.profilePicture} alt="" />
+        <img src={user?.profilePicture?user.profilePicture:"https://res.cloudinary.com/dmhcnhtng/image/upload/v1643044376/avatars/default_pic_jeaybr.png"} alt="" />
         <span>
-          {user ?.username}
+          {user?.username}
         </span>
       </Link>
       {left.slice(0, 8).map((link, i) => (
