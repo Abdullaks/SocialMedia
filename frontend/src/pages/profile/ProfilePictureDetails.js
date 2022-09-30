@@ -32,11 +32,11 @@ export default function ProfielPictureDetails({ profile, visitor }) {
         </div>
         <div className="profile_w_col">
           <div className="profile_name">
-            {profile.username}
-            <div className="othername">
+            {profile?.username}
+            {/* <div className="othername">
               othername
-              {/* {othername && `(${othername})`} */}
-            </div>
+              {othername && `(${othername})`}
+            </div> */}
           </div>
           <div className="profile_friend_count"></div>
           <div className="profile_friend_imgs"></div>

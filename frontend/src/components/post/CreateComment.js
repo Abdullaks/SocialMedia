@@ -46,7 +46,7 @@ export default function CreateComment({ postId }) {
       <div className="create_comment">
         <img
           src={
-            user.profilePicture
+            user?.profilePicture
               ? user.profilePicture
               : "https://res.cloudinary.com/dmhcnhtng/image/upload/v1643044376/avatars/default_pic_jeaybr.png"
           }

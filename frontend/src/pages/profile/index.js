@@ -10,47 +10,47 @@ import Cover from "./Cover";
 import GridPosts from "./GridPosts";
 import CreatePost from "../../components/createPost";
 import CreatePostPopUp from "../../components/createPostPopUp";
-import { useParams } from 'react-router-dom'
+import { useParams } from "react-router-dom";
 import { getProfile, reset } from "../../features/profile/profileSlice";
 import Post from "../../components/post";
 import Friends from "./Friends";
+import Bio from "../../components/profile/Bio";
 
 export default function Profile() {
   const [postPopup, setPostPopup] = useState(false);
   const { user } = useSelector((state) => state.auth);
   const { profile } = useSelector((state) => state.profile);
   const navigate = useNavigate();
-  const dispatch= useDispatch()
-  const { username}=useParams()
-  var userName = username === undefined ? user.username : username;
-  var visitor = userName === user.username ? false : true;
+  const dispatch = useDispatch();
+  const { username } = useParams();
+  var userName = username === undefined ? user?.username : username;
+  var visitor = userName === user?.username ? false : true;
   useEffect(() => {
     if (!user) {
       navigate("/");
     }
-    dispatch(getProfile(userName))
+    dispatch(getProfile(userName));
     return () => {
-      dispatch(reset())
-    }
-  }, [user,navigate,dispatch,userName]);
+      dispatch(reset());
+    };
+  }, [user, navigate, dispatch, userName]);
 
   return (
     <div className="profile">
       <Header page="profile" />
-      <div className="profile_top"
-      //  ref={profileTop}
-       >
+      <div
+        className="profile_top"
+        //  ref={profileTop}
+      >
         <div className="profile_container">
           <Cover
             cover={profile?.coverPicture}
             visitor={visitor}
             // photos={photos.resources}
           />
-          <ProfielPictureDetails 
-          profile={profile}
-          visitor={visitor}
-          // photos={photos.resources}
-          // othername={othername}
+          <ProfielPictureDetails
+            profile={profile}
+            visitor={visitor}
           />
           <ProfileMenu />
         </div>
@@ -60,18 +60,21 @@ export default function Profile() {
           <div className="bottom_container">
             {/* <PeoplelYouMayKnow /> */}
             <div
-              // className={`profile_grid ${
-              //   check && scrollHeight >= height && leftHeight > 1000
-              //     ? "scrollFixed showLess"
-              //     : check &&
-              //       scrollHeight >= height &&
-              //       leftHeight < 1000 &&
-              //       "scrollFixed showMore"
-              // }`}
+            // className={`profile_grid ${
+            //   check && scrollHeight >= height && leftHeight > 1000
+            //     ? "scrollFixed showLess"
+            //     : check &&
+            //       scrollHeight >= height &&
+            //       leftHeight < 1000 &&
+            //       "scrollFixed showMore"
+            // }`}
             >
-              <div className="profile_left" 
-              // ref={leftSide}
+              <div
+                className="profile_left"
+                // ref={leftSide}
               >
+                <Bio visitor={visitor} profile={profile} />
+
                 {/* <Intro
                 detailss={profile.details}
                 visitor={visitor}
@@ -83,24 +86,23 @@ export default function Profile() {
                 photos={photos}
               /> */}
                 <Friends friends={profile.friends} />
-                
               </div>
               <div className="profile_right">
                 {!visitor && (
-                <CreatePost user={user} setPostPopup={setPostPopup} />
-                 )} 
-                 {postPopup && (
+                  <CreatePost user={user} setPostPopup={setPostPopup} />
+                )}
+                {postPopup && (
                   <CreatePostPopUp user={user} setPostPopup={setPostPopup} />
                 )}
                 <GridPosts />
                 <div className="posts">
                   {profile.posts && profile.posts.length ? (
-                  profile.posts.map((post) => (
-                    <Post post={post} user={user} key={post._id} profile />
-                  ))
-                ) : (
-                  <div className="no_posts">No posts available</div>
-                )}
+                    profile.posts.map((post) => (
+                      <Post post={post} user={user} key={post._id} profile />
+                    ))
+                  ) : (
+                    <div className="no_posts">No posts available</div>
+                  )}
                 </div>
               </div>
             </div>

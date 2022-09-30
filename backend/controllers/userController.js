@@ -2,51 +2,75 @@ const bcrypt = require("bcrypt");
 const User = require("../models/userModel");
 const Post = require("../models/postModel");
 
+const getProfile = async (req, res) => {
+  try {
+    const { username } = req.params;
+    const profile = await User.findOne({ username }).select("-password");
 
-
-
-
-
-
-const getProfile= async (req, res) => {
-try {
-  const { username } = req.params;
-  const profile = await User.findOne({username}).select("-password")
-
-  const posts = await Post.find({ user: profile._id })
+    const posts = await Post.find({ user: profile._id })
       .populate("user")
       .sort({ createdAt: -1 });
-      
+
     res.json({ ...profile.toObject(), posts });
-} catch (error) {
-  return res.status(500).json({ message: error.message });  
-}
-}
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
 
-const updateProfilePicture=async(req,res) => {
+const updateProfilePicture = async (req, res) => {
   try {
     const { url } = req.body;
-    await User.findByIdAndUpdate({ _id: req.user.id }, {$set:{
-      profilePicture: url,
-    }});
+    await User.findByIdAndUpdate(
+      { _id: req.user.id },
+      {
+        $set: {
+          profilePicture: url,
+        },
+      }
+    );
     res.json(url);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
-}
+};
 
-const updateCoverPicture=async(req,res) => {
+const updateCoverPicture = async (req, res) => {
   try {
     const { url } = req.body;
-    await User.findByIdAndUpdate({ _id: req.user.id }, {$set:{
-      coverPicture: url,
-    }});
+    await User.findByIdAndUpdate(
+      { _id: req.user.id },
+      {
+        $set: {
+          coverPicture: url,
+        },
+      }
+    );
     res.json(url);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
-}
-
+};
+                              
+const updateBio = async (req, res) => {
+  console.log(req.body,"req.body");
+  try {
+    // const { infos } = req.body;
+    
+    const updated = await User.findByIdAndUpdate(
+      req.user.id,
+      {
+        bio: req.body.bio,
+      },
+      {
+        new: true,
+      }
+    );
+    console.log(updated);
+    res.json(updated);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
 //UPDATE USER
 // const updateUser = async (req, res) => {
@@ -150,4 +174,5 @@ module.exports = {
   getProfile,
   updateProfilePicture,
   updateCoverPicture,
+  updateBio,
 };

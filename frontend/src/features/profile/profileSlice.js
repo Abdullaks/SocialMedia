@@ -29,7 +29,27 @@ export const getProfile = createAsyncThunk(
       }
     }
   );
+                                     
 
+//update Profile  Bio
+export const updateBio = createAsyncThunk(
+  "user/updateBio",
+  async (infos, thunkAPI) => {
+    try {
+      console.log(infos,"slice called");
+      const token = thunkAPI.getState().auth.user.token;
+      return await profileService.updateBio(infos,token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
 
   
 

@@ -21,12 +21,12 @@ export default function Post({ post, profile,comments }) {
     <div className="post" style={{ width: `${profile && "100%"}` }}>
       <div className="post_header">
         <Link
-          to={`/profile/${post?.user.username}`}
+          to={`/profile/${post?.user?.username}`}
           className="post_header_left"
         >
           <img
             src={
-              post?.user.profilePicture
+              post?.user?.profilePicture
                 ? post.user.profilePicture
                 : "https://res.cloudinary.com/dmhcnhtng/image/upload/v1643044376/avatars/default_pic_jeaybr.png"
             }
@@ -34,7 +34,7 @@ export default function Post({ post, profile,comments }) {
           />
           <div className="header_col">
             <div className="post_profile_name">
-              {post?.user.username}
+              {post?.user?.username}
               <div className="updated_p">
                 {post?.type == "profilePicture" &&
                   `updated their profile picture`}

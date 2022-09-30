@@ -14,6 +14,7 @@ const userSchema = mongoose.Schema(
     name: {
       type: String,
       // trim: true,
+      // required: true,
       text: true,
     },
     email: {
@@ -40,28 +41,10 @@ const userSchema = mongoose.Schema(
     coverPicture: {
       type: String,
       trim: true,
-      default:
-        "https://res.cloudinary.com/dmhcnhtng/image/upload/v1643044376/avatars/default_pic_jeaybr.png",
+      default: "",
     },
-    gender: {
+    bio: {
       type: String,
-      // required: [true, "gender is required"],
-      trim: true,
-    },
-    bYear: {
-      type: Number,
-      // required: true,
-      trim: true,
-    },
-    bMonth: {
-      type: Number,
-      // required: true,
-      trim: true,
-    },
-    bDay: {
-      type: Number,
-      // required: true,
-      trim: true,
     },
     friends: {
       type: Array,
@@ -88,19 +71,14 @@ const userSchema = mongoose.Schema(
       },
     ],
     details: {
-      bio: {
-        type: String,
+      age: {
+        type: Number,
       },
-      otherName: {
+      gender: {
         type: String,
-      },
-      job: {
-        type: String,
+        trim: true,
       },
       workplace: {
-        type: String,
-      },
-      highSchool: {
         type: String,
       },
       college: {

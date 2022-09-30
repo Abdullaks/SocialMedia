@@ -169,7 +169,7 @@
     background: var(--bg-third);
     position: absolute;
     right: 0;
-    top: 10px;
+    top: 9px;
     border-radius: 5px;
     display: grid;
     place-items: center;
