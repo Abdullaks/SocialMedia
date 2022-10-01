@@ -20,12 +20,9 @@ export default function ProfileMenu() {
         <Link to="/" className="hover1">
           Videos
         </Link>
-        {/* <Link to="/" className="hover1">
-          Check-ins
-        </Link> */}
-        {/* <Link to="/" className="hover1">
+        <Link to="/" className="hover1">
           More
-        </Link> */}
+        </Link>
         <div className="p10_dots">
           <Dots />
         </div>

@@ -40,18 +40,13 @@ export default function Profile() {
       <Header page="profile" />
       <div
         className="profile_top"
-        //  ref={profileTop}
       >
         <div className="profile_container">
           <Cover
             cover={profile?.coverPicture}
             visitor={visitor}
-            // photos={photos.resources}
           />
-          <ProfielPictureDetails
-            profile={profile}
-            visitor={visitor}
-          />
+          <ProfielPictureDetails profile={profile} visitor={visitor} userName={userName} />
           <ProfileMenu />
         </div>
       </div>
@@ -59,32 +54,13 @@ export default function Profile() {
         <div className="profile_container">
           <div className="bottom_container">
             {/* <PeoplelYouMayKnow /> */}
-            <div
-            // className={`profile_grid ${
-            //   check && scrollHeight >= height && leftHeight > 1000
-            //     ? "scrollFixed showLess"
-            //     : check &&
-            //       scrollHeight >= height &&
-            //       leftHeight < 1000 &&
-            //       "scrollFixed showMore"
-            // }`}
+            <div 
+            // className="profile_grid"
             >
               <div
-                className="profile_left"
-                // ref={leftSide}
-              >
+                className="profile_left"    >
                 <Bio visitor={visitor} profile={profile} />
 
-                {/* <Intro
-                detailss={profile.details}
-                visitor={visitor}
-                setOthername={setOthername}
-              /> */}
-                {/* <Photos
-                username={userName}
-                token={user.token}
-                photos={photos}
-              /> */}
                 <Friends friends={profile.friends} />
               </div>
               <div className="profile_right">
@@ -94,7 +70,7 @@ export default function Profile() {
                 {postPopup && (
                   <CreatePostPopUp user={user} setPostPopup={setPostPopup} />
                 )}
-                <GridPosts />
+                {/* <GridPosts /> */}
                 <div className="posts">
                   {profile.posts && profile.posts.length ? (
                     profile.posts.map((post) => (

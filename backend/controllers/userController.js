@@ -5,13 +5,19 @@ const Post = require("../models/postModel");
 const getProfile = async (req, res) => {
   try {
     const { username } = req.params;
+    const user = await User.findById(req.user.id);
     const profile = await User.findOne({ username }).select("-password");
-
+    const followCheck = {
+      following: false,
+    };
+    if (user.following.includes(profile._id)) {
+      followCheck.following = true;
+    }
     const posts = await Post.find({ user: profile._id })
       .populate("user")
       .sort({ createdAt: -1 });
 
-    res.json({ ...profile.toObject(), posts });
+    res.json({ ...profile.toObject(), posts,followCheck });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
@@ -67,6 +73,64 @@ const updateBio = async (req, res) => {
     );
     console.log(updated);
     res.json(updated);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const follow = async (req, res) => {
+  try {
+    if (req.user.id !== req.params.id) {
+      const sender = await User.findById(req.user.id);
+      const receiver = await User.findById(req.params.id);
+      if (
+        !receiver.followers.includes(sender._id) &&
+        !sender.following.includes(receiver._id)
+      ) {
+        await receiver.updateOne({
+          $push: { followers: sender._id },
+        });
+
+        await sender.updateOne({
+          $push: { following: receiver._id },
+        });
+        res.json({ message: "follow success" });
+      } else {
+        return res.status(400).json({ message: "Already following" });
+      }
+    } else {
+      return res.status(400).json({ message: "You can't follow yourself" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
+                     
+const unFollow = async (req, res) => {
+  try {
+    if (req.user.id !== req.params.id) {
+      const sender = await User.findById(req.user.id);
+      const receiver = await User.findById(req.params.id);
+      if (
+        receiver.followers.includes(sender._id) &&
+        sender.following.includes(receiver._id)
+      ) {
+        await receiver.updateOne({
+          $pull: { followers: sender._id },
+        });
+
+        await sender.updateOne({
+          $pull: { following: receiver._id },
+        });
+        res.json({ message: "unfollow success" });
+      } else {
+        return res.status(400).json({ message: "Already not following" });
+      }
+    } else {
+      return res.status(400).json({ message: "You can't unfollow yourself" });
+    }
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -175,4 +239,9 @@ module.exports = {
   updateProfilePicture,
   updateCoverPicture,
   updateBio,
+  follow,
+  unFollow,
 };
+
+
+

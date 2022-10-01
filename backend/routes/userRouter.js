@@ -1,20 +1,15 @@
 const express = require("express");
 const router = express.Router();
 const {verifyUser}= require('../middleware/authMiddleware');
-// const {
-//   updateUser,
-//   deleteUser,
-//   getUser,
-//   followUser,
-//   unfollowUser,
-// } = require("../controllers/userController");
-const {getProfile,updateProfilePicture,updateCoverPicture,updateBio} =require("../controllers/userController")
+
+const {getProfile,updateProfilePicture,updateCoverPicture,updateBio,follow,unFollow} =require("../controllers/userController")
 
 router.get("/getProfile/:username",verifyUser, getProfile);
 router.put("/updateProfilePicture",verifyUser, updateProfilePicture);
 router.put("/updateCoverPicture",verifyUser, updateCoverPicture);
 router.put("/updateBio",verifyUser, updateBio);
-
+router.put("/follow/:id",verifyUser, follow);
+router.put("/unfollow/:id",verifyUser, unFollow);
 
 
 // router.put("/:id", updateUser);

@@ -2,8 +2,8 @@ export default function Friends({ friends }) {
   return (
     <div className="profile_card">
       <div className="profile_card_header">
-        Friends
-        <div className="profile_header_link">See all friends</div>
+        Suggestions
+        <div className="profile_header_link">See all</div>
       </div>
       {friends && (
         <div className="profile_card_count">

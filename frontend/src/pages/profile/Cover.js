@@ -13,7 +13,7 @@ export default function Cover({ cover, visitor }) {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const { user } = useSelector((state) => state.auth);
-  const dispatch= useDispatch()
+  const dispatch = useDispatch();
   const menuRef = useRef(null);
   const refInput = useRef(null);
   useClickOutside(menuRef, () => setShowCoverMenu(false));
@@ -58,7 +58,7 @@ export default function Cover({ cover, visitor }) {
           user._id,
           user.token
         );
-        dispatch(getProfile(user.username))
+        dispatch(getProfile(user.username));
         if (new_post === "ok") {
           setLoading(false);
           setCoverPicture("");
@@ -107,12 +107,10 @@ export default function Cover({ cover, visitor }) {
       )}
       {coverPicture && (
         <div className="cover_crooper">
-          <img src={coverPicture} className="cover" alt=""  />
+          <img src={coverPicture} className="cover" alt="" />
         </div>
       )}
-      {cover && !coverPicture && (
-        <img src={cover} className="cover" alt=""  />
-      )}
+      {cover && !coverPicture && <img src={cover} className="cover" alt="" />}
       {!visitor && (
         <div className="udpate_cover_wrapper">
           <div
@@ -135,13 +133,6 @@ export default function Cover({ cover, visitor }) {
           )}
         </div>
       )}
-      {/* {show && (
-      <OldCovers
-        photos={photos}
-        setCoverPicture={setCoverPicture}
-        setShow={setShow}
-      />
-    )} */}
     </div>
   );
 }
