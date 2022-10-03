@@ -13,7 +13,6 @@ const getProfile = async (username, token) => {
 
 //update profile Bio
 const updateBio = async (infos, token) => {
-  console.log(infos, "service called");
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,

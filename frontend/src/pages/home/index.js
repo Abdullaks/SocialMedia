@@ -46,7 +46,7 @@ export default function Home() {
           <CreatePostPopUp user={user} setPostPopup={setPostPopup} />
         )}
       </div>
-      <RightHome user={user} />
+      {/* <RightHome user={user} /> */}
     </div>
   );
 }

@@ -9,6 +9,7 @@ import PulseLoader from "react-spinners/PulseLoader";
 import { createPost } from "../../functions/createPost";
 import { toast } from "react-toastify";
 import { uploadImages } from "../../functions/uploadImages";
+import {getAllposts} from "../../features/post/postSlice"
 export default function CreatePostPopUp({ user, setPostPopup }) {
   const [text, setText] = useState("");
   const [showPrev, setShowPrev] = useState(false);
@@ -41,6 +42,7 @@ export default function CreatePostPopUp({ user, setPostPopup }) {
         setText("");
         setImages("");
         setPostPopup(false);
+        dispatch(getAllposts())
       } else {
         console.log(res, "error");
         toast.error("error");
@@ -59,6 +61,7 @@ export default function CreatePostPopUp({ user, setPostPopup }) {
       if (response === "ok") {
         setText("");
         setPostPopup(false);
+        dispatch(getAllposts())
       } else {
         console.log(response, "error");
       }

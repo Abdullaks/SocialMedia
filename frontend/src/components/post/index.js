@@ -6,8 +6,10 @@ import "./style.css";
 import CreateComment from "./CreateComment";
 import ReactionPopup from "./ReactionPopup";
 import Comment from "./Comment";
-export default function Post({ post, profile,comments }) {
+import PostMenu from "./PostMenu";
+export default function Post({ post, profile, comments }) {
   const [showReaction, setShowReaction] = useState(false);
+  const [showPostMenu, setShowPostMenu] = useState(false);
   const [commentsArray, setCommentsArray] = useState([]);
   const [count, setCount] = useState(1);
   const navigate = useNavigate();
@@ -49,7 +51,12 @@ export default function Post({ post, profile,comments }) {
             </div>
           </div>
         </Link>
-        <div className="post_header_right hover1">
+        <div
+          className="post_header_right hover1"
+          onClick={() => {
+            setShowPostMenu((prev) => !prev);
+          }}
+        >
           <Dots color="#828387" />
         </div>
       </div>
@@ -138,6 +145,13 @@ export default function Post({ post, profile,comments }) {
           </div>
         )}
       </div>
+      {showPostMenu && (
+        <PostMenu
+          setShowPostMenu={setShowPostMenu}
+          postUserId={post.user._id}
+          postId={post._id}
+        />
+      )}
     </div>
   );
 }

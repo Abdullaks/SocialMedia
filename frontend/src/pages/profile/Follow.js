@@ -14,12 +14,12 @@ export default function Follow({ friendship, profileId, userName }) {
   }, [friendship]);
   const followHandler = async () => {
     setFollow({ ...follow, following: true });
-    dispatch(followUser(profileId));
+    await dispatch(followUser(profileId));
     dispatch(getProfile(userName));
   };
   const unfollowHandler = async () => {
     setFollow({ ...follow, following: false });
-    dispatch(unFollowUser(profileId));
+    await dispatch(unFollowUser(profileId));
     dispatch(getProfile(userName));
   };
 

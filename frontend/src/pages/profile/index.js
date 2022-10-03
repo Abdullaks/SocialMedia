@@ -64,12 +64,12 @@ export default function Profile() {
                 <Friends friends={profile.friends} />
               </div>
               <div className="profile_right">
-                {!visitor && (
+                {/* {!visitor && (
                   <CreatePost user={user} setPostPopup={setPostPopup} />
                 )}
                 {postPopup && (
                   <CreatePostPopUp user={user} setPostPopup={setPostPopup} />
-                )}
+                )} */}
                 {/* <GridPosts /> */}
                 <div className="posts">
                   {profile.posts && profile.posts.length ? (

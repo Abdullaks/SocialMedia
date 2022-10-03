@@ -1,7 +1,7 @@
 const Post = require("../models/postModel");
+const User = require("../models/userModel");
 const Comment = require("../models/commentModel");
 const Like = require("../models/likeModel");
-// const { text } = require("express");
 
 // CREATE POST
 const createPost = async (req, res) => {
@@ -82,9 +82,51 @@ const like = async (req, res) => {
   }
 };
 
+
+const savePost = async (req, res) => {
+  try {
+    const postId = req.params.id;
+    const user = await User.findById(req.user.id);
+    const check = user?.savedPosts.find(
+      (post) => post.post.toString() == postId
+    );
+    if (check) {
+      await User.findByIdAndUpdate(req.user.id, {
+        $pull: {
+          savedPosts: {
+            _id: check._id,
+          },
+        },
+      });
+    } else {
+      await User.findByIdAndUpdate(req.user.id, {
+        $push: {
+          savedPosts: {
+            post: postId,
+            savedAt: new Date(),
+          },
+        },
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
+const deletePost = async (req, res) => {
+  try {
+    await Post.findByIdAndRemove(req.params.id);
+    res.json({ status: "ok" });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   createPost,
   getAllPosts,
   comment,
   like,
+  deletePost,
+  savePost
 };

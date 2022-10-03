@@ -4,10 +4,10 @@ const reactsArray = [
     //   name: "like",
     //   image: "../../../reacts/like.gif",
     // },
-    {
-      name: "love",
-      image: "../../../reacts/love.gif",
-    },
+    // {
+    //   name: "love",
+    //   image: "../../../reacts/love.gif",
+    // },
     // {
     //   name: "haha",
     //   image: "../../../reacts/haha.gif",
