@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
-import {updatePassword } from "../features/auth/authSlice";
+import {updatePassword } from "../../features/auth/authSlice";
 
 const validate = (values) => {
   const errors = {};
@@ -21,7 +21,7 @@ const validate = (values) => {
 
 function ForgetPassword() {
   const dispatch = useDispatch();
-  // Formik starts
+  // Formik starts  
   const formik = useFormik({
     initialValues: {
       username: "",

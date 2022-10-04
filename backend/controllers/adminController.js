@@ -7,7 +7,7 @@ const getAllUsers = async (req, res) => {
   const users = await User.find({});
   res.json(users);
 };
-
+ 
 //DELETE USERS
 const deleteUser = async (req, res) => {
   const { id } = req.params;

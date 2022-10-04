@@ -33,6 +33,17 @@ const getAllPosts = async (req, res) => {
   }
 };
 
+//single  POST
+const getSinglePost = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const post = await Post.findById({ _id: id });
+    res.json(post.text);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
 // CREATE comment
 const comment = async (req, res) => {
   try {
@@ -75,13 +86,12 @@ const like = async (req, res) => {
           },
         }
       );
-    }
+    }                    
     res.json(like);
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
 };
-
 
 const savePost = async (req, res) => {
   try {
@@ -113,6 +123,17 @@ const savePost = async (req, res) => {
   }
 };
 
+const editPost = async (req, res) => {
+  try {
+    await Post.findByIdAndUpdate({ _id: req.params.id }, { $set: {
+      text: req.body.text
+    } });
+    res.json({ status: "ok" });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
 const deletePost = async (req, res) => {
   try {
     await Post.findByIdAndRemove(req.params.id);
@@ -128,5 +149,7 @@ module.exports = {
   comment,
   like,
   deletePost,
-  savePost
+  savePost,
+  getSinglePost,
+  editPost,
 };

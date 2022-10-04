@@ -5,7 +5,7 @@ import { Login as LoginIcon } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { login,adminLogin, reset } from "../features/auth/authSlice";
+import { login,adminLogin, reset } from "../../features/auth/authSlice";
 import {toast} from 'react-toastify'
 const ADMIN_EMAIL=process.env.ADMIN_EMAIL
 const validate = (values) => {
@@ -49,8 +49,7 @@ const Login = () => {
   });
   //formik ends
   const { user, isLoading, isError, isSuccess,isAdmin, message } = useSelector( (state) => state.auth);
-      //  console.log(isError)
-      //  console.log(message);;
+     
   useEffect(() => {
     if (isError) {
       toast.error(message);

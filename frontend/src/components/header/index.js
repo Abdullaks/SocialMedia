@@ -17,27 +17,23 @@ import {
 import "./style.css";
 import SearchMenu from "./SearchMenu";
 import { useDispatch, useSelector } from "react-redux";
-import { logout, reset } from "../../features/auth/authSlice";
+import UserMenu from "./UserMenu";
 
-export default function Header({page}) {
+export default function Header({ page }) {
   const { user } = useSelector((state) => state.auth);
   const [showSearchMenu, setShowSearchMenu] = useState(false);
+  const [showUserMenu, setShowUserMenu] = useState(false);
   const color = "#65676b";
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const navigate = useNavigate();
-  const onLogout = () => {
-    dispatch(logout())
-    dispatch(reset())
-  }
+  
 
   useEffect(() => {
-     if(!user){
-      navigate("/")
-     }
-  }, [user,navigate])
-  
-  
-  
+    if (!user) {
+      navigate("/");
+    }
+  }, [user, navigate]);
+
   return (
     <header>
       <div className="header_left">
@@ -57,36 +53,49 @@ export default function Header({page}) {
           <input type="text" placeholder="Search" className="hide_input" />
         </div>
       </div>
-      {showSearchMenu && <SearchMenu color={color}  setShowSearchMenu={setShowSearchMenu} />}
+      {showSearchMenu && (
+        <SearchMenu color={color} setShowSearchMenu={setShowSearchMenu} />
+      )}
       <div className="header_middle">
-        <Link to="/" className={`middle_icon ${page === "home" ? "active" : "hover1"}`} >
+        <Link
+          to="/"
+          className={`middle_icon ${page === "home" ? "active" : "hover1"}`}
+        >
           {page === "home" ? <HomeActive /> : <Home color={color} />}
         </Link>
         <Link to="/" className="middle_icon hover1">
           <Friends color={color} />
         </Link>
-        {/* <Link to="/" className="middle_icon hover1">
+        <Link to="/" className="middle_icon hover1">
           <Watch color={color} />
           <div className="middle_notification">9+</div>
-        </Link> */}
+        </Link>
         {/* <Link to="/" className="middle_icon hover1">
           <Market color={color} />      
         </Link> */}
         <Link to="/" className="middle_icon hover1">
           <Gaming color={color} />
-        </Link>  
+        </Link>
       </div>
       <div className="header_right">
-        <Link to="/profile"className={`profile_link hover1 ${
+        <Link
+          to="/profile"
+          className={`profile_link hover1 ${
             page === "profile" ? "active_link" : ""
-          }`}>
-            
-          <img src={user?.profilePicture?user.profilePicture:"https://res.cloudinary.com/dmhcnhtng/image/upload/v1643044376/avatars/default_pic_jeaybr.png "}  />
+          }`}
+        >
+          <img
+            src={
+              user?.profilePicture
+                ? user.profilePicture
+                : "https://res.cloudinary.com/dmhcnhtng/image/upload/v1643044376/avatars/default_pic_jeaybr.png "
+            }
+          />
           <span>{user?.username}</span>
         </Link>
-        <div className="circle_icon hover1">
+        {/* <div className="circle_icon hover1">
           <Menu />
-        </div>
+        </div> */}
         <div className="circle_icon hover1">
           <Messenger />
         </div>
@@ -94,13 +103,16 @@ export default function Header({page}) {
           <Notifications />
           <div className="right_notification">1</div>
         </div>
-        <div className="circle_icon hover1"
-        onClick={onLogout} >
-          LO
-        </div>
-        <div className="circle_icon hover1">
+       
+        <div
+          className="circle_icon hover1"
+          onClick={() => {
+            setShowUserMenu((prev) => !prev);
+          }}
+        >
           <ArrowDown />
         </div>
+        {showUserMenu && <UserMenu />}
       </div>
     </header>
   );

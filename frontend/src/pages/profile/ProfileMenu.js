@@ -8,17 +8,15 @@ export default function ProfileMenu() {
         <Link to="/" className="profile_menu_active">
           Posts
         </Link>
-        <Link to="/"  className="hover1">
-          About
+        <Link to=""  className="hover1">
+          Home
         </Link>
         <Link to="/" className="hover1">
           Friends
         </Link>
+       
         <Link to="/" className="hover1">
-          Photos
-        </Link>
-        <Link to="/" className="hover1">
-          Videos
+        About
         </Link>
         <Link to="/" className="hover1">
           More

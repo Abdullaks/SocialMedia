@@ -1,9 +1,15 @@
 import  { useEffect, useRef, useState } from "react";
 import { Return, Search } from "../../svg";
 import useClickOutside from "../../helpers/clickOutside";
+import { useDispatch } from "react-redux";
+import { search } from "../../features/profile/profileSlice";
+import { Link } from "react-router-dom";
 
 export default function SearchMenu({ color ,setShowSearchMenu}) {
   const [iconVisible, setIconVisible] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [results, setResults] = useState([]);
+  const dispatch = useDispatch();
   const menu = useRef(null);
   const input = useRef(null);
   useClickOutside(menu, () => {
@@ -12,6 +18,14 @@ export default function SearchMenu({ color ,setShowSearchMenu}) {
   useEffect(() => {
     input.current.focus();
   }, []);
+  const searchHandler = async () => {
+    if (searchTerm === "") {
+      setResults("");
+    } else {
+      const res = await dispatch(search(searchTerm));
+      setResults(res);
+    }
+  };
   return (
     <div className="header_left search_area scrollbar" ref={menu}>
       <div className="search_wrap">
@@ -40,6 +54,9 @@ export default function SearchMenu({ color ,setShowSearchMenu}) {
             type="text"
             placeholder="Search Facebook"
             ref={input}
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            onKeyUp={searchHandler}
             onFocus={() => {
               setIconVisible(false);
             }}
@@ -50,11 +67,26 @@ export default function SearchMenu({ color ,setShowSearchMenu}) {
         </div>
       </div>
       <div className="search_history_header">
-        <span>Recent searches</span>
-        <a>Edit</a>
+        <span>Search Results</span>
+        {/* <span>Recent searches</span>
+        <a>Edit</a> */}
       </div>
       <div className="search_history"></div>
-      <div className="search_results scrollbar"></div>
+      <div className="search_results scrollbar">
+      {results &&
+          results.map((result) => (
+            <Link
+              to={`/profile/${result.username}`}
+              className="search_user_item hover1"
+              key={result._id}
+            >
+              <img src={result.profilePicture} alt="" />
+              <span>
+                {result.username}
+              </span>
+            </Link>
+          ))}
+      </div>
     </div>
   );
 }

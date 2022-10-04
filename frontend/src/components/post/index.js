@@ -150,6 +150,7 @@ export default function Post({ post, profile, comments }) {
           setShowPostMenu={setShowPostMenu}
           postUserId={post.user._id}
           postId={post._id}
+          // userName={profile?.user?.username}
         />
       )}
     </div>

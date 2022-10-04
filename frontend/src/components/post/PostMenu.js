@@ -1,30 +1,46 @@
 import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useOnClickOutside from "../../helpers/clickOutside";
-// import { deletePost, savePost } from "../../functions/post";
-import { deletePost, getAllposts, savePost } from "../../features/post/postSlice";
-export default function PostMenu({ postUserId, setShowPostMenu, checkSaved ,postId }) {
+import {
+  deletePost,
+  getAllposts,
+  savePost,
+} from "../../features/post/postSlice";
+import EditPost from "./EditPost";
+import { getProfile } from "../../features/profile/profileSlice";
+import { Link } from "react-router-dom";
+export default function PostMenu({
+  postUserId,
+  setShowPostMenu,
+  checkSaved,
+  postId,
+}) {
+  const [showEditPopup, setShowEditPopup] = useState(false);
   const { user } = useSelector((state) => state.auth);
   const [test, setTest] = useState(postUserId === user._id ? true : false);
+
   const menu = useRef(null);
   useOnClickOutside(menu, () => setShowPostMenu(false));
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
   const saveHandler = async () => {
-    dispatch(savePost(postId))
+    dispatch(savePost(postId));
     // if (checkSaved) {
     //   setCheckSaved(false);
-      
+
     // } else {
     //   setCheckSaved(true);
     // }
   };
-  
+
   const deleteHandler = async () => {
-    console.log("clicked delete handler");
-    console.log(postId);
     dispatch(deletePost(postId));
     setShowPostMenu(false);
-    dispatch(getAllposts())
+    dispatch(getAllposts());
+  };
+  const editHandler = async () => {
+    // dispatch(deletePost(postId));
+    // setShowPostMenu(false);
+    // dispatch(getAllposts());
   };
   return (
     <ul className="post_menu" ref={menu}>
@@ -52,6 +68,29 @@ export default function PostMenu({ postUserId, setShowPostMenu, checkSaved ,post
         )}
       </div>
 
+      {/* {test && (
+        <Link to={`/editPost/${postId}`}>
+        <div
+          // onClick={() => editHandler()}
+          // onClick={setShowEditPopup(true)}
+          >
+          <li className="hover1">
+            <i className="edit_icon"></i>
+            <div className="post_menu_text">
+              <span>Edit Post</span>
+              <span className="menu_post_col"></span>
+            </div>
+          </li> 
+        </div>
+          </Link>
+      )} */}
+  
+      {/* {showEditPopup && (
+        <>
+          <EditPost user={user} />                   
+        </>
+      )} */}
+                                           
       {test && (
         <div onClick={() => deleteHandler()}>
           <li className="hover1">

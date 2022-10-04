@@ -15,9 +15,9 @@ import { toast } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
-import OTPInput, { ResendOTP } from "otp-input-react";
+import OTPInput from "otp-input-react";
 import OtpTimer from "otp-timer";
-import { register, reset } from "../features/auth/authSlice";
+import { register, reset } from "../../features/auth/authSlice";
 const validate = (values) => {
   const errors = {};
   if (!values.username) {
@@ -77,9 +77,9 @@ const Signup = () => {
       });
       if (checkUser.data == "emailExist") {
         toast.error("Email is already taken");
-      }else if (checkUser.data == "nameExist") {
+      } else if (checkUser.data == "nameExist") {
         toast.error("username is already taken");
-      }else{
+      } else {
         const otpData = await axios.post("/api/auth/otpSend", {
           mobile: values.mobile,
         });
@@ -87,7 +87,6 @@ const Signup = () => {
           setOpen(true);
         }
       }
-     
     },
   });
   //formik ends
@@ -109,7 +108,7 @@ const Signup = () => {
       console.log(" OTP is Not 4 digit");
     }
   };
-  const { user, isLoading, isError,isAdmin, isSuccess, message } = useSelector(
+  const { user, isLoading, isError, isAdmin, isSuccess, message } = useSelector(
     (state) => state.auth
   );
   useEffect(() => {
@@ -119,7 +118,7 @@ const Signup = () => {
     if (isAdmin) {
       navigate("/admin");
     }
-    if (user||isSuccess) {
+    if (user || isSuccess) {
       navigate("/home");
     }
     dispatch(reset());
@@ -166,7 +165,7 @@ const Signup = () => {
               width: { sm: 200, md: 300 },
               "& .MuiInputBase-root": {
                 height: 60,
-              },  
+              },
             }}
           />
           {formik.errors.name ? (
@@ -323,7 +322,8 @@ const Signup = () => {
             minutes={2}
             ButtonText="Resend OTP"
             buttonColor={"black"}
-            background={"none"}          />
+            background={"none"}
+          />
           <Divider
             textAlign="center"
             sx={{

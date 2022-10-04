@@ -18,10 +18,7 @@ const updateBio = async (infos, token) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  console.log("config done");
   const response = await axios.put("/api/user/updateBio", infos, config);
-  console.log(response.data, "response");
-
   return response.data;
 };
 
@@ -84,10 +81,29 @@ const unFollowUser = async (id, token) => {
 //   }
 // };
 
+
+const search = async (searchTerm, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const response = await axios.post("/api/user/search"+searchTerm, {}, config);
+  return response.data;
+};
+
+
+
+
+
+
+
 const profileService = {
   getProfile,
   updateBio,
   followUser,
   unFollowUser,
+  search,
+
 };
 export default profileService;

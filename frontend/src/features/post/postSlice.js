@@ -29,6 +29,24 @@ export const getAllposts = createAsyncThunk(
     }
   }
 );
+//Get A post
+// export const getAPost = createAsyncThunk(
+//   "post/getAllposts",
+//   async (id, thunkAPI) => {
+//     try {
+//       const token = thunkAPI.getState().auth.user.token;
+//       return await postService.getAPost(id,token);
+//     } catch (error) {
+//       const message =
+//         (error.response &&
+//           error.response.data &&
+//           error.response.data.message) ||
+//         error.message ||
+//         error.toString();
+//       return thunkAPI.rejectWithValue(message);
+//     }
+//   }
+// );
 
 //Comment
 export const comment = createAsyncThunk(
@@ -71,7 +89,6 @@ export const comment = createAsyncThunk(
 //Save Post
 export const savePost = createAsyncThunk("post/save", async (id, thunkAPI) => {
   try {
-    console.log(id, "slice called");
     const token = thunkAPI.getState().auth.user.token;
     return await postService.savePost(id, token);
   } catch (error) {
@@ -105,6 +122,34 @@ export const deletePost = createAsyncThunk(
     }
   }
 );
+
+
+
+//edit Post
+// export const editPost = createAsyncThunk(
+//   "post/edit",
+//   async (id,data, thunkAPI) => {
+//     try {
+//       const token = thunkAPI.getState().auth.user.token;
+//       return await postService.editPost(id,data, token);
+//     } catch (error) {
+//       const message =
+//         (error.response &&
+//           error.response.data &&
+//           error.response.data.message) ||
+//         error.message ||
+//         error.toString();
+//       return thunkAPI.rejectWithValue(message);
+//     }
+//   }
+// );
+
+
+
+
+
+
+
 
 export const postSlice = createSlice({
   name: "posts",
@@ -173,3 +218,13 @@ export const postSlice = createSlice({
 
 export const { reset } = postSlice.actions;
 export default postSlice.reducer;
+
+
+
+
+
+
+
+
+
+

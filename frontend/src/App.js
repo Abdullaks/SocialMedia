@@ -2,13 +2,14 @@ import React from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
-import VerifyMobile from "./pages/VerifyMobile";
-import ForgetPassword from "./pages/ForgetPassword";
+import Login from "./pages/auth/Login";
+import Signup from "./pages/auth/Signup";
+import VerifyMobile from "./pages/auth/VerifyMobile";
+import ForgetPassword from "./pages/auth/ForgetPassword";
 import Home from "./pages/home/index";
 import Profile from "./pages/profile";
 import AdminHome from "./pages/admin/AdminHome";
+import EditPost from "./components/post/EditPost";
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
           <Route path="/admin" element={<AdminHome />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/profile/:username" element={<Profile />} />
+          {/* <Route path="/editPost/:id" element={<EditPost />} /> */}
         </Routes>
       </Router>
       <ToastContainer />

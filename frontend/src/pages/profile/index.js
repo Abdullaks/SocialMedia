@@ -30,6 +30,7 @@ export default function Profile() {
       navigate("/");
     }
     dispatch(getProfile(userName));
+
     return () => {
       dispatch(reset());
     };
@@ -38,15 +39,14 @@ export default function Profile() {
   return (
     <div className="profile">
       <Header page="profile" />
-      <div
-        className="profile_top"
-      >
+      <div className="profile_top">
         <div className="profile_container">
-          <Cover
-            cover={profile?.coverPicture}
+          <Cover cover={profile?.coverPicture} visitor={visitor} />
+          <ProfielPictureDetails
+            profile={profile}
             visitor={visitor}
+            userName={userName}
           />
-          <ProfielPictureDetails profile={profile} visitor={visitor} userName={userName} />
           <ProfileMenu />
         </div>
       </div>
@@ -54,13 +54,11 @@ export default function Profile() {
         <div className="profile_container">
           <div className="bottom_container">
             {/* <PeoplelYouMayKnow /> */}
-            <div 
+            <div
             // className="profile_grid"
             >
-              <div
-                className="profile_left"    >
+              <div className="profile_left">
                 <Bio visitor={visitor} profile={profile} />
-
                 <Friends friends={profile.friends} />
               </div>
               <div className="profile_right">
@@ -70,7 +68,7 @@ export default function Profile() {
                 {postPopup && (
                   <CreatePostPopUp user={user} setPostPopup={setPostPopup} />
                 )} */}
-                {/* <GridPosts /> */}
+                <GridPosts />
                 <div className="posts">
                   {profile.posts && profile.posts.length ? (
                     profile.posts.map((post) => (
