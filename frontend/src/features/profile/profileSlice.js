@@ -49,19 +49,24 @@ export const updateBio = createAsyncThunk(
   }
 );
 
-export const followUser = createAsyncThunk("user/follow", async (id, thunkAPI) => {
-  try {
-    console.log(id, "slice called");
-    const token = thunkAPI.getState().auth.user.token;
-    return await profileService.followUser(id, token);
-  } catch (error) {
-    const message =
-      (error.response && error.response.data && error.response.data.message) ||
-      error.message ||
-      error.toString();
-    return thunkAPI.rejectWithValue(message);
+export const followUser = createAsyncThunk(
+  "user/follow",
+  async (id, thunkAPI) => {
+    try {
+      console.log(id, "slice called");
+      const token = thunkAPI.getState().auth.user.token;
+      return await profileService.followUser(id, token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
   }
-});
+);
 
 export const unFollowUser = createAsyncThunk(
   "user/unfollow",
@@ -82,8 +87,6 @@ export const unFollowUser = createAsyncThunk(
   }
 );
 
-
-//Comment
 export const search = createAsyncThunk(
   "user/search",
   async (searchTerm, thunkAPI) => {
@@ -101,12 +104,6 @@ export const search = createAsyncThunk(
     }
   }
 );
-
-
-
-
-
-
 
 export const profileSlice = createSlice({
   name: "profile",
@@ -147,7 +144,7 @@ export const profileSlice = createSlice({
       })
       .addCase(followUser.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = true;                     
+        state.isSuccess = true;
       })
       .addCase(followUser.rejected, (state, action) => {
         state.isLoading = false;
@@ -183,13 +180,3 @@ export const profileSlice = createSlice({
 
 export const { reset } = profileSlice.actions;
 export default profileSlice.reducer;
-
-
-
-
-
-
-
-
-
-

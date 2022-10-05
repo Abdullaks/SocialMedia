@@ -10,8 +10,8 @@ const authRouter = require("./routes/authRouter");
 const adminRouter = require("./routes/adminRouter");
 const postRouter = require("./routes/postRouter");
 const uploadRouter = require("./routes/uploadRouter");
+const chatRouter = require("./routes/chatRouter");
 const app = express();
-// const { readdirSync } = require("fs");
 
 //middlewares
 app.use(express.json()); // middleware to print json data
@@ -29,6 +29,7 @@ app.use("/api/user", userRouter);
 app.use("/api/admin", adminRouter);
 app.use("/api/post", postRouter);
 app.use("/api/upload", uploadRouter);
+app.use("/api/chat", chatRouter);
 
 
 //backend port

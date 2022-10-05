@@ -136,17 +136,48 @@ const unFollow = async (req, res) => {
   }
 };
 
+
+
+
 const search = async (req, res) => {
   try {
     const searchTerm = req.params.searchTerm;
     const results = await User.find({ $text: { $search: searchTerm } }).select(
       "username name profilePicture"
     );
+    console.log(results);
     res.json(results);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
+
+
+const allUsers = async (req, res) => {
+  try {
+    
+    const keyword = req.query.search
+      ? {
+          $or: [
+            { name: { $regex: req.query.search, $options: "i" } },
+            { email: { $regex: req.query.search, $options: "i" } },
+          ],
+        }
+      : {};
+  
+    const users = await User.find(keyword).find({ _id: { $ne: req.user._id } });
+    res.send(users);
+  } catch (error) {
+     res.status(500).json({ message: error.message });
+  }
+};
+
+
+
+
+
+
+
 
 module.exports = {
   getProfile,
@@ -156,6 +187,7 @@ module.exports = {
   follow,
   unFollow,
   search,
+  allUsers,
 };
 
 

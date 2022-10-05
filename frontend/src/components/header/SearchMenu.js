@@ -1,11 +1,12 @@
-import  { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Return, Search } from "../../svg";
 import useClickOutside from "../../helpers/clickOutside";
 import { useDispatch } from "react-redux";
-import { search } from "../../features/profile/profileSlice";
+// import { search } from "../../features/profile/profileSlice";
 import { Link } from "react-router-dom";
+import { search } from "../../functions/search";
 
-export default function SearchMenu({ color ,setShowSearchMenu}) {
+export default function SearchMenu({ color, setShowSearchMenu ,token}) {
   const [iconVisible, setIconVisible] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [results, setResults] = useState([]);
@@ -22,7 +23,9 @@ export default function SearchMenu({ color ,setShowSearchMenu}) {
     if (searchTerm === "") {
       setResults("");
     } else {
-      const res = await dispatch(search(searchTerm));
+      const res= await search(searchTerm, token);
+      console.log(res);
+      // dispatch(search(searchTerm));
       setResults(res);
     }
   };
@@ -73,7 +76,7 @@ export default function SearchMenu({ color ,setShowSearchMenu}) {
       </div>
       <div className="search_history"></div>
       <div className="search_results scrollbar">
-      {results &&
+        {results &&
           results.map((result) => (
             <Link
               to={`/profile/${result.username}`}
@@ -81,16 +84,10 @@ export default function SearchMenu({ color ,setShowSearchMenu}) {
               key={result._id}
             >
               <img src={result.profilePicture} alt="" />
-              <span>
-                {result.username}
-              </span>
+              <span>{result.username}</span>
             </Link>
           ))}
       </div>
     </div>
   );
 }
-
-
-
-
