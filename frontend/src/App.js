@@ -10,9 +10,9 @@ import Home from "./pages/home/index";
 import Profile from "./pages/profile";
 import AdminHome from "./pages/admin/AdminHome";
 import EditPost from "./components/post/EditPost";
+import Chat from "./pages/chat/Chat";
 
 function App() {
-
   return (
     <>
       <Router>
@@ -25,6 +25,7 @@ function App() {
           <Route path="/admin" element={<AdminHome />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/profile/:username" element={<Profile />} />
+          <Route path="/chat" element={<Chat />} />
           {/* <Route path="/editPost/:id" element={<EditPost />} /> */}
         </Routes>
       </Router>

@@ -152,3 +152,8 @@ a {
     brightness(97%) contrast(96%);
 }
 /*----filters---*/
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

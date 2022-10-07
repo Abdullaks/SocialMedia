@@ -25,7 +25,7 @@ export default function UserMenu({ user }) {
           </Link>
          
           <div className="mmenu_splitter"></div>
-          <div
+          {/* <div
             className="mmenu_item hover3"
             // onClick={() => {
             //   setVisible(1);
@@ -38,8 +38,8 @@ export default function UserMenu({ user }) {
             <div className="rArrow">
               <i className="right_icon"></i>
             </div>
-          </div>
-          <div
+          </div> */}
+          {/* <div
             className="mmenu_item hover3"
             // onClick={() => {
             //   setVisible(2);
@@ -52,7 +52,7 @@ export default function UserMenu({ user }) {
             <div className="rArrow">
               <i className="right_icon"></i>
             </div>
-          </div>
+          </div> */}
           <div
             className="mmenu_item hover3"
             // onClick={() => {
@@ -63,9 +63,9 @@ export default function UserMenu({ user }) {
               <i className="dark_filled_icon"></i>
             </div>
             <span>Display & Accessibility</span>
-            <div className="rArrow">
+            {/* <div className="rArrow">
               <i className="right_icon"></i>
-            </div>
+            </div> */}
           </div>
           <div
             className="mmenu_item hover3"

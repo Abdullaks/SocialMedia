@@ -20,7 +20,7 @@ router.put("/updateBio",verifyUser, updateBio);
 router.put("/follow/:id",verifyUser, follow);
 router.put("/unfollow/:id",verifyUser, unFollow);
 router.post("/search/:searchTerm", verifyUser, search);
-router.get("/", allUsers);
+router.get("/searchChat", allUsers);
 
 
 

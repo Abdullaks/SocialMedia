@@ -26,7 +26,6 @@ export default function Header({ page }) {
   const color = "#65676b";
   // const dispatch = useDispatch();
   const navigate = useNavigate();
-  
 
   useEffect(() => {
     if (!user) {
@@ -50,12 +49,15 @@ export default function Header({ page }) {
           }}
         >
           <Search color={color} />
-          <input type="text" placeholder="Search" className="hide_input" />
+          <input type="text" placeholder="Search..." className="hide_input" />
         </div>
       </div>
       {showSearchMenu && (
-        <SearchMenu color={color} setShowSearchMenu={setShowSearchMenu} 
-        token={user.token} />
+        <SearchMenu
+          color={color}
+          setShowSearchMenu={setShowSearchMenu}
+          token={user.token}
+        />
       )}
       <div className="header_middle">
         <Link
@@ -97,14 +99,17 @@ export default function Header({ page }) {
         {/* <div className="circle_icon hover1">
           <Menu />
         </div> */}
+        <Link to='/chat'>
         <div className="circle_icon hover1">
           <Messenger />
-        </div>
-        <div className="circle_icon hover1">
-          <Notifications />
           <div className="right_notification">1</div>
         </div>
-       
+        </Link>
+        {/* <div className="circle_icon hover1">
+          <Notifications />
+          <div className="right_notification">1</div>
+        </div> */}
+
         <div
           className="circle_icon hover1"
           onClick={() => {

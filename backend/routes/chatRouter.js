@@ -4,7 +4,7 @@ const {
   fetchChats,
   createGroupChat,
   removeFromGroup,
-  addToGroup,
+  addToGroup,    
   renameGroup,
 } = require("../controllers/chatController");
 const { verifyUser } = require("../middleware/authMiddleware");
