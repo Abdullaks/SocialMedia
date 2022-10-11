@@ -11,6 +11,7 @@ export default function Post({ post, profile, comments }) {
   const [showReaction, setShowReaction] = useState(false);
   const [showPostMenu, setShowPostMenu] = useState(false);
   const [commentsArray, setCommentsArray] = useState([]);
+  const [showCreateComment, setShowCreateComment] = useState(false);
   const [count, setCount] = useState(1);
   const navigate = useNavigate();
   useEffect(() => {
@@ -122,7 +123,10 @@ export default function Post({ post, profile, comments }) {
           <i className="like_icon"></i>
           <span>Like</span>
         </div>
-        <div className="post_action hover1">
+        <div
+          className="post_action hover1"
+          onClick={() => setShowCreateComment(true)}
+        >
           <i className="comment_icon"></i>
           <span>Comment</span>
         </div>
@@ -134,7 +138,7 @@ export default function Post({ post, profile, comments }) {
       <div className="comments_wrap">
         <div className="comments_order"></div>
 
-        <CreateComment postId={post._id} />
+        {showCreateComment && <CreateComment postId={post._id} />}
         {commentsArray &&
           commentsArray
             .slice(0, count)

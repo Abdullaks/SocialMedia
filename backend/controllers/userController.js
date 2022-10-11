@@ -17,7 +17,7 @@ const getProfile = async (req, res) => {
       .populate("user")
       .sort({ createdAt: -1 });
 
-    res.json({ ...profile.toObject(), posts,followCheck });
+    res.json({ ...profile.toObject(), posts, followCheck });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
@@ -56,12 +56,12 @@ const updateCoverPicture = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-                              
+
 const updateBio = async (req, res) => {
-  console.log(req.body,"req.body");
+  console.log(req.body, "req.body");
   try {
     // const { infos } = req.body;
-    
+
     const updated = await User.findByIdAndUpdate(
       req.user.id,
       {
@@ -106,8 +106,6 @@ const follow = async (req, res) => {
   }
 };
 
-
-                     
 const unFollow = async (req, res) => {
   try {
     if (req.user.id !== req.params.id) {
@@ -136,9 +134,6 @@ const unFollow = async (req, res) => {
   }
 };
 
-
-
-
 const search = async (req, res) => {
   try {
     const searchTerm = req.params.searchTerm;
@@ -149,28 +144,43 @@ const search = async (req, res) => {
     res.json(results);
   } catch (error) {
     res.status(500).json({ message: error.message });
+  }    
+};
+
+// const allUsers = async (req, res) => {
+//   try {
+//     const keyword = req.query.search
+//       ? {
+//           $or: [
+//             { name: { $regex: req.query.search, $options: "i" } },
+//             { email: { $regex: req.query.search, $options: "i" } },
+//           ],
+//         }
+//       : {};
+
+//     const users = await User.find(keyword).find({ _id: { $ne: req.user.id } });
+//     res.send(users);
+//   } catch (error) {
+//     res.status(500).json({ message: error.message });
+//   }
+// };
+
+
+
+//get a user
+const getAUser = async (req, res) => {
+  const userId = req.query.userId;
+  try { 
+    const user =  await User.findById({_id:userId})
+    const { password, updatedAt, ...other } = user._doc;
+    res.status(200).json(other);
+  } catch (err) {
+    res.status(500).json(err);
   }
 };
 
 
-const allUsers = async (req, res) => {
-  try {
-    
-    const keyword = req.query.search
-      ? {
-          $or: [
-            { name: { $regex: req.query.search, $options: "i" } },
-            { email: { $regex: req.query.search, $options: "i" } },
-          ],
-        }
-      : {};
-  
-    const users = await User.find(keyword).find({ _id: { $ne: req.user._id } });
-    res.send(users);
-  } catch (error) {
-     res.status(500).json({ message: error.message });
-  }
-};
+
 
 
 
@@ -187,8 +197,5 @@ module.exports = {
   follow,
   unFollow,
   search,
-  allUsers,
+  getAUser,
 };
-
-
-

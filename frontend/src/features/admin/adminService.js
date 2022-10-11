@@ -10,7 +10,7 @@ const getAllUsers = async (token) => {
   const response = await axios.get("/api/admin/", config);
   return response.data;
 };
-
+   
 //Delete user
 const deleteUser = async (userId, token) => {
   const config = {

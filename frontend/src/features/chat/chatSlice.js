@@ -3,16 +3,12 @@ import chatService from "./chatService";
 
 const initialState = {
   searchUsers: [],
+  createChat: {},
   isError: false,
   isSuccess: false,
   isLoading: false,
   message: "",
 };
-
- 
-
-
-
 
 //Get All users
 export const getAllUsers = createAsyncThunk(
@@ -20,6 +16,7 @@ export const getAllUsers = createAsyncThunk(
   async (search, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
+      console.log("slice", token, search);
       return await chatService.getAllUsers(search, token);
     } catch (error) {
       const message =
@@ -32,6 +29,21 @@ export const getAllUsers = createAsyncThunk(
     }
   }
 );
+
+export const createChat = createAsyncThunk("chat/create", async (userId, thunkAPI) => {
+  try {
+    const token = thunkAPI.getState().auth.user.token;
+    console.log("slice", token, userId);
+    return await chatService.createChat(userId, token);
+  } catch (error) {
+    const message =
+      (error.response && error.response.data && error.response.data.message) ||
+      error.message ||
+      error.toString();
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+
 
 
 
@@ -57,7 +69,19 @@ export const chatSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
       })
-      
+      .addCase(createChat.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(createChat.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.createChat = action.payload;
+      })
+      .addCase(createChat.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      });
   },
 });
 

@@ -1,7 +1,7 @@
 const Post = require("../models/postModel");
 const User = require("../models/userModel");
 const Comment = require("../models/commentModel");
-const Like = require("../models/likeModel");
+const React = require("../models/reactModel");
 
 // CREATE POST
 const createPost = async (req, res) => {
@@ -61,38 +61,35 @@ const comment = async (req, res) => {
   }
 };
 
-// CREATE like
-const like = async (req, res) => {
+// CREATE react
+const reactPost = async (req, res) => {
   try {
-    console.log("like controller");
-    console.log(req.body);
-    const { postId, userId, isLiked } = req.body;
-    const likeCheck = await Like.findOne({ post: postId, likedBy: userId });
-    if (likeCheck == null) {
-      const like = await new Like({
-        Post: postId,
-        likedBy: userId,
-        isLiked: true,
+    const { postId, react } = req.body;
+    const check = await React.findOne({
+      postRef: postId,
+      reactBy: mongoose.Types.ObjectId(req.user.id),
+    });
+    if (check == null) {
+      const newReact = new React({
+        react: react,
+        postRef: postId,
+        reactBy: req.user.id,
       });
-      await like.save();
+      await newReact.save();
     } else {
-      // if (likeCheck.isLiked == true) {
-      // }
-      await Like.findByIdAndUpdate(
-        { _id: likeCheck._id },
-        {
-          $set: {
-            isLiked: false,
-          },
-        }
-      );
-    }                    
-    res.json(like);
+      if (check.react == react) {
+        await React.findByIdAndRemove(check._id);
+      } else {
+        await React.findByIdAndUpdate(check._id, {
+          react: react,
+        });
+      }
+    }
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
 };
-
+//save post
 const savePost = async (req, res) => {
   try {
     const postId = req.params.id;
@@ -122,7 +119,7 @@ const savePost = async (req, res) => {
     return res.status(500).json({ message: error.message });
   }
 };
-
+//edit post
 const editPost = async (req, res) => {
   try {
     await Post.findByIdAndUpdate({ _id: req.params.id }, { $set: {
@@ -147,7 +144,7 @@ module.exports = {
   createPost,
   getAllPosts,
   comment,
-  like,
+  reactPost,
   deletePost,
   savePost,
   getSinglePost,
