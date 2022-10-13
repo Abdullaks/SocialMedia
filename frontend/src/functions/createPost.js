@@ -1,4 +1,6 @@
 import axios from "axios";
+const baseUrl = "http://localhost:8800";
+
 export const createPost = async (
   type,
   background,
@@ -9,7 +11,7 @@ export const createPost = async (
 ) => {
   try {
     const { data } = await axios.post(
-      "/api/post/createPost",
+      `${baseUrl}/api/post/createPost`,
       {
         type,
         background,

@@ -231,7 +231,18 @@ const newmessage = async (req, res) => {
   const newMessage = new Message(req.body);
 
   try {
-    const savedMessage = await newMessage.save();
+    let savedMessage = await newMessage.save();
+    savedMessage = await savedMessage.populate(
+      "sender",
+      "username profilePicture"
+    );
+        savedMessage = await savedMessage.populate("conversationId")
+        savedMessage = await User.populate(savedMessage, {
+          path: "conversationId.members",
+          select: "username profilePicture email",
+        });
+
+
     res.status(200).json(savedMessage);
   } catch (err) {
     res.status(500).json(err);
@@ -247,7 +258,6 @@ const allmessage = async (req, res) => {
     const messages = await Message.find({
       conversationId: req.params.conversationId,
     });
-    console.log(messages);
     res.status(200).json(messages);
   } catch (err) {
     res.status(500).json(err);

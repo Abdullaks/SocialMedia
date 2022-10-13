@@ -1,8 +1,10 @@
 import axios from "axios";
+const baseUrl = "http://localhost:8800";
+
 export const updateprofilePicture = async (url, token) => {
   try {
     const { data } = await axios.put(
-      "/api/user/updateProfilePicture",
+      `${baseUrl}/api/user/updateProfilePicture`,
       {
         url,
       },
@@ -20,7 +22,7 @@ export const updateprofilePicture = async (url, token) => {
 export const updateCover = async (url, token) => {
   try {
     const { data } = await axios.put(
-      "/api/user/updateCoverPicture",
+      `${baseUrl}/api/user/updateCoverPicture`,
       {
         url,
       },

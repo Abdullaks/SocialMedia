@@ -7,18 +7,49 @@ import CreateComment from "./CreateComment";
 import ReactionPopup from "./ReactionPopup";
 import Comment from "./Comment";
 import PostMenu from "./PostMenu";
+import { useSelector } from "react-redux";
+import { reactPost } from "../../functions/reactPost";
 export default function Post({ post, profile, comments }) {
   const [showReaction, setShowReaction] = useState(false);
   const [showPostMenu, setShowPostMenu] = useState(false);
   const [commentsArray, setCommentsArray] = useState([]);
   const [showCreateComment, setShowCreateComment] = useState(false);
   const [count, setCount] = useState(1);
+  const [reacts, setReacts] = useState();
+  const [check, setCheck] = useState();
   const navigate = useNavigate();
   useEffect(() => {
     setCommentsArray(post?.Comments);
   }, [post, comments]);
   const showMore = () => {
     setCount((prev) => prev + 5);
+  };
+  const { user } = useSelector((state) => state.auth);
+  const reactHandler = async (type) => {
+    console.log(type);
+    reactPost(post._id, type, user?.token);
+    if (check == type) {
+      setCheck();
+      let index = reacts.findIndex((x) => x.react == check);
+      if (index !== -1) {
+        setReacts([...reacts, (reacts[index].count = --reacts[index].count)]);
+        // setTotal((prev) => --prev);
+      }
+    } else {
+      setCheck(type);
+      let index = reacts.findIndex((x) => x.react == type);
+      let index1 = reacts.findIndex((x) => x.react == check);
+      if (index !== -1) {
+        setReacts([...reacts, (reacts[index].count = ++reacts[index].count)]);
+        // setTotal((prev) => ++prev);
+        console.log(reacts);
+      }
+      // if (index1 !== -1) {
+      //   setReacts([...reacts, (reacts[index1].count = --reacts[index1].count)]);
+      //   // setTotal((prev) => --prev);
+      //   console.log(reacts);
+      // }
+    }
   };
   return (
     <div className="post" style={{ width: `${profile && "100%"}` }}>
@@ -106,6 +137,7 @@ export default function Post({ post, profile, comments }) {
         <ReactionPopup
           showReaction={showReaction}
           setShowReaction={setShowReaction}
+          reactHandler={reactHandler}
         />
         <div
           className="post_action hover1"
@@ -119,9 +151,36 @@ export default function Post({ post, profile, comments }) {
               setShowReaction(false);
             }, 500);
           }}
+          onClick={() => reactHandler(check ? check : "like")}
         >
-          <i className="like_icon"></i>
-          <span>Like</span>
+          {check ? (
+            <img
+              src={`../../../reacts/${check}.svg`}
+              alt=""
+              className="small_react"
+              style={{ width: "18px" }}
+            />
+          ) : (
+            <i className="like_icon"></i>
+          )}
+          <span
+            style={{
+              color: `
+          
+          ${
+            check === "like"
+              ? "#4267b2"
+              : check === "love"
+              ? "#f63459"
+              : check === "wow"
+              ? "#f7b125"
+              : ""
+          }
+          `,
+            }}
+          >
+            {check ? check : "Like"}
+          </span>
         </div>
         <div
           className="post_action hover1"
@@ -154,7 +213,6 @@ export default function Post({ post, profile, comments }) {
           setShowPostMenu={setShowPostMenu}
           postUserId={post.user._id}
           postId={post._id}
-          // userName={profile?.user?.username}
         />
       )}
     </div>

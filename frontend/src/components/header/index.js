@@ -18,9 +18,11 @@ import "./style.css";
 import SearchMenu from "./SearchMenu";
 import { useDispatch, useSelector } from "react-redux";
 import UserMenu from "./UserMenu";
+import { ChatState } from "../../context/chatProvider";
 
 export default function Header({ page }) {
   const { user } = useSelector((state) => state.auth);
+const { notification, setNotification } = ChatState();
   const [showSearchMenu, setShowSearchMenu] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
   const color = "#65676b";
@@ -66,17 +68,17 @@ export default function Header({ page }) {
         >
           {page === "home" ? <HomeActive /> : <Home color={color} />}
         </Link>
-        <Link to="/" className="middle_icon hover1">
+        <Link to="/friends" className="middle_icon hover1">
           <Friends color={color} />
         </Link>
-        <Link to="/" className="middle_icon hover1">
+        {/* <Link to="/" className="middle_icon hover1">
           <Watch color={color} />
           <div className="middle_notification">9+</div>
-        </Link>
-        {/* <Link to="/" className="middle_icon hover1">
-          <Market color={color} />      
         </Link> */}
-        <Link to="/" className="middle_icon hover1">
+        <Link to="#" className="middle_icon hover1">
+          <Market color={color} />      
+        </Link>
+        <Link to="#" className="middle_icon hover1">
           <Gaming color={color} />
         </Link>
       </div>
@@ -96,14 +98,12 @@ export default function Header({ page }) {
           />
           <span>{user?.username}</span>
         </Link>
-        {/* <div className="circle_icon hover1">
-          <Menu />
-        </div> */}
-        <Link to='/chat'>
-        <div className="circle_icon hover1">
-          <Messenger />
-          <div className="right_notification">1</div>
-        </div>
+        
+        <Link to="/chat">
+          <div className="circle_icon hover1">
+            <Messenger />
+            {notification.length>0 &&<div className="right_notification">{notification.length}</div>}
+          </div>
         </Link>
         {/* <div className="circle_icon hover1">
           <Notifications />

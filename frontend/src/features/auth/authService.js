@@ -1,8 +1,10 @@
 import axios from "axios";
 
+const baseUrl = "http://localhost:8800";
+
 //REGISTER USER
 const register = async (userData) => {
-  const response = await axios.post("/api/auth/register", userData);
+  const response = await axios.post(`${baseUrl}/api/auth/register`, userData);
   if (response.data) {
     localStorage.setItem("user", JSON.stringify(response.data));
   }
@@ -11,7 +13,7 @@ const register = async (userData) => {
 
 //LOGIN USER
 const login = async (userData) => {
-  const response = await axios.post("/api/auth/login", userData);
+  const response = await axios.post(`${baseUrl}/api/auth/login`, userData);
   if (response.data) {
     localStorage.setItem("user", JSON.stringify(response.data));
   }
@@ -23,7 +25,7 @@ const logout = () => {
 };
 //ADMIN LOGIN 
 const adminLogin = async (userData) => {
-  const response = await axios.post("/api/auth/adminLogin", userData);
+  const response = await axios.post(`${baseUrl}/api/auth/adminLogin`, userData);
   if (response.data) {
     localStorage.setItem("admin", JSON.stringify(response.data));
   }
@@ -35,7 +37,7 @@ const adminLogout = () => {
 };
 
 const updatePassword = async (userData) => {
-  const response = await axios.post("/api/auth/updatePassword", userData);
+  const response = await axios.post(`${baseUrl}/api/auth/updatePassword`, userData);
   // if (response.data) {
   //   localStorage.setItem("user", JSON.stringify(response.data));
   // }

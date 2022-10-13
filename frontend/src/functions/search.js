@@ -1,20 +1,11 @@
-
-
-
-
-
-
-
 import axios from "axios";
 
-
-
+const baseUrl = "http://localhost:8800";
 
 export const search = async (searchTerm, token) => {
-    console.log("search called");
   try {
     const { data } = await axios.post(
-      `/api/user/search/${searchTerm}`,
+      `${baseUrl}/api/user/search/${searchTerm}`,
       {},
       {
         headers: {

@@ -6,6 +6,7 @@ const {
   getAllPosts,
   comment,
   reactPost,
+  getReacts,
   savePost,
   deletePost,
   getSinglePost,
@@ -16,7 +17,8 @@ const {
 router.post("/createPost",verifyUser,createPost );
 router.get("/getAllPosts",verifyUser, getAllPosts);
 router.post("/comment",verifyUser, comment);
-router.post("/reactPost", verifyUser, reactPost);
+router.put("/reactPost", verifyUser, reactPost);
+router.get("/getReacts/:id", verifyUser, getReacts);
 router.put("/getAPost/:id", verifyUser, getSinglePost);
 // router.put("/editPost/:id", verifyUser, editPost);
 router.put("/savePost/:id", verifyUser, savePost);

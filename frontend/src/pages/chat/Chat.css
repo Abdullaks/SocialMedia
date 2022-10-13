@@ -1,11 +1,12 @@
 .messenger {
   height: calc(100vh - 70px);
   display: flex;
-padding-top: 70px;
+  padding-top: 70px;
 }
 
 .chatMenu {
   flex: 3.5;
+  background-color: rgba(200, 191, 191, 0.69);
 }
 
 .chatMenuInput {
@@ -17,6 +18,9 @@ padding-top: 70px;
 
 .chatBox {
   flex: 5.5;
+  height: 100%;
+
+  background-color: rgba(251, 246, 246, 0.308);
 }
 
 .chatBoxWrapper {
@@ -39,26 +43,36 @@ padding-top: 70px;
   justify-content: space-between;
 }
 
-.chatMessageInput {
+.search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-forth);
+  padding: 10px 32px 10px 10px;
+  border-radius: 50px;
+  cursor: text;
   width: 80%;
-  height: 90px;
-  padding: 10px;
-  
-
 }
 
-    
-
+.chatMessageInput {
+  width: 100%;
+  height: 90px;
+  padding: 10px;
+  outline: none;
+  border: none;
+  background: transparent;
+  font-size: 15px;
+  font-family: inherit;
+}
 .chatSubmitButton {
   width: 70px;
   height: 40px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  background-color: teal;
+  background-color: #1877f2;
   color: white;
 }
-
 .chatOnline {
   flex: 3;
 }
@@ -87,11 +101,11 @@ padding-top: 70px;
     display: none;
   }
 
-  .chatBox{
+  .chatBox {
     flex: 10;
   }
 
-  .chatOnline{
+  .chatOnline {
     flex: 1px;
   }
 }

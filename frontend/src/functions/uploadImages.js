@@ -1,11 +1,10 @@
 import axios from "axios";
+const baseUrl = "http://localhost:8800";
 
 export const uploadImages = async (formData, path, token) => {
-
-
   try {
     const { data } = await axios.post(
-        "/api/upload/uploadImages",
+      `${baseUrl}/api/upload/uploadImages`,
       formData,
       {
         headers: {
@@ -19,5 +18,3 @@ export const uploadImages = async (formData, path, token) => {
     return error.response.data.message;
   }
 };
-
-

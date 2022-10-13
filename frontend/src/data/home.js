@@ -1,116 +1,65 @@
 export const left = [
   {
-    text: "Find friends",
+     text: "Followers",
     img: "friends",
   },
-  {
-    text: "Groups",
-    img: "groups",
-    notification: "5 new",
-  },
-
+  // {
+  //   text: "Groups",
+  //   img: "groups",
+  //   // notification: "5 new",
+  // },
   {
     text: "Messenger",
     img: "messenger",
+    notification: "5 new",
   },
   {
     text: "Saved",
     img: "saved",
   },
-  {
-    text: "Favorites",
-    img: "fav",
-  },
+  // {
+  //   text: "Favorites",
+  //   img: "fav",
+  // },
   {
     text: "Pages",
     img: "pages",
   },
-  {
-    text: "Recent",
-    img: "recent",
-  },
-  {
-    text: "Watch",
-    img: "watch",
-    notification: "9 new videos",
-  },
-  {
-    text: "Events",
-    img: "events",
-  },
-  {
-    text: "Facebook Pay",
-    img: "pay",
-  },
-  {
-    text: "Play Games",
-    img: "play",
-  },
-  {
-    text: "Jobs",
-    img: "jobs",
-  },
-  {
-    text: "Live videos",
-    img: "live",
-  },
-  {
-    text: "Campus",
-    img: "campus",
-  },
   // {
-  //   text: "Memories",
-  //   img: "memories",
+  //   text: "Recent",
+  //   img: "recent",
   // },
   // {
-  //   text: "Marketplace",
-  //   img: "marketplace",
+  //   text: "Watch",
+  //   img: "watch",
+  //   notification: "9 new videos",
   // },
   // {
-  //   text: "Climate science center",
-  //   img: "climate",
+  //   text: "Events",
+  //   img: "events",
   // },
   // {
-  //   text: "Community Help",
-  //   img: "community",
+  //   text: "Facebook Pay",
+  //   img: "pay",
   // },
   // {
-  //   text: "COVID-19 Information Centrer",
-  //   img: "covid",
+  //   text: "Play Games",
+  //   img: "play",
   // },
   // {
-  //   text: "Emotional health",
-  //   img: "emotional",
+  //   text: "Jobs",
+  //   img: "jobs",
   // },
+  
   // {
-  //   text: "Ad Center",
-  //   img: "ad",
-  // },
-  // {
-  //   text: "Ads Manager",
-  //   img: "ads",
-  // },
-
-  // {
-  //   text: "Fundraisers",
-  //   img: "fund",
-  // },
-  // {
-  //   text: "Gaming Video",
-  //   img: "gaming",
-  // },
-  // {
-  //   text: "Messenger Kids",
-  //   img: "messkids",
+  //   text: "Campus",
+  //   img: "campus",
   // },
   // {
   //   text: "Recent ad activity",
   //   img: "recentad",
   // },
-  // {
-  //   text: "Weather",
-  //   img: "weather",
-  // },
+ 
 ];
 
 export const stories = [

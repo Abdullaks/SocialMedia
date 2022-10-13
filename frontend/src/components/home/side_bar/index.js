@@ -4,7 +4,6 @@ import LeftLink from "./LeftLink";
 import "./style.css";
 import { left } from "../../../data/home";
 import { ArrowDown1 } from "../../../svg";
-
 export default function LeftHome({ user }) {
   const [visible, setVisible] = useState(false);
   return (
@@ -23,7 +22,7 @@ export default function LeftHome({ user }) {
           notification={link.notification}
         />
       ))}
-      {!visible && (
+      {/* {!visible && (
         <div
           className="left_link hover1"
             onClick={() => {setVisible(true);}}
@@ -33,7 +32,7 @@ export default function LeftHome({ user }) {
           </div>
           <span>See more</span>
         </div>
-      )}
+      )} */}
 
       {visible && (
         <div className="more_left">

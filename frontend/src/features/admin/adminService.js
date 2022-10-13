@@ -1,5 +1,5 @@
 import axios from "axios";
-
+const baseUrl = "http://localhost:8800";
 //Get user
 const getAllUsers = async (token) => {
   const config = {
@@ -7,7 +7,7 @@ const getAllUsers = async (token) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  const response = await axios.get("/api/admin/", config);
+  const response = await axios.get(`${baseUrl}/api/admin/`, config);
   return response.data;
 };
    
@@ -19,7 +19,7 @@ const deleteUser = async (userId, token) => {
     },
   };
   const response = await axios.delete(
-    "/api/admin/deleteUser/" + userId,
+    `${baseUrl}/api/admin/deleteUser/` + userId,
     config
   );
   return response.data;
@@ -31,7 +31,7 @@ const blockUser = async (userId, token) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  const response = await axios.put("/api/admin/blockUser/" + userId, config);
+  const response = await axios.put(`${baseUrl}/api/admin/blockUser/` + userId, config);
   return response.data;
 };
 //Unblock user
@@ -41,7 +41,10 @@ const unBlockUser = async (userId, token) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  const response = await axios.put("/api/admin/unBlockUser/" + userId, config);
+  const response = await axios.put(
+    `${baseUrl}/api/admin/unBlockUser/` + userId,
+    config
+  );
   return response.data;
 };
 

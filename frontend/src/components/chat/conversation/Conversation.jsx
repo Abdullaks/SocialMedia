@@ -1,19 +1,20 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import './conversation.css'
-
 export default function Conversation({conversation,currentUser}) {
-
   const [friend, setFriend] = useState(null);
-
    useEffect(() => {
      const friendId = conversation.members.find((m) => m !== currentUser._id);
      const getUser = async () => {
        try {
-         const res = await axios.get("/api/user?userId=" + friendId,{
+         const res = await axios.get("http://localhost:8800/api/user?userId=" + friendId,{
         headers: {
           Authorization: `Bearer ${currentUser.token}`,
         }
+
+
+
+        
        } );
          setFriend(res.data);
        } catch (err) {

@@ -6,15 +6,15 @@ import Header from "../../components/header";
 import ProfielPictureDetails from "./ProfilePictureDetails";
 import ProfileMenu from "./ProfileMenu";
 import PeoplelYouMayKnow from "./PeoplelYouMayKnow";
-import Cover from "./Cover";
-import GridPosts from "./GridPosts";
 import CreatePost from "../../components/createPost";
 import CreatePostPopUp from "../../components/createPostPopUp";
+import Cover from "./Cover";
+import GridPosts from "./GridPosts";
 import { useParams } from "react-router-dom";
-import { getProfile, reset } from "../../features/profile/profileSlice";
 import Post from "../../components/post";
 import Friends from "./Friends";
 import Bio from "../../components/profile/Bio";
+import { getProfile, reset } from "../../features/profile/profileSlice";
 
 export default function Profile() {
   const [postPopup, setPostPopup] = useState(false);

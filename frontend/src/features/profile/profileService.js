@@ -1,4 +1,5 @@
 import axios from "axios";
+const baseUrl = "http://localhost:8800";
 
 //Get profile
 const getProfile = async (username, token) => {
@@ -7,7 +8,7 @@ const getProfile = async (username, token) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  const response = await axios.get("/api/user/getProfile/" + username, config);
+  const response = await axios.get(`${baseUrl}/api/user/getProfile/` + username, config);
   return response.data;
 };
 
@@ -18,7 +19,11 @@ const updateBio = async (infos, token) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  const response = await axios.put("/api/user/updateBio", infos, config);
+  const response = await axios.put(
+    `${baseUrl}/api/user/updateBio`,
+    infos,
+    config
+  );
   return response.data;
 };
 
@@ -29,7 +34,11 @@ const followUser = async (id, token) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  const response = await axios.put("/api/user/follow/" + id,{}, config);
+  const response = await axios.put(
+    `${baseUrl}/api/user/follow/` + id,
+    {},
+    config
+  );
   return response.data;
 };
 
@@ -40,7 +49,11 @@ const unFollowUser = async (id, token) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  const response = await axios.put("/api/user/unfollow/" + id,{}, config);
+  const response = await axios.put(
+    `${baseUrl}/api/user/unfollow/` + id,
+    {},
+    config
+  );
   return response.data;
 };
 
@@ -57,7 +70,7 @@ const unFollowUser = async (id, token) => {
 //       }
 //     );
 //     console.log(data);
-//     return "ok";
+//     return `ok`;
 //   } catch (error) {
 //     console.log(error.response.data.message);
 //     return error.response.data.message;
@@ -75,7 +88,7 @@ const unFollowUser = async (id, token) => {
 //         },
 //       }
 //     );
-//     return "ok";
+//     return `ok`;
 //   } catch (error) {
 //     return error.response.data.message;
 //   }
@@ -88,7 +101,11 @@ const search = async (searchTerm, token) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  const response = await axios.post("/api/user/search"+searchTerm, {}, config);
+  const response = await axios.post(
+    `${baseUrl}/api/user/search` + searchTerm,
+    {},
+    config
+  );
   return response.data;
 };
 

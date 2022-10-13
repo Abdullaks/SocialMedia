@@ -26,10 +26,7 @@ const reactsArray = [
   // },
 ];
 
-export default function ReactionPopup({showReaction,setShowReaction}) {
-
-
-  
+export default function ReactionPopup({ showReaction, setShowReaction, reactHandler }) {
   return (
     <>
       {showReaction && (
@@ -37,22 +34,26 @@ export default function ReactionPopup({showReaction,setShowReaction}) {
           className="reacts_popup"
           onMouseOver={() => {
             setTimeout(() => {
-                setShowReaction(true);
+              setShowReaction(true);
             }, 500);
           }}
           onMouseLeave={() => {
             setTimeout(() => {
-                setShowReaction(false);
+              setShowReaction(false);
             }, 500);
           }}
         >
           {reactsArray.map((react, i) => (
-            <div className="react" key={i}>
+            <div
+              className="react"
+              key={i}
+              onClick={() => {reactHandler(react.name)}}
+            >
               <img src={react.image} alt="" />
             </div>
           ))}
         </div>
       )}
     </>
-  )
+  );
 }

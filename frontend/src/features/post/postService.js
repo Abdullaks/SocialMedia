@@ -1,4 +1,5 @@
 import axios from "axios";
+const baseUrl = "http://localhost:8800";
 
 //Get All posts
 const getAllposts = async (token) => {
@@ -7,7 +8,7 @@ const getAllposts = async (token) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  const response = await axios.get("/api/post/getAllPosts", config);
+  const response = await axios.get(`${baseUrl}/api/post/getAllPosts`, config);
   return response.data;
 };
 //Get A post
@@ -17,7 +18,7 @@ const getAllposts = async (token) => {
 //       Authorization: `Bearer ${token}`,
 //     },
 //   };
-//   const response = await axios.get("/api/post/getAPost/"+id, config);
+//   const response = await axios.get(`${baseUrl}/api/post/getAPost/`+id, config);
 //   return response.data;
 // };
 
@@ -28,7 +29,7 @@ const comment = async (Data, token) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  const response = await axios.post("/api/post/comment", Data, config);
+  const response = await axios.post(`${baseUrl}/api/post/comment`, Data, config);
   return response.data;
 };
 
@@ -39,7 +40,11 @@ const savePost = async (id, token) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  const response = await axios.put("/api/post/savePost/" + id, {}, config);
+  const response = await axios.put(
+    `${baseUrl}/api/post/savePost/` + id,
+    {},
+    config
+  );
   return response.data;
 };
 
@@ -51,8 +56,7 @@ const deletePost = async (postId, token) => {
     },
   };
   console.log("service ",config);
-  const response = await axios.delete("/api/post/deletePost/" + postId, config);
-  console.log("response ",response);
+  const response = await axios.delete(`${baseUrl}/api/post/deletePost/` + postId, config);
   return response.data;                
 };
 //Edit post

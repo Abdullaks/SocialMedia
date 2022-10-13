@@ -1,4 +1,5 @@
 import axios from "axios";
+const baseUrl = "http://localhost:8800";
 
 //Get user
 const getAllUsers = async (search, token) => {
@@ -9,7 +10,7 @@ const getAllUsers = async (search, token) => {
   };
 
   const response = await axios.get(
-    `/api/user/searchChat?search=${search}`,
+    `${baseUrl}/api/user/searchChat?search=${search}`,
     config
   );
   return response.data;
@@ -23,7 +24,7 @@ const createChat = async (userId, token) => {
     },
   };
 
-  const response = await axios.post("/api/chat", { userId }, config);
+  const response = await axios.post(`${baseUrl}/api/chat`, { userId }, config);
   return response.data;
 };
 

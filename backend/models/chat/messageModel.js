@@ -26,18 +26,22 @@
 //   { timestamps: true }
 // );
 
-
 // const Message = mongoose.model("Message", messageSchema);
 // module.exports = Message;
 const mongoose = require("mongoose");
+const { ObjectId } = mongoose.Schema;
 
 const MessageSchema = new mongoose.Schema(
   {
     conversationId: {
-      type: String,
+      type: ObjectId,
+      ref: "Conversation",
+      required: true,
     },
     sender: {
-      type: String,
+      type: ObjectId,
+      ref: "User",
+      required: true,
     },
     text: {
       type: String,
