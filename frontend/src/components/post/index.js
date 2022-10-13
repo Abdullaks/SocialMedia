@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import "./style.css";
+import { Link, useNavigate } from "react-router-dom";
 import Moment from "react-moment";
 import { Dots, Public } from "../../svg";
-import "./style.css";
 import CreateComment from "./CreateComment";
 import ReactionPopup from "./ReactionPopup";
 import Comment from "./Comment";
 import PostMenu from "./PostMenu";
 import { useSelector } from "react-redux";
-import { reactPost } from "../../functions/reactPost";
+import { getReacts, reactPost } from "../../functions/reactPost";
 export default function Post({ post, profile, comments }) {
   const [showReaction, setShowReaction] = useState(false);
   const [showPostMenu, setShowPostMenu] = useState(false);
@@ -17,6 +17,7 @@ export default function Post({ post, profile, comments }) {
   const [count, setCount] = useState(1);
   const [reacts, setReacts] = useState();
   const [check, setCheck] = useState();
+  const [total, setTotal] = useState(0);
   const navigate = useNavigate();
   useEffect(() => {
     setCommentsArray(post?.Comments);
@@ -24,16 +25,26 @@ export default function Post({ post, profile, comments }) {
   const showMore = () => {
     setCount((prev) => prev + 5);
   };
+useEffect(() => {
+  getPostReacts();
+}, [post]); 
+
+const getPostReacts = async () => {
+  const res = await getReacts(post._id, user.token);
+  setReacts(res.reacts);
+  setCheck(res.check);
+  setTotal(res.total);
+};
   const { user } = useSelector((state) => state.auth);
   const reactHandler = async (type) => {
     console.log(type);
-    reactPost(post._id, type, user?.token);
-    if (check == type) {
+    reactPost(post._id, "like", user?.token);
+    if (check == "like") {
       setCheck();
       let index = reacts.findIndex((x) => x.react == check);
       if (index !== -1) {
         setReacts([...reacts, (reacts[index].count = --reacts[index].count)]);
-        // setTotal((prev) => --prev);
+        setTotal((prev) => --prev);
       }
     } else {
       setCheck(type);
@@ -41,14 +52,14 @@ export default function Post({ post, profile, comments }) {
       let index1 = reacts.findIndex((x) => x.react == check);
       if (index !== -1) {
         setReacts([...reacts, (reacts[index].count = ++reacts[index].count)]);
-        // setTotal((prev) => ++prev);
+        setTotal((prev) => ++prev);
+        // console.log(reacts);
+      } 
+      if (index1 !== -1) {
+        setReacts([...reacts, (reacts[index1].count = --reacts[index1].count)]);
+        setTotal((prev) => --prev);
         console.log(reacts);
       }
-      // if (index1 !== -1) {
-      //   setReacts([...reacts, (reacts[index1].count = --reacts[index1].count)]);
-      //   // setTotal((prev) => --prev);
-      //   console.log(reacts);
-      // }
     }
   };
   return (
@@ -125,8 +136,20 @@ export default function Post({ post, profile, comments }) {
       </>
       <div className="post_infos">
         <div className="reacts_count">
-          <div className="reacts_count_imgs"></div>
-          <div className="reacts_count_num"></div>
+          <div className="reacts_count_imgs">
+            {reacts &&
+              reacts
+                .sort((a, b) => {
+                  return b.count - a.count;
+                })
+                .map(
+                  (react) =>
+                    react.count > 0 && (
+                      <img src={`../../../reacts/${react.react}.svg`} alt="" />
+                    )
+                )}
+          </div>
+          <div className="reacts_count_num">{total > 0 && total}</div>
         </div>
         {/* <div className="to_right">
           <div className="comments_count"> comments</div>
@@ -134,11 +157,11 @@ export default function Post({ post, profile, comments }) {
         </div> */}
       </div>
       <div className="post_actions">
-        <ReactionPopup
+        {/* <ReactionPopup
           showReaction={showReaction}
           setShowReaction={setShowReaction}
-          reactHandler={reactHandler}
-        />
+          // reactHandler={reactHandler}
+        /> */}
         <div
           className="post_action hover1"
           onMouseOver={() => {
@@ -170,10 +193,7 @@ export default function Post({ post, profile, comments }) {
           ${
             check === "like"
               ? "#4267b2"
-              : check === "love"
-              ? "#f63459"
-              : check === "wow"
-              ? "#f7b125"
+              
               : ""
           }
           `,
@@ -181,6 +201,7 @@ export default function Post({ post, profile, comments }) {
           >
             {check ? check : "Like"}
           </span>
+          {/* <span style={{ color: "#4267b2" }}>{total > 0 && total}</span> */}
         </div>
         <div
           className="post_action hover1"

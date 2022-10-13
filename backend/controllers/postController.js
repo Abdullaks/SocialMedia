@@ -117,10 +117,10 @@ const getReacts = async (req, res) => {
       //   react: "sad",
       //   count: newReacts.sad ? newReacts.sad.length : 0,
       // },
-      {
-        react: "wow",
-        count: newReacts.wow ? newReacts.wow.length : 0,
-      },
+      // {
+      //   react: "wow",
+      //   count: newReacts.wow ? newReacts.wow.length : 0,
+      // },
       // {
       //   react: "angry",
       //   count: newReacts.angry ? newReacts.angry.length : 0,
@@ -145,20 +145,6 @@ const getReacts = async (req, res) => {
     return res.status(500).json({ message: error.message });
   }
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //save post
 const savePost = async (req, res) => {
