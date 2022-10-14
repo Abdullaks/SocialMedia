@@ -11,16 +11,7 @@ const getAllposts = async (token) => {
   const response = await axios.get(`${baseUrl}/api/post/getAllPosts`, config);
   return response.data;
 };
-//Get A post
-// const getAPost = async (id,token) => {
-//   const config = {
-//     headers: {
-//       Authorization: `Bearer ${token}`,
-//     },
-//   };
-//   const response = await axios.get(`${baseUrl}/api/post/getAPost/`+id, config);
-//   return response.data;
-// };
+
 
 //Comment on Post
 const comment = async (Data, token) => {

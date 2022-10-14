@@ -18,6 +18,7 @@ export default function Post({ post, profile, comments }) {
   const [reacts, setReacts] = useState();
   const [check, setCheck] = useState();
   const [total, setTotal] = useState(0);
+  const { user } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   useEffect(() => {
     setCommentsArray(post?.Comments);
@@ -35,7 +36,6 @@ const getPostReacts = async () => {
   setCheck(res.check);
   setTotal(res.total);
 };
-  const { user } = useSelector((state) => state.auth);
   const reactHandler = async (type) => {
     console.log(type);
     reactPost(post._id, "like", user?.token);

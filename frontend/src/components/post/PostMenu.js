@@ -68,7 +68,7 @@ export default function PostMenu({
         )}
       </div>
 
-      {/* {test && (
+      {test && (
         <Link to={`/editPost/${postId}`}>
         <div
           // onClick={() => editHandler()}
@@ -83,13 +83,13 @@ export default function PostMenu({
           </li> 
         </div>
           </Link>
-      )} */}
+      )}
   
-      {/* {showEditPopup && (
+      {showEditPopup && (
         <>
           <EditPost user={user} />                   
         </>
-      )} */}
+      )}
                                            
       {test && (
         <div onClick={() => deleteHandler()}>

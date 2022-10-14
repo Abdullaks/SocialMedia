@@ -26,7 +26,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/profile/:username" element={<Profile />} />
           <Route path="/chat" element={<Chat />} />
-          {/* <Route path="/editPost/:id" element={<EditPost />} /> */}
+          <Route path="/editPost/:id" element={<EditPost />} />
         </Routes>
       </Router>
       <ToastContainer />

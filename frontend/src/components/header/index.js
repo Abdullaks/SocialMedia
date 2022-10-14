@@ -40,8 +40,8 @@ const { notification, setNotification } = ChatState();
       <div className="header_left">
         <Link to="/" className="header_logo">
           <div className="circle">
-            AKS
-            {/* <Logo/>  */}
+            
+            <Logo/> 
           </div>
         </Link>
         <div

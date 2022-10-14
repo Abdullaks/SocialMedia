@@ -1,56 +1,57 @@
-// import React, { useState, useEffect } from "react";
-// import { useParams } from "react-router-dom";
-// import { useDispatch } from "react-redux";
-// import { editPost, getAPost } from "../../features/post/postSlice";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getAPost, editPost } from "../../functions/editPost";
 
-// export default function EditPost() {
-//   const [text, setText] = useState("");
-//   const { id } = useParams();
-//   const dispatch = useDispatch();
-//   useEffect(() => {
-//     dispatch(getAPost(id)).then((res) => {
-//       setText(res.data);
-//     });
-//   }, [id, dispatch]);
+export default function EditPost() {
+  const [text, setText] = useState("");
+  const { id } = useParams();
+const {user} =useSelector((state) => state.auth);
+  const dispatch = useDispatch(); 
+  const navigate = useNavigate();
+  useEffect(() => {
+    getsinglePost()
+  }, [id]);
 
-//   const onSubmit = async () => {
-//     const data = {
-//       text: text,
-//       id,
-//     };
-//     //   dispatch(editPost(data));
-//   };
-//   const onChange = (e) => {
-//     setText((text) => ({
-//       ...text,
-//       text: e.target.value,
-//     }));
-//   };
 
-//   return (
-//     <>
-//       <section className="heading">
-//         <h1>Edit post Caption</h1>
-//       </section>
-//       <section className="form">
-//         <form onSubmit={onSubmit}>
-//           <div className="form-group">
-//             <input
-//               type="text"
-//               className="form-control"
-//               id="text"
-//               name="text"
-//               value={text}
-//               onChange={onChange}
-//             />
-//           </div>
-//           <div className="form-group">
-//             <button type="submit" className="btn ">
-//               Edit
-//             </button>
-//           </div>
-//         </form>
-//       </section>
-//     </>
-//   );
-// }                        
+const getsinglePost= async (req, res) => {
+const ePost =await getAPost(id,user.token);
+ setText(ePost);
+}
+
+
+  const onSubmit = async () => {
+        const response = await editPost( null, null, text,null,user._id,user.token,id);
+    console.log(response);
+    if (response === "ok") {
+      setText("");
+      navigate("/home");
+    } else {
+      console.log(response, "error");
+    }
+  };
+  return (
+    <>
+      <section className="heading">
+        <h1>Edit post Caption</h1>
+      </section>
+      <section className="form">
+          <div className="form-group">
+            <input
+              type="text" 
+              className="form-control"
+              id="text"
+              name="text"
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+            />
+          </div>
+          <div className="form-group">
+            <button type="submit" className="btn " onClick={onSubmit}>
+              Edit
+            </button>
+          </div>
+      </section>
+    </>
+  );
+}

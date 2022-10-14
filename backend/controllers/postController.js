@@ -176,9 +176,16 @@ const savePost = async (req, res) => {
     return res.status(500).json({ message: error.message });
   }
 };
+
+
+
+
 //edit post
 const editPost = async (req, res) => {
   try {
+
+console.log(req.params);
+
     await Post.findByIdAndUpdate({ _id: req.params.id }, { $set: {
       text: req.body.text
     } });
