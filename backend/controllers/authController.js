@@ -34,6 +34,7 @@ const loginAdmin = async (req, res) => {
 
 //REGISTER
 const registerUser = async (req, res) => {
+  console.log(req.body);
   try {
     //check if user is already registered
     const userExist = await User.findOne({ email: req.body.email });
@@ -54,6 +55,7 @@ const registerUser = async (req, res) => {
 
     //save the new user and response
     const user = await newUser.save();
+    console.log(user,"sdfghjk");
     if (user) {
       res.status(200).json({
         _id: user.id,
@@ -98,6 +100,7 @@ const loginUser = async (req, res) => {
       username: user.username,
       email: user.email,
       mobile: user.mobile,
+      profilePicture:user.profilePicture?user.profilePicture:null,
       token: generateToken(user._id),
     });
   } catch (error) {

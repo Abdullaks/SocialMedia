@@ -424,6 +424,53 @@
   border-bottom: 3px solid var(--blue-color);
 }
 
+
+/* followerpopup */
+
+.popup1{
+
+display: flex;
+flex-direction: column;
+margin-top: 5px;
+scrollbar-base-color: blue;
+overflow-y: scroll;
+
+  /* flex flex-col mt-5  scrollbar-thin scrollbar-thumb-blue-700 scrollbar-track-blue-300 h-96 overflow-y-scroll  */
+}
+
+.popup2{
+  /* scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-300  overflow-y-scroll */
+
+
+overflow-y: scroll;
+
+
+}
+
+.popup-list{
+  /* flex justify-between items-center bg-white mt-2 p-2 hover:shadow-lg rounded cursor-pointer transition */
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+
+margin-top: 2px;
+padding: 2px;
+
+cursor: pointer;
+/* transition: all; */
+
+
+}
+
+
+
+/* followerpopup */
+
+
+
+
 /*-----profile card--------*/
 @media (max-width: 900px) {
   .profile_w_left {

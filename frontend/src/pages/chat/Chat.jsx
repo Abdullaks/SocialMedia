@@ -19,7 +19,6 @@ export default function Chat() {
   const [newMessage, setNewMessage] = useState([]);
   const [socketConnected, setSocketConnected] = useState(false);
   const scrollRef = useRef();
-  // const socket = useRef(ENDPOINT);
   const { notification, setNotification } = ChatState();
   useEffect(() => {
     socket = io(ENDPOINT);

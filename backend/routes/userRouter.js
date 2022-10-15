@@ -9,8 +9,9 @@ const {
   updateBio,
   follow,
   unFollow,
-  search,
-  getAUser
+  // search,
+  getAUser,
+  allUsers
 } = require("../controllers/userController");
 
 
@@ -21,10 +22,8 @@ router.put("/updateCoverPicture",verifyUser, updateCoverPicture);
 router.put("/updateBio",verifyUser, updateBio);
 router.put("/follow/:id",verifyUser, follow);
 router.put("/unfollow/:id",verifyUser, unFollow);
-router.post("/search/:searchTerm", verifyUser, search);
+router.post("/search/:searchTerm", verifyUser, allUsers);
 // router.get("/searchChat", verifyUser,allUsers);
 router.get("/", verifyUser, getAUser);
- 
-
 
 module.exports = router;

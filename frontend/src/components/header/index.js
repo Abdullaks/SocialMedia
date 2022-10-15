@@ -38,10 +38,9 @@ const { notification, setNotification } = ChatState();
   return (
     <header>
       <div className="header_left">
-        <Link to="/" className="header_logo">
+        <Link to="/home" className="header_logo">
           <div className="circle">
-            
-            <Logo/> 
+            <Logo />
           </div>
         </Link>
         <div
@@ -76,7 +75,7 @@ const { notification, setNotification } = ChatState();
           <div className="middle_notification">9+</div>
         </Link> */}
         <Link to="#" className="middle_icon hover1">
-          <Market color={color} />      
+          <Market color={color} />
         </Link>
         <Link to="#" className="middle_icon hover1">
           <Gaming color={color} />
@@ -98,11 +97,13 @@ const { notification, setNotification } = ChatState();
           />
           <span>{user?.username}</span>
         </Link>
-        
+
         <Link to="/chat">
           <div className="circle_icon hover1">
             <Messenger />
-            {notification.length>0 &&<div className="right_notification">{notification.length}</div>}
+            {notification.length > 0 && (
+              <div className="right_notification">{notification.length}</div>
+            )}
           </div>
         </Link>
         {/* <div className="circle_icon hover1">
@@ -118,7 +119,7 @@ const { notification, setNotification } = ChatState();
         >
           <ArrowDown />
         </div>
-        {showUserMenu && <UserMenu />}
+        {showUserMenu && <UserMenu user={user} />}
       </div>
     </header>
   );

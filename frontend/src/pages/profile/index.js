@@ -17,7 +17,9 @@ import Bio from "../../components/profile/Bio";
 import { getProfile, reset } from "../../features/profile/profileSlice";
 
 export default function Profile() {
-  const [postPopup, setPostPopup] = useState(false);
+  // const [postPopup, setPostPopup] = useState(false);
+  // const [followersPopup, setFollowersPopup] = useState(false);
+  // const [followingPopup, setFollowingPopup] = useState(false);
   const { user } = useSelector((state) => state.auth);
   const { profile } = useSelector((state) => state.profile);
   const navigate = useNavigate();
@@ -31,9 +33,9 @@ export default function Profile() {
     }
     dispatch(getProfile(userName));
 
-    return () => {
-      dispatch(reset());
-    };
+    // return () => {
+    //   dispatch(reset());
+    // };
   }, [user, navigate, dispatch, userName]);
 
   return (
@@ -46,6 +48,10 @@ export default function Profile() {
             profile={profile}
             visitor={visitor}
             userName={userName}
+            // followersPopup={followersPopup}
+            // setFollowersPopup={setFollowersPopup}
+            // followingPopup={followingPopup}
+            // setFollowingPopup={setFollowingPopup}
           />
           <ProfileMenu />
         </div>

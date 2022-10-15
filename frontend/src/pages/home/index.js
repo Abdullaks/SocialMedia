@@ -17,28 +17,21 @@ export default function Home() {
   const { posts, comments } = useSelector((state) => state.posts);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   useEffect(() => {
     if (!user) {
       navigate("/");
     }
     dispatch(getAllposts());
-
   }, [user, navigate, dispatch, comments]);
-
   return (
-    <div
-      className="home"
-      // style={{ height: `${height + 150}px` }}
-    >
+    <div className="home">
       <Header page="home" />
       <LeftHome user={user} />
       <div className="home_middle">
         <CreatePost user={user} setPostPopup={setPostPopup} />
         <div className="posts">
-        
           {posts?.map((post, i) => (
-            <Post key={i} post={post} comments={comments}  />
+            <Post key={i} post={post} comments={comments} />
           ))}
           <CreatePost user={user} setPostPopup={setPostPopup} />
         </div>
@@ -50,4 +43,3 @@ export default function Home() {
     </div>
   );
 }
-

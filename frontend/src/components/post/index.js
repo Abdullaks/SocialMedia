@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./style.css";
 import { Link, useNavigate } from "react-router-dom";
-import Moment from "react-moment";
 import { Dots, Public } from "../../svg";
 import CreateComment from "./CreateComment";
 import ReactionPopup from "./ReactionPopup";
 import Comment from "./Comment";
 import PostMenu from "./PostMenu";
+import { format } from "timeago.js";
 import { useSelector } from "react-redux";
 import { getReacts, reactPost } from "../../functions/reactPost";
 export default function Post({ post, profile, comments }) {
@@ -87,9 +87,8 @@ const getPostReacts = async () => {
               </div>
             </div>
             <div className="post_profile_privacy_date">
-              <Moment fromNow interval={60}>
-                {post?.createdAt}
-              </Moment>
+              {format(post?.createdAt)}
+
               {/* <Public color="#828387" /> */}
             </div>
           </div>
@@ -190,12 +189,7 @@ const getPostReacts = async () => {
             style={{
               color: `
           
-          ${
-            check === "like"
-              ? "#4267b2"
-              
-              : ""
-          }
+          ${check === "like" ? "#4267b2" : ""}
           `,
             }}
           >

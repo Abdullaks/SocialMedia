@@ -25,7 +25,7 @@ const userSchema = mongoose.Schema(
     mobile: {
       type: String,
       required: [true, "please Add a phone number"],
-      unique: true,
+      // unique: true,
     },
     password: {
       type: String,
@@ -46,14 +46,21 @@ const userSchema = mongoose.Schema(
     bio: {
       type: String,
     },
-
     followers: {
-      type: Array,
-      default: [],
+      type: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "User",
+        },
+      ],
     },
     following: {
-      type: Array,
-      default: [],
+      type: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "User",
+        },
+      ],
     },
     search: [
       {

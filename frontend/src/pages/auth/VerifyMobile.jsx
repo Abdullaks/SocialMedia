@@ -13,8 +13,8 @@ import {
 import styled from "@emotion/styled";
 import OTPInput from "otp-input-react";
 import OtpTimer from "otp-timer";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+const baseUrl = "http://localhost:8800";
 const validate = (values) => {
   const errors = {};
 
@@ -43,14 +43,14 @@ function VerifyMobile() {
     validate,
     onSubmit: async (values) => {
       setMobile(values);
-      const verifyMobile = await axios.post("/api/auth/verifyMobile", {
+      const verifyMobile = await axios.post(`${baseUrl}/api/auth/verifyMobile`, {
         mobile: values.mobile,
       });
       if (verifyMobile.data == "noMobile") {
         toast.error(" User not registered,Please check Mobile Number ");
       } else {
         localStorage.setItem('mobile', JSON.stringify(verifyMobile.data)) 
-        const otpData = await axios.post("/api/auth/otpSend", {
+        const otpData = await axios.post(`${baseUrl}/api/auth/otpSend`, {
           mobile: values.mobile,
         });
         if (otpData.data == "success") {
@@ -63,10 +63,13 @@ function VerifyMobile() {
   const validateOtp = async (e) => {
     e.preventDefault();
     if (OTP.length === 4) {
-      const inOtpData = await axios.post("/api/auth/otpConfirmation", {
-        mobile: mobile.mobile,
-        otp: OTP,
-      });
+      const inOtpData = await axios.post(
+        `${baseUrl}/api/auth/otpConfirmation`,
+        {
+          mobile: mobile.mobile,
+          otp: OTP,
+        }
+      );
       console.log(inOtpData);
       if (inOtpData.data == "otpConfirmed") {
         navigate("/forgetPassword");
@@ -133,8 +136,6 @@ function VerifyMobile() {
           >
             Send OTP
           </Button>
-
-          {/* <Link to="/" sx={{ marginTop: 1, borderRadius: 1 }}> Back </Link> */}
         </Box>
       </form>
       <StyledModal
@@ -194,7 +195,6 @@ function VerifyMobile() {
             textAlign="center"
             sx={{
               width: "100%",
-              // width: { sm: 200, md: 300 },
               bgcolor: "background.paper",
               mt: { xs: 1, md: 2 },
               mb: 2,

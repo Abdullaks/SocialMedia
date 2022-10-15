@@ -15,31 +15,16 @@ export default function UserMenu({ user }) {
       {visible === 0 && (
         <div>
           <Link to="/profile" className="mmenu_header hover3">
-            <img src={user?.picture} alt="" />
+            <img src={user?.profilePicture} alt="" />
             <div className="mmenu_col">
               <span>
-                {user?.first_name} {user?.last_name}
+                {user?.username} 
               </span>
               <span>See your profile</span>
             </div>
           </Link>
          
           <div className="mmenu_splitter"></div>
-          {/* <div
-            className="mmenu_item hover3"
-            // onClick={() => {
-            //   setVisible(1);
-            // }}
-          >
-            <div className="small_circle">
-              <i className="settings_filled_icon"></i>
-            </div>
-            <span>Settings & privacy</span>
-            <div className="rArrow">
-              <i className="right_icon"></i>
-            </div>
-          </div> */}
-          
           <div
             className="mmenu_item hover3"
             

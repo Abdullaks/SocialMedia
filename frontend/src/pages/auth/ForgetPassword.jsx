@@ -72,26 +72,7 @@ function ForgetPassword() {
             Change Password
           </Typography>
 
-          {/* <TextField
-            name="email"
-            value={formik.values.email}
-            onChange={formik.handleChange}
-            margin="normal"
-            type={"email"}
-            variant="outlined"
-            placeholder="Email"
-            sx={{
-              width: { sm: 200, md: 300 },
-              "& .MuiInputBase-root": {
-                height: 60,
-              },
-            }}
-          />
-          {formik.errors.email ? (
-            <Typography color="error.main" variant="body1">
-              {formik.errors.email}
-            </Typography>
-          ) : null} */}
+          
 
           <TextField
             name="password"

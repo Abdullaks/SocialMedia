@@ -53,7 +53,6 @@ export const followUser = createAsyncThunk(
   "user/follow",
   async (id, thunkAPI) => {
     try {
-      console.log(id, "slice called");
       const token = thunkAPI.getState().auth.user.token;
       return await profileService.followUser(id, token);
     } catch (error) {

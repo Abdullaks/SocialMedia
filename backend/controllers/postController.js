@@ -102,29 +102,14 @@ const getReacts = async (req, res) => {
 
     const reacts = [
       {
-        react: "like", 
+        react: "like",
         count: newReacts.like ? newReacts.like.length : 0,
       },
       {
         react: "love",
         count: newReacts.love ? newReacts.love.length : 0,
       },
-      // {
-      //   react: "haha",
-      //   count: newReacts.haha ? newReacts.haha.length : 0,
-      // },
-      // {
-      //   react: "sad",
-      //   count: newReacts.sad ? newReacts.sad.length : 0,
-      // },
-      // {
-      //   react: "wow",
-      //   count: newReacts.wow ? newReacts.wow.length : 0,
-      // },
-      // {
-      //   react: "angry",
-      //   count: newReacts.angry ? newReacts.angry.length : 0,
-      // },
+      
     ];
 
     const check = await React.findOne({
@@ -177,18 +162,17 @@ const savePost = async (req, res) => {
   }
 };
 
-
-
-
 //edit post
 const editPost = async (req, res) => {
   try {
-
-console.log(req.params);
-
-    await Post.findByIdAndUpdate({ _id: req.params.id }, { $set: {
-      text: req.body.text
-    } });
+    await Post.findByIdAndUpdate(
+      { _id: req.params.id },
+      {
+        $set: {
+          text: req.body.text,
+        },
+      }
+    );
     res.json({ status: "ok" });
   } catch (error) {
     return res.status(500).json({ message: error.message });

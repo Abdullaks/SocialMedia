@@ -1,14 +1,33 @@
 import React, { useState } from "react";
 import ProfilePicture from "../../components/profile/profilePicture";
 import Follow from "./Follow";
-export default function ProfielPictureDetails({ profile, visitor, userName }) {
+import FollowerPopup from "./FollowerPopup";
+import FollowingPopup from "./FollowingPopup";
+export default function ProfielPictureDetails({
+  profile,
+  visitor,
+  userName,
+ 
+}) {
   const [profilePopup, setProfilePopup] = useState(false);
+  const [followersPopup, setFollowersPopup] = useState(false);
+  const [followingPopup, setFollowingPopup] = useState(false);
   return (
     <div className="profile_img_wrap">
-      {profilePopup && (
-        <ProfilePicture
-          setProfilePopup={setProfilePopup}
-          // pRef={pRef}
+      {profilePopup && <ProfilePicture setProfilePopup={setProfilePopup} />}
+      {followersPopup && (
+        <FollowerPopup
+          followersPopup={followersPopup}
+          setFollowersPopup={setFollowersPopup}
+          profile={profile}
+        />
+      )}
+
+      {followingPopup && (
+        <FollowingPopup
+          followingPopup={followingPopup}
+          setFollowingPopup={setFollowingPopup}
+          profile={profile}
         />
       )}
       <div className="profile_w_left">
@@ -31,16 +50,17 @@ export default function ProfielPictureDetails({ profile, visitor, userName }) {
           )}
         </div>
         <div className="profile_w_col">
-          <div className="profile_name">
-            {profile?.username}
-            {/* <div className="othername">
-              {othername && `(${othername})`}
-            </div> */}
-          </div>
-          <div className="profile_friend_count" style={{ display: "flex",gap:"5px" }}>
-            <div >
-              {profile?.following && (
-                <div className="profile_card_count">
+          <div className="profile_name">{profile?.username}</div>
+          <div
+            className="profile_friend_count"
+            style={{ display: "flex", gap: "5px" }}
+          >
+            <div>
+              {profile?.followers && (
+                <div
+                  className="profile_card_count"
+                  onClick={() => setFollowersPopup(true)}
+                >
                   {profile?.followers.length === 0
                     ? "0 Follower"
                     : profile?.followers.length === 1
@@ -49,9 +69,13 @@ export default function ProfielPictureDetails({ profile, visitor, userName }) {
                 </div>
               )}
             </div>
-            <div >
-              {profile?.friends && (
-                <div className="profile_card_count ">
+
+            <div>
+              {profile?.following && (
+                <div
+                  className="profile_card_count "
+                  onClick={() => setFollowingPopup(true)}
+                >
                   {profile?.following.length === 0
                     ? " 0 Following"
                     : profile?.following.length === 1
@@ -63,13 +87,13 @@ export default function ProfielPictureDetails({ profile, visitor, userName }) {
           </div>
           <div className="profile_friend_imgs"></div>
           {visitor && (
-          <div style={{margin:"10px"}}> 
-            <Follow
-              friendship={profile.followCheck}
-              profileId={profile._id}
-              userName={userName}
-            />
-          </div>
+            <div style={{ margin: "10px" }}>
+              <Follow
+                friendship={profile.followCheck}
+                profileId={profile._id}
+                userName={userName}
+              />
+            </div>
           )}
         </div>
       </div>

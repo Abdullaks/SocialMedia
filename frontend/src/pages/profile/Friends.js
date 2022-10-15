@@ -8,7 +8,7 @@ export default function Friends({ friends }) {
       {friends && (
         <div className="profile_card_count">
           {friends.length === 0
-            ? ""
+            ? "" 
             : friends.length === 1
             ? "1 friend"
             : `${friends.length} friends`}
@@ -23,3 +23,6 @@ export default function Friends({ friends }) {
     </div>
   );
 }
+
+
+

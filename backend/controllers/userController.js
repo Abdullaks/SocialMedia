@@ -6,7 +6,10 @@ const getProfile = async (req, res) => {
   try {
     const { username } = req.params;
     const user = await User.findById(req.user.id);
-    const profile = await User.findOne({ username }).select("-password");
+    const profile = await User.findOne({ username })
+      .select("-password")
+      .populate("followers")
+      .populate("following")
     const followCheck = {
       following: false,
     };
@@ -140,30 +143,33 @@ const search = async (req, res) => {
     const results = await User.find({ $text: { $search: searchTerm } }).select(
       "username name profilePicture"
     );
-    console.log(results);
     res.json(results);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }    
 };
 
-// const allUsers = async (req, res) => {
-//   try {
-//     const keyword = req.query.search
-//       ? {
-//           $or: [
-//             { name: { $regex: req.query.search, $options: "i" } },
-//             { email: { $regex: req.query.search, $options: "i" } },
-//           ],
-//         }
-//       : {};
+const allUsers = async (req, res) => {
+  try {
 
-//     const users = await User.find(keyword).find({ _id: { $ne: req.user.id } });
-//     res.send(users);
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// };
+    const searchTerm = req.params.searchTerm
+      ? {
+          $or: [
+            { name: { $regex: req.params.searchTerm, $options: "i" } },
+            { email: { $regex: req.params.searchTerm, $options: "i" } },
+          ],
+        }
+      : {};
+
+    const users = await User.find(searchTerm).find({
+      _id: { $ne: req.user.id },
+    });
+    console.log(users);
+    res.send(users);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
 
 
@@ -198,4 +204,5 @@ module.exports = {
   unFollow,
   search,
   getAUser,
+  allUsers,
 };
