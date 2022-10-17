@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { followUser, unFollowUser } from "../../features/profile/profileSlice";
 
-export default function FollowerPopup({ images, setFollowersPopup, profile  }) {
+export default function FollowerPopup({ setFollowersPopup, profile}) {
   const refInput = useRef(null);
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
@@ -51,7 +51,7 @@ export default function FollowerPopup({ images, setFollowersPopup, profile  }) {
                     </div>
                   </div>
                 </Link>
-                {/* <div>
+                <div>
                   {user?.following?.includes(item?._id) ? (
                     <span onClick={() => dispatch(unFollowUser(item?._id))}>
                       Unfollow
@@ -61,7 +61,7 @@ export default function FollowerPopup({ images, setFollowersPopup, profile  }) {
                       Follow
                     </span>
                   )}
-                </div> */}
+                </div>
               </li>
             ))}
           </ul>

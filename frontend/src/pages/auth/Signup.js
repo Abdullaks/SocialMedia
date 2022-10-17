@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Box,
-  Button,
-  Divider,
-  Modal,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Divider, Modal, Typography } from "@mui/material";
 import axios from "axios";
 import { useFormik } from "formik";
 import { Link } from "react-router-dom";
@@ -64,7 +58,7 @@ export default function Signup() {
   // Formik starts
   const formik = useFormik({
     initialValues: {
-        name:"",
+      name: "",
       username: "",
       email: "",
       mobile: "",
@@ -72,8 +66,8 @@ export default function Signup() {
     },
     validate,
     onSubmit: async (values) => {
-setLoading(true)      
-setUserData(values);
+      setLoading(true);
+      setUserData(values);
       const checkUser = await axios.post(`${baseUrl}/api/auth/checkUser`, {
         email: values.email,
         username: values.username,
@@ -110,10 +104,10 @@ setUserData(values);
         console.log("otp not confirmed");
       }
     } else {
-      console.log(" OTP is Not 4 digit"); 
+      console.log(" OTP is Not 4 digit");
     }
   };
-  const { user, isLoading, isError, isAdmin, isSuccess, message } = useSelector(
+  const { user, isError, isAdmin, isSuccess, message } = useSelector(
     (state) => state.auth
   );
   useEffect(() => {
@@ -127,7 +121,7 @@ setUserData(values);
       navigate("/home");
     }
     dispatch(reset());
-  }, [user, isError, isSuccess, message, navigate, dispatch]);
+  }, [user, isError, isAdmin, isSuccess, message, navigate, dispatch]);
 
   return (
     <>
@@ -136,7 +130,7 @@ setUserData(values);
           <div className="login_wrap">
             <div className="login_1">
               <img src="../../icons/facebook.svg" alt="" />
-              <span>OutSpace ............................</span>
+              <span></span>
             </div>
             <div className="login_2">
               <div className="login_2_wrap">
@@ -147,9 +141,7 @@ setUserData(values);
                       name="username"
                       value={formik.values.username}
                       onChange={formik.handleChange}
-                      margin="normal"
                       type={"text"}
-                      variant="outlined"
                       placeholder="Username"
                     />
                     {formik.errors.username ? (
@@ -160,9 +152,7 @@ setUserData(values);
                       name="name"
                       value={formik.values.name}
                       onChange={formik.handleChange}
-                      margin="normal"
                       type={"text"}
-                      variant="outlined"
                       placeholder="Full Name"
                     />
                     {formik.errors.name ? (
@@ -174,9 +164,7 @@ setUserData(values);
                       name="email"
                       value={formik.values.email}
                       onChange={formik.handleChange}
-                      margin="normal"
                       type={"email"}
-                      variant="outlined"
                       placeholder="Email"
                     />
                     {formik.errors.email ? (
@@ -187,10 +175,8 @@ setUserData(values);
                       name="mobile"
                       value={formik.values.mobile}
                       onChange={formik.handleChange}
-                      margin="normal"
                       type={"mobile"}
-                      variant="outlined"
-                      placeholder="Enter your Phone Number"
+                      placeholder="Phone Number"
                     />
                     {formik.errors.mobile ? (
                       <div className="error_text">{formik.errors.mobile}</div>
@@ -200,9 +186,7 @@ setUserData(values);
                       name="password"
                       value={formik.values.password}
                       onChange={formik.handleChange}
-                      //   margin="normal"
                       type={"password"}
-                      //   variant="outlined"
                       placeholder="Password"
                     />
                     {formik.errors.password ? (
@@ -235,9 +219,10 @@ setUserData(values);
 
                 <div className="sign_splitter"></div>
 
-                  <span>Already have an Account?</span>
+                <span>Already have an Account?</span>
                 <Link to="/">
-                  {" "} <span className="blue_btn">Login Here</span>
+                  {" "}
+                  <span className="blue_btn">Login Here</span>
                 </Link>
               </div>
             </div>
@@ -300,7 +285,6 @@ setUserData(values);
               textAlign="center"
               sx={{
                 width: "100%",
-                // width: { sm: 200, md: 300 },
                 bgcolor: "background.paper",
                 mt: { xs: 1, md: 2 },
                 mb: 2,

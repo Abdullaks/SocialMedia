@@ -8,11 +8,16 @@ export default function LeftHome({ user }) {
   const [visible, setVisible] = useState(false);
   return (
     <div className="left_home scrollbar">
-      <Link to="/profile" className="left_link hover1">
-        <img src={user?.profilePicture?user.profilePicture:"https://res.cloudinary.com/dmhcnhtng/image/upload/v1643044376/avatars/default_pic_jeaybr.png"} alt="" />
-        <span>
-          {user?.username}
-        </span>
+      <Link to="/profile" className="left_link hover2">
+        <img
+          src={
+            user?.profilePicture
+              ? user.profilePicture
+              : "https://res.cloudinary.com/dmhcnhtng/image/upload/v1643044376/avatars/default_pic_jeaybr.png"
+          }
+          alt=""
+        />
+        <span>{user?.username}</span>
       </Link>
       {left.slice(0, 8).map((link, i) => (
         <LeftLink
@@ -24,7 +29,7 @@ export default function LeftHome({ user }) {
       ))}
       {/* {!visible && (
         <div
-          className="left_link hover1"
+          className="left_link hover2"
             onClick={() => {setVisible(true);}}
         >
           <div className="small_circle">
@@ -46,7 +51,9 @@ export default function LeftHome({ user }) {
           ))}
           <div
             className="left_link hover1"
-              onClick={() => {setVisible(false);}}
+            onClick={() => {
+              setVisible(false);
+            }}
           >
             <div className="small_circle rotate360">
               <ArrowDown1 />

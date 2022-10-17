@@ -3,13 +3,13 @@ import "./style.css";
 import { Link, useNavigate } from "react-router-dom";
 import { Dots, Public } from "../../svg";
 import CreateComment from "./CreateComment";
-import ReactionPopup from "./ReactionPopup";
+// import ReactionPopup from "./ReactionPopup";
 import Comment from "./Comment";
 import PostMenu from "./PostMenu";
 import { format } from "timeago.js";
 import { useSelector } from "react-redux";
 import { getReacts, reactPost } from "../../functions/reactPost";
-export default function Post({ post, profile, comments }) {
+export default function SavedPosts({ post, profile, comments }) {
   const [showReaction, setShowReaction] = useState(false);
   const [showPostMenu, setShowPostMenu] = useState(false);
   const [commentsArray, setCommentsArray] = useState([]);
@@ -59,32 +59,33 @@ const getPostReacts = async () => {
       }
     }
   };
+  console.log(post);
   return (
     <div className="post" style={{ width: `${profile && "100%"}` }}>
       <div className="post_header">
         <Link
-          to={`/profile/${post?.user?.username}`}
+          to={`/profile/${post?.post?.user?.username}`}
           className="post_header_left"
         >
           <img
             src={
-              post?.user?.profilePicture
-                ? post.user.profilePicture
+              post?.post?.user?.profilePicture
+                ? post.post?.user.profilePicture
                 : "https://res.cloudinary.com/dmhcnhtng/image/upload/v1643044376/avatars/default_pic_jeaybr.png"
             }
             alt=""
           />
           <div className="header_col">
             <div className="post_profile_name">
-              {post?.user?.username}
+              {post?.post?.user?.username}
               <div className="updated_p">
-                {post?.type == "profilePicture" &&
+                {post?.post?.type == "profilePicture" &&
                   `updated their profile picture`}
-                {post?.type == "cover" && `updated their cover picture`}
+                {post?.post?.type == "cover" && `updated their cover picture`}
               </div>
             </div>
             <div className="post_profile_privacy_date">
-              {format(post?.createdAt)}
+              {format(post?.post?.createdAt)}
             </div>
           </div>
         </Link>
@@ -99,22 +100,22 @@ const getPostReacts = async () => {
       </div>
 
       <>
-        <div className="post_text">{post?.text}</div>
-        {post?.images && post?.images.length && (
+        <div className="post_text">{post?.post?.text}</div>
+        {post?.post?.images && post?.post?.images.length && (
           <div
             className={
-              post.images.length === 1
+              post.post?.images.length === 1
                 ? "grid_1"
-                : post.images.length === 2
+                : post.post?.images.length === 2
                 ? "grid_2"
-                : post.images.length === 3
+                : post.post?.images.length === 3
                 ? "grid_3"
-                : post.images.length === 4
+                : post.post?.images.length === 4
                 ? "grid_4"
-                : post.images.length >= 5 && "grid_5"
+                : post.post?.images.length >= 5 && "grid_5"
             }
           >
-            {post?.images.slice(0, 5).map((image, i) => (
+            {post?.post?.images.slice(0, 5).map((image, i) => (
               <img
                 src={image.url}
                 key={i}
@@ -122,8 +123,10 @@ const getPostReacts = async () => {
                 className={`img-${i}`}
               />
             ))}
-            {post?.images.length > 5 && (
-              <div className="more-pics-shadow">+{post?.images.length - 5}</div>
+            {post?.post?.images.length > 5 && (
+              <div className="more-pics-shadow">
+                +{post?.post?.images.length - 5}
+              </div>
             )}
           </div>
         )}
@@ -183,7 +186,7 @@ const getPostReacts = async () => {
           <span
             style={{
               color: `
-          
+
           ${check === "like" ? "#4267b2" : ""}
           `,
             }}
@@ -206,7 +209,7 @@ const getPostReacts = async () => {
       <div className="comments_wrap">
         <div className="comments_order"></div>
 
-        {showCreateComment && <CreateComment postId={post._id} />}
+        {/* {showCreateComment && <CreateComment postId={post.post._id} />}
         {commentsArray &&
           commentsArray
             .slice(0, count)
@@ -215,13 +218,13 @@ const getPostReacts = async () => {
           <div className="view_comments" onClick={() => showMore()}>
             View more comments
           </div>
-        )}
+        )} */}
       </div>
       {showPostMenu && (
         <PostMenu
           setShowPostMenu={setShowPostMenu}
-          postUserId={post.user._id}
-          postId={post._id}
+          postUserId={post.post.user._id}
+          postId={post.post._id}
         />
       )}
     </div>

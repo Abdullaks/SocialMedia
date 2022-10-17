@@ -5,7 +5,6 @@ import { Link, useNavigate } from "react-router-dom";
 import Header from "../../components/header";
 import ProfielPictureDetails from "./ProfilePictureDetails";
 import ProfileMenu from "./ProfileMenu";
-import PeoplelYouMayKnow from "./PeoplelYouMayKnow";
 import CreatePost from "../../components/createPost";
 import CreatePostPopUp from "../../components/createPostPopUp";
 import Cover from "./Cover";
@@ -15,11 +14,13 @@ import Post from "../../components/post";
 import Friends from "./Friends";
 import Bio from "../../components/profile/Bio";
 import { getProfile, reset } from "../../features/profile/profileSlice";
+import SavedPosts from "../../components/saved Posts";
 
 export default function Profile() {
-  // const [postPopup, setPostPopup] = useState(false);
-  // const [followersPopup, setFollowersPopup] = useState(false);
-  // const [followingPopup, setFollowingPopup] = useState(false);
+  const [postPopup, setPostPopup] = useState(false);
+const [showPosts, setShowPosts] = useState(true);
+const [showSavedPosts, setShowSavedPosts] = useState(false);
+
   const { user } = useSelector((state) => state.auth);
   const { profile } = useSelector((state) => state.profile);
   const navigate = useNavigate();
@@ -32,10 +33,6 @@ export default function Profile() {
       navigate("/");
     }
     dispatch(getProfile(userName));
-
-    // return () => {
-    //   dispatch(reset());
-    // };
   }, [user, navigate, dispatch, userName]);
 
   return (
@@ -48,10 +45,6 @@ export default function Profile() {
             profile={profile}
             visitor={visitor}
             userName={userName}
-            // followersPopup={followersPopup}
-            // setFollowersPopup={setFollowersPopup}
-            // followingPopup={followingPopup}
-            // setFollowingPopup={setFollowingPopup}
           />
           <ProfileMenu />
         </div>
@@ -59,31 +52,67 @@ export default function Profile() {
       <div className="profile_bottom">
         <div className="profile_container">
           <div className="bottom_container">
-            {/* <PeoplelYouMayKnow /> */}
             <div
             // className="profile_grid"
             >
               <div className="profile_left">
                 <Bio visitor={visitor} profile={profile} />
-                <Friends friends={profile.friends} />
+                {/* <Friends friends={profile.friends} /> */}
               </div>
               <div className="profile_right">
-                {/* {!visitor && (
+                {!visitor && (
                   <CreatePost user={user} setPostPopup={setPostPopup} />
                 )}
                 {postPopup && (
                   <CreatePostPopUp user={user} setPostPopup={setPostPopup} />
-                )} */}
-                <GridPosts />
-                <div className="posts">
-                  {profile.posts && profile.posts.length ? (
-                    profile.posts.map((post) => (
-                      <Post post={post} user={user} key={post._id} profile />
-                    ))
-                  ) : (
-                    <div className="no_posts">No posts available</div>
+                )}
+
+                <GridPosts
+                  showPosts={showPosts}
+                  setShowPosts={setShowPosts}
+                  showSavedPosts={showSavedPosts}
+                  setShowSavedPosts={setShowSavedPosts}
+                  visitor={visitor}
+                  
+                />
+                <>
+                  {showPosts && (
+                    <div className="posts" id="posts">
+                      {profile.posts && profile.posts.length ? (
+                        profile.posts.map((post) => (
+                          <Post
+                            post={post}
+                            user={user}
+                            key={post._id}
+                            profile
+                          />
+                        ))
+                      ) : (
+                        <div className="no_posts">No posts available</div>
+                      )}
+                    </div>
                   )}
-                </div>
+                </>
+                {!visitor && (
+                  <>
+                    {showSavedPosts && (
+                      <div className="posts" id="posts">
+                        {profile?.savedPosts && profile.savedPosts?.length ? (
+                          profile.savedPosts.map((post) => (
+                            <SavedPosts
+                              post={post}
+                              user={user}
+                              key={post._id}
+                              profile
+                            />
+                          ))
+                        ) : (
+                          <div className="no_posts">No posts are saved</div>
+                        )}
+                      </div>
+                    )}
+                  </>
+                )}
               </div>
             </div>
           </div>

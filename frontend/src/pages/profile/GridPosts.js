@@ -1,31 +1,50 @@
-export default function GridPosts() {
+import { useState } from "react";
+
+export default function GridPosts({
+  showPosts,
+  setShowPosts,
+  showSavedPosts,
+  setShowSavedPosts,
+  visitor,
+}) {
+
+
+const [saved, setSaved] = useState(false)
+
+
+  const onSavedPost = () => {
+    setSaved(true)
+    setShowPosts(false);
+    setShowSavedPosts(true);
+  };
+  const onPost = () => {
+        setSaved(false);
+
+    setShowPosts(true);
+    setShowSavedPosts(false);
+  };
   return (
     <div className="createPost">
       <div
         className="createPost_header"
         style={{ justifyContent: "space-between" }}
       >
-        <div className="left_header_grid">Posts</div>
-        <div className="flex">
-          <div className="gray_btn">
-            <i className="equalize_icon"></i>
-          </div>
-          <div className="gray_btn">
-            <i className="manage_icon"></i>
-            Manage Posts
-          </div>
-        </div>
+        {visitor && <div className="left_header_grid">Posts</div>}
+        <div className="flex"></div>
       </div>
-      <div className="create_splitter"></div>
+      {visitor && <div className="create_splitter"></div>}
       <div className="createPost_body grid2">
-        <div className="view_type active">
-          <i className="list_icon filter_blue"></i>
-          List view
+        <div className={`view_type ${saved ? "" : "active"}`} onClick={onPost}>
+          Posts
         </div>
-        <div className="view_type">
-          <i className="grid_icon"></i>
-          Grid view
-        </div>
+        {!visitor && (
+          <div
+            className={`view_type ${saved ? "active" : ""}`}
+            onClick={onSavedPost}
+          >
+            Saved{" "}
+          </div>
+        )}
       </div>
     </div>
   );

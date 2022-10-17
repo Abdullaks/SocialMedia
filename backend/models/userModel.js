@@ -14,7 +14,7 @@ const userSchema = mongoose.Schema(
     name: {
       type: String,
       trim: true,
-      // required: true,
+      required: [true, "please Add a name"],
       text: true,
     },
     email: {
@@ -25,7 +25,7 @@ const userSchema = mongoose.Schema(
     mobile: {
       type: String,
       required: [true, "please Add a phone number"],
-      // unique: true,
+      unique: true,
     },
     password: {
       type: String,
@@ -62,6 +62,18 @@ const userSchema = mongoose.Schema(
         },
       ],
     },
+    savedPosts: [
+      {
+        post: {
+          type: ObjectId,
+          ref: "Post",
+        },
+        savedAt: {
+          type: Date,
+          default: new Date(),
+        },
+      },
+    ],
     search: [
       {
         user: {
@@ -95,18 +107,7 @@ const userSchema = mongoose.Schema(
         enum: ["Single", "In a relationship", "Married"],
       },
     },
-    savedPosts: [
-      {
-        post: {
-          type: ObjectId,
-          ref: "Post",
-        },
-        savedAt: {
-          type: Date,
-          default: new Date(),
-        },
-      },
-    ],
+
     isBlock: {
       type: Boolean,
       default: false,

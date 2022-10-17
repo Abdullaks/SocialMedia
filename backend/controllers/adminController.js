@@ -7,7 +7,7 @@ const getAllUsers = async (req, res) => {
   const users = await User.find({});
   res.json(users);
 };
- 
+
 //DELETE USERS
 const deleteUser = async (req, res) => {
   const { id } = req.params;
@@ -22,7 +22,7 @@ const blockUser = async (req, res) => {
     { $set: { isBlock: true } },
     { upsert: true }
   );
- 
+
   res.json({ id });
 };
 //UNBLOCK USERS
@@ -33,7 +33,7 @@ const unBlockUser = async (req, res) => {
     { $set: { isBlock: false } },
     { upsert: true }
   );
-    res.json({ id });
+  res.json({ id });
 };
 
 module.exports = {

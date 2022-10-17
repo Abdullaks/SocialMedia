@@ -6,7 +6,6 @@ import CreatePostPopUp from "../../components/createPostPopUp";
 import Header from "../../components/header";
 import RightHome from "../../components/home/right_bar";
 import LeftHome from "../../components/home/side_bar";
-// import Stories from "../../components/home/stories";
 import Post from "../../components/post/index";
 import { getAllposts, reset } from "../../features/post/postSlice";
 import "./style.css";
@@ -39,7 +38,7 @@ export default function Home() {
           <CreatePostPopUp user={user} setPostPopup={setPostPopup} />
         )}
       </div>
-      {/* <RightHome user={user} /> */}
+      <RightHome user={user} />
     </div>
   );
 }

@@ -55,7 +55,7 @@ const registerUser = async (req, res) => {
 
     //save the new user and response
     const user = await newUser.save();
-    console.log(user,"sdfghjk");
+    console.log(user, "sdfghjk");
     if (user) {
       res.status(200).json({
         _id: user.id,
@@ -100,7 +100,8 @@ const loginUser = async (req, res) => {
       username: user.username,
       email: user.email,
       mobile: user.mobile,
-      profilePicture:user.profilePicture?user.profilePicture:null,
+      profilePicture: user.profilePicture ? user.profilePicture : null,
+      savedPosts: user.savedPosts? user.savedPosts:null,
       token: generateToken(user._id),
     });
   } catch (error) {

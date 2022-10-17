@@ -7,7 +7,8 @@ export const editPost = async (
   text,
   images,
   user,
-  token,id
+  token,
+  id
 ) => {
   try {
     const { data } = await axios.put(
@@ -31,16 +32,16 @@ export const editPost = async (
   }
 };
 
-
-
 // Get A post
-export const getAPost = async (id,token) => {
+export const getAPost = async (id, token) => {
   const config = {
     headers: {
-      Authorization: `Bearer ${token}`,       
+      Authorization: `Bearer ${token}`,
     },
   };
-  const response = await axios.get(`${baseUrl}/api/post/getAPost/`+id, config);
-//   console.log(response.data);
+  const response = await axios.get(
+    `${baseUrl}/api/post/getAPost/` + id,
+    config
+  );
   return response.data;
-};              
+};

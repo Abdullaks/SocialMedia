@@ -21,8 +21,6 @@ export const reactPost = async (postId, react, token) => {
   }
 };
 
-
-
 export const getReacts = async (postId, token) => {
   try {
     const { data } = await axios.get(

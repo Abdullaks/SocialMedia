@@ -55,6 +55,18 @@ export default function ProfielPictureDetails({
             className="profile_friend_count"
             style={{ display: "flex", gap: "5px" }}
           >
+            {" "}
+            <div>
+              <a href="#posts">
+                <div className="profile_card_count">
+                  {profile?.posts?.length === 0
+                    ? "0 post"
+                    : profile?.posts?.length === 1
+                    ? "1 post"
+                    : `${profile?.posts?.length} posts`}
+                </div>
+              </a>
+            </div>
             <div>
               {profile?.followers && (
                 <div
@@ -69,7 +81,6 @@ export default function ProfielPictureDetails({
                 </div>
               )}
             </div>
-
             <div>
               {profile?.following && (
                 <div
@@ -100,16 +111,17 @@ export default function ProfielPictureDetails({
       {visitor ? (
         <div className="profile_w_right"></div>
       ) : (
-        <div className="profile_w_right">
-          <div className="blue_btn">
-            <img src="../../../icons/plus.png" alt="" className="invert" />
-            <span>Add to story</span>
-          </div>
-          <div className="gray_btn">
-            <i className="edit_icon"></i>
-            <span>Edit profile</span>
-          </div>
-        </div>
+        ""
+        // <div className="profile_w_right">
+        //   <div className="blue_btn">
+        //     <img src="../../../icons/plus.png" alt="" className="invert" />
+        //     <span>Add to story</span>
+        //   </div>
+        //   <div className="gray_btn">
+        //     <i className="edit_icon"></i>
+        //     <span>Edit profile</span>
+        //   </div>
+        // </div>
       )}
     </div>
   );

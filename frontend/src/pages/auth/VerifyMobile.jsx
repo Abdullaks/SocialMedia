@@ -43,20 +43,23 @@ function VerifyMobile() {
     validate,
     onSubmit: async (values) => {
       setMobile(values);
-      const verifyMobile = await axios.post(`${baseUrl}/api/auth/verifyMobile`, {
-        mobile: values.mobile,
-      });
+      const verifyMobile = await axios.post(
+        `${baseUrl}/api/auth/verifyMobile`,
+        {
+          mobile: values.mobile,
+        }
+      );
       if (verifyMobile.data == "noMobile") {
         toast.error(" User not registered,Please check Mobile Number ");
       } else {
-        localStorage.setItem('mobile', JSON.stringify(verifyMobile.data)) 
+        localStorage.setItem("mobile", JSON.stringify(verifyMobile.data));
         const otpData = await axios.post(`${baseUrl}/api/auth/otpSend`, {
           mobile: values.mobile,
         });
         if (otpData.data == "success") {
           setOpen(true);
         }
-      } 
+      }
     },
   });
   //formik ends

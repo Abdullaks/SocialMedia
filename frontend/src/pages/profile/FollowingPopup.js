@@ -7,6 +7,14 @@ export default function FollowingPopup({  setFollowingPopup, profile }) {
   const refInput = useRef(null);
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const followHandler = async () => {
+    await dispatch(followUser(profile._id));
+    // dispatch(getProfile(userName));
+  };
+  const unfollowHandler = async () => {
+    await dispatch(unFollowUser(profile._id));
+    // dispatch(getProfile(userName));
+  };
   return (
     <div className="blur">
       <div className="postBox pictureBox">
@@ -51,17 +59,17 @@ export default function FollowingPopup({  setFollowingPopup, profile }) {
                   </div>
                 </Link>
 
-                {/* <div>
+                <div>
                   {user?.following?.includes(item?._id) ? (
-                    <span onClick={() => dispatch(unFollowUser(item?._id))}>
+                    <span onClick={() => dispatch(unfollowHandler(item?._id))}>
                       Unfollow
                     </span>
                   ) : (
-                    <span onClick={() => dispatch(followUser(item?._id))}>
+                    <span onClick={() => dispatch(followHandler(item?._id))}>
                       Follow
                     </span>
                   )}
-                </div> */}
+                </div>
               </li>
             ))}
           </ul>

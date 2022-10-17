@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
-import {updatePassword } from "../../features/auth/authSlice";
+import { updatePassword } from "../../features/auth/authSlice";
 
 const validate = (values) => {
   const errors = {};
@@ -10,7 +10,7 @@ const validate = (values) => {
     errors.password = "Required";
   } else if (values.password.length < 8) {
     errors.password = "password must be 8 character long ";
-  } 
+  }
   if (!values.confirmpassword) {
     errors.confirmpassword = "Required";
   } else if (values.password !== values.confirmpassword) {
@@ -21,7 +21,7 @@ const validate = (values) => {
 
 function ForgetPassword() {
   const dispatch = useDispatch();
-  // Formik starts  
+  // Formik starts
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -32,13 +32,14 @@ function ForgetPassword() {
     validate,
     onSubmit: async (values) => {
       const mobile = JSON.parse(localStorage.getItem("mobile"));
-      
-      dispatch(updatePassword({
-        mobile,
-        password: values.password
-      }));
-      await localStorage.removeItem("mobile");
 
+      dispatch(
+        updatePassword({
+          mobile,
+          password: values.password,
+        })
+      );
+      await localStorage.removeItem("mobile");
     },
   });
   //formik ends
@@ -71,8 +72,6 @@ function ForgetPassword() {
           >
             Change Password
           </Typography>
-
-          
 
           <TextField
             name="password"
@@ -122,7 +121,6 @@ function ForgetPassword() {
           >
             Confirm
           </Button>
-          
         </Box>
       </form>
     </div>

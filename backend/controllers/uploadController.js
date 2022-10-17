@@ -72,17 +72,6 @@ const getImages = async (req, res) => {
   }
 };
 
-
-
-
-
-
-
-
-
-
-
-
 module.exports = {
   uploadImages,
   getImages,

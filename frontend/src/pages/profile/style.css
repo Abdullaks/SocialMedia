@@ -1,3 +1,11 @@
+
+
+
+
+
+
+
+
 .profile {
   color: var(--color-primary);
 }
@@ -308,6 +316,7 @@
 }
 .profile_card_count {
   color: var(--color-secondary);
+  cursor: pointer;
 }
 .profile_card_grid {
   display: grid;

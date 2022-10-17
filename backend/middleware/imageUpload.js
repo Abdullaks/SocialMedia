@@ -1,15 +1,10 @@
 const fs = require("fs");
 
-
-
-
 const removeTmp = (path) => {
   fs.unlink(path, (err) => {
     if (err) throw err;
   });
 };
-
-
 
 module.exports = async function (req, res, next) {
   try {
@@ -17,8 +12,8 @@ module.exports = async function (req, res, next) {
       return res.status(400).json({ message: "No files selected." });
     }
     let files = Object.values(req.files).flat();
-    files.forEach((file) => {                                      
-      if ( 
+    files.forEach((file) => {
+      if (
         file.mimetype !== "image/jpeg" &&
         file.mimetype !== "image/png" &&
         file.mimetype !== "image/gif" &&
@@ -37,5 +32,3 @@ module.exports = async function (req, res, next) {
     return res.status(500).json({ message: error.message });
   }
 };
-
-

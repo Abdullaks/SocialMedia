@@ -17,7 +17,7 @@ const createPost = async (req, res) => {
 const getAllPosts = async (req, res) => {
   try {
     const posts = await Post.find({})
-      .populate("user", "username profilePicture ")
+      .populate("user", "username name profilePicture ")
       .populate("Comments")
       .populate({
         path: "Comments",
@@ -89,7 +89,7 @@ const reactPost = async (req, res) => {
     return res.status(500).json({ message: error.message });
   }
 };
-
+// GET  react
 const getReacts = async (req, res) => {
   try {
     const reactsArray = await React.find({ postRef: req.params.id });
@@ -105,11 +105,6 @@ const getReacts = async (req, res) => {
         react: "like",
         count: newReacts.like ? newReacts.like.length : 0,
       },
-      {
-        react: "love",
-        count: newReacts.love ? newReacts.love.length : 0,
-      },
-      
     ];
 
     const check = await React.findOne({

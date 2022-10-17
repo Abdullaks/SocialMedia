@@ -25,24 +25,21 @@ const postSchema = new mongoose.Schema(
     },
   },
   {
-    toJSON:{
-      virtuals:true
-  },
-  toObject:{
-      virtuals:true,
-  },
+    toJSON: {
+      virtuals: true,
+    },
+    toObject: {
+      virtuals: true,
+    },
     timestamps: true,
-  },
-  
+  }
 );
 
-
-// virtual methode to populate 
+// virtual methode to populate
 postSchema.virtual("Comments", {
-    ref:"Comment",
-    foreignField:"Post",
-    localField:"_id"
-  })
-  
-  module.exports = mongoose.model("Post", postSchema);
+  ref: "Comment",
+  foreignField: "Post",
+  localField: "_id",
+});
 
+module.exports = mongoose.model("Post", postSchema);

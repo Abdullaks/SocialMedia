@@ -44,51 +44,40 @@ const server = app.listen(8800, () => {
   console.log("Backend running...");
 });
 
-const io = require("socket.io")(server,{
-  pingTimeout:60000,
+const io = require("socket.io")(server, {
+  pingTimeout: 60000,
   cors: {
     origin: "http://localhost:3000",
-   
-  }})
-
-// let users = [];
-
-// const addUser = (userId, socketId) => {
-//   !users.some((user) => user.userId === userId) &&
-//     users.push({ userId, socketId });
-// };
+  },
+});
 
 io.on("connection", (socket) => {
   console.log("Connection to socket");
   socket.on("setup", (userData) => {
     socket.join(userData._id);
     socket.emit("connected");
-  })
+  });
 
-socket.on("join chat", (room) => {
-  socket.join(room);
-  console.log("User Joined Room: " + room);
-});
+  socket.on("join chat", (room) => {
+    socket.join(room);
+    console.log("User Joined Room: " + room);
+  });
 
+  socket.on("new message", (newMessageRecieved) => {
+    var chat = newMessageRecieved.conversationId;
 
-socket.on("new message", (newMessageRecieved) => {
-  var chat = newMessageRecieved.conversationId;
+    if (!chat.members) return console.log("chat.member not defined");
 
-  if (!chat.members) return console.log("chat.member not defined");
-  
-  chat.members.forEach((user) => {
-    // console.log(newMessageRecieved.sender._id);
-    console.log(user);
-    if (user == newMessageRecieved.sender._id) return;
+    chat.members.forEach((user) => {
+      console.log(user);
+      if (user == newMessageRecieved.sender._id) return;
 
-    socket.in(user).emit("message recieved", newMessageRecieved);
+      socket.in(user).emit("message recieved", newMessageRecieved);
+    });
+  });
+
+  socket.off("setup", () => {
+    console.log("USER DISCONNECTED");
+    socket.leave(userData._id);
   });
 });
-
-
-socket.off("setup", () => {
-  console.log("USER DISCONNECTED");
-  socket.leave(userData._id);
-});
-
-}); 

@@ -49,7 +49,7 @@ const Login = () => {
     },
   });
   //formik ends
-  const { user, isLoading, isError, isSuccess, isAdmin, message } = useSelector(
+  const { user, isError, isSuccess, isAdmin, message } = useSelector(
     (state) => state.auth
   );
 
@@ -73,7 +73,7 @@ const Login = () => {
           <div className="login_wrap">
             <div className="login_1">
               <img src="../../icons/facebook.svg" alt="" />
-              <span>OutSpace ............................</span>
+              <span></span>
             </div>
             <div className="login_2">
               <div className="login_2_wrap">
@@ -84,9 +84,7 @@ const Login = () => {
                       name="email"
                       value={formik.values.email}
                       onChange={formik.handleChange}
-                      margin="normal"
                       type={"email"}
-                      variant="outlined"
                       placeholder="Email"
                     />
                     {formik.errors.email ? (
@@ -97,9 +95,7 @@ const Login = () => {
                       name="password"
                       value={formik.values.password}
                       onChange={formik.handleChange}
-                    //   margin="normal"
                       type={"password"}
-                    //   variant="outlined"
                       placeholder="Password"
                     />
                     {formik.errors.password ? (
@@ -114,11 +110,10 @@ const Login = () => {
                   Forgotten password?
                 </Link>
                 <DotLoader color="#1876f2" loading={loading} size={30} />
-
                 <div className="sign_splitter"></div>
                 <Link to="/signup">
                   <span
-                    className="btn "
+                    className="blue_btn "
                     style={{ backgroundColor: "#42b72a", border: "none" }}
                   >
                     Create Account

@@ -116,7 +116,6 @@ export default function Chat() {
       <div className="messenger">
         <div className="chatMenu">
           <div className="chatMenuWrapper">
-            {/* <input type="text" placeholder="search" className="chatMenuInput" /> */}
             {conversations.map((conversation) => (
               <div
                 key={conversation._id}
@@ -146,7 +145,6 @@ export default function Chat() {
                   <div className="search">
                     <input
                       type="text"
-                      // className="hide_input"
                       value={newMessage}
                       onChange={(e) => setNewMessage(e.target.value)}
                       className="chatMessageinput"
@@ -155,14 +153,6 @@ export default function Chat() {
                     />
                   </div>
                   <div>
-                    {/* <textarea
-                    name=""
-                    id=""
-                    value={newMessage}
-                    onChange={(e) => setNewMessage(e.target.value)}
-                    className="chatMessageinput"
-                    placeholder="message .."
-                  ></textarea> */}
                     <button className="chatSubmitButton" onClick={handleSubmit}>
                       send
                     </button>

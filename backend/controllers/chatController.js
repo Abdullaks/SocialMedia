@@ -1,21 +1,10 @@
 const Chat = require("../models/chat/chatModel");
 const User = require("../models/userModel");
-
-
-
-
-
-
-
-
-
-
-
 const Conversation = require("../models/chat/chatModel");
 const Message = require("../models/chat/messageModel");
 
-//new conv
-const newconversation=async (req, res) => {
+//new conversation
+const newconversation = async (req, res) => {
   const newConversation = new Conversation({
     members: [req.body.senderId, req.body.receiverId],
   });
@@ -26,12 +15,9 @@ const newconversation=async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
-}; 
+};
 
-
-//get conv of a user
-
-
+//get conversation of a user
 const getConversation = async (req, res) => {
   try {
     const conversation = await Conversation.find({
@@ -41,16 +27,9 @@ const getConversation = async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
-};   
-
-
-
-
-
-
+};
 
 //new message
-
 const newmessage = async (req, res) => {
   const newMessage = new Message(req.body);
 
@@ -60,12 +39,11 @@ const newmessage = async (req, res) => {
       "sender",
       "username profilePicture"
     );
-        savedMessage = await savedMessage.populate("conversationId")
-        savedMessage = await User.populate(savedMessage, {
-          path: "conversationId.members",
-          select: "username profilePicture email",
-        });
-
+    savedMessage = await savedMessage.populate("conversationId");
+    savedMessage = await User.populate(savedMessage, {
+      path: "conversationId.members",
+      select: "username profilePicture email",
+    });
 
     res.status(200).json(savedMessage);
   } catch (err) {
@@ -73,10 +51,7 @@ const newmessage = async (req, res) => {
   }
 };
 
-//get
-
-
-
+//get all messages from the conversation
 const allmessage = async (req, res) => {
   try {
     const messages = await Message.find({

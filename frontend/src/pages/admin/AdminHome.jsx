@@ -20,7 +20,7 @@ function AdminHome() {
   }, [admin, navigate, dispatch]);
 
   return (
-    <> 
+    <>
       <Box>
         <AdminNavbar />
         <Stack direction="row" spacing={2} justifyContent="space-between">
