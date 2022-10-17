@@ -59,7 +59,6 @@ const getPostReacts = async () => {
       }
     }
   };
-  console.log(post);
   return (
     <div className="post" style={{ width: `${profile && "100%"}` }}>
       <div className="post_header">
