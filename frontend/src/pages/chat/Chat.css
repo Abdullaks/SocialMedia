@@ -6,7 +6,8 @@
 
 .chatMenu {
   flex: 3.5;
-  background-color: rgba(200, 191, 191, 0.69);
+  background-color: #D7EADD;
+
 }
 
 .chatMenuInput {
@@ -19,7 +20,7 @@
 .chatBox {
   flex: 5.5;
   height: 100%;
-
+  /* background-color: #F2F4F5; */
   background-color: rgba(251, 246, 246, 0.308);
 }
 
@@ -47,7 +48,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  background: var(--bg-forth);
+  background:#F2F4F5 ;
   padding: 10px 32px 10px 10px;
   border-radius: 50px;
   cursor: text;
@@ -75,6 +76,7 @@
 }
 .chatOnline {
   flex: 3;
+  background: #E7EEE8;
 }
 
 .chatMenuWrapper,

@@ -8,7 +8,6 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Box, Button } from "@mui/material";
-// import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   blockUser,
@@ -47,7 +46,6 @@ export default function AdminTable() {
       dispatch(reset());
     };
   }, [dispatch]);
-
   return (
     <Box flex={5} p={2}>
       <TableContainer component={Paper}>

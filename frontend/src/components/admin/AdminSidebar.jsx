@@ -5,18 +5,15 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  Switch,
 } from "@mui/material";
 import React from "react";
 import {
-  AccountBox,
   Home,
-  ModeNight,
   Pages,
   Settings,
   Shop,
 } from "@mui/icons-material";
-function AdminSidebar({ mode, setMode }) {
+function AdminSidebar() {
   return (
     <Box
       flex={1}
@@ -31,27 +28,27 @@ function AdminSidebar({ mode, setMode }) {
       <Box position="fixed">
         <List>
           <ListItem disablePadding>
-            <ListItemButton component="a" href="#home">
+            <ListItemButton component="a" href="#userManagement">
               <ListItemIcon>
                 <Home />
               </ListItemIcon>
-              <ListItemText primary="Home page" />
+              <ListItemText primary="User Management" />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton component="a" href="#pages">
+            <ListItemButton component="a" href="#adManagement">
               <ListItemIcon>
                 <Pages />
               </ListItemIcon>
-              <ListItemText primary="User Management" />
+              <ListItemText primary="Ad Management" />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton component="a" href="#settings">
+            <ListItemButton component="a" href="#reportManagement">
               <ListItemIcon>
                 <Settings />
               </ListItemIcon>
-              <ListItemText primary="User Management" />
+              <ListItemText primary="Report Management" />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
@@ -62,8 +59,6 @@ function AdminSidebar({ mode, setMode }) {
               <ListItemText primary="shop" />
             </ListItemButton>
           </ListItem>
-         
-          
         </List>
       </Box>
     </Box>

@@ -25,7 +25,7 @@ export default function Home() {
   return (
     <div className="home">
       <Header page="home" />
-      <LeftHome user={user} />
+      {/* <LeftHome user={user} /> */}
       <div className="home_middle">
         <CreatePost user={user} setPostPopup={setPostPopup} />
         <div className="posts">
@@ -38,7 +38,7 @@ export default function Home() {
           <CreatePostPopUp user={user} setPostPopup={setPostPopup} />
         )}
       </div>
-      <RightHome user={user} />
+      {/* <RightHome user={user} /> */}
     </div>
   );
 }

@@ -12,9 +12,6 @@ export default function Conversation({conversation,currentUser}) {
           Authorization: `Bearer ${currentUser.token}`,
         }
 
-
-
-        
        } );
          setFriend(res.data);
        } catch (err) {

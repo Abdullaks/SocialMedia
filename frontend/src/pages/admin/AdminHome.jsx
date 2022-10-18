@@ -5,12 +5,10 @@ import { Box, Stack } from "@mui/material";
 import AdminSidebar from "../../components/admin/AdminSidebar";
 import AdminFeed from "../../components/admin/AdminFeed";
 import AdminNavbar from "../../components/admin/AdminNavbar";
-
 function AdminHome() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { admin } = useSelector((state) => state.auth);
-
   useEffect(() => {
     if (admin) {
       navigate("/admin");
@@ -18,7 +16,6 @@ function AdminHome() {
       navigate("/");
     }
   }, [admin, navigate, dispatch]);
-
   return (
     <>
       <Box>
